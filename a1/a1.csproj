@@ -53,6 +53,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -227,27 +228,113 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>RoleEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IvhunimController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="GeneratorService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IvhunimAndActions.cs" />
+    <Compile Include="Models\RolesAction.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RolesAction.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RolesAction.cs">
+      <DependentUpon>RolesAction.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RolesAction.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RolesAction.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RolesAction1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RolesAction.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="RoleEntityModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoleEntityModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RoleEntityModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoleEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RoleEntityModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoleEntityModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="User.cs">
+      <DependentUpon>UserEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserEntityModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserEntityModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserEntityModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserEntityModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserEntityModel.edmx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="ChangePassword.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\mom.png" />
+    <Content Include="Data.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Login.html" />
+    <Content Include="Models\RolesAction.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RolesAction.edmx</DependentUpon>
+      <LastGenOutput>RolesAction.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\RolesAction.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RolesAction.edmx</DependentUpon>
+      <LastGenOutput>RolesAction1.cs</LastGenOutput>
+    </Content>
+    <Content Include="navigationbar.html" />
+    <Content Include="Register.html" />
+    <Content Include="ResetPassword.html" />
+    <Content Include="RoleEntityModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RoleEntityModel.edmx</DependentUpon>
+      <LastGenOutput>RoleEntityModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="RoleEntityModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RoleEntityModel.edmx</DependentUpon>
+      <LastGenOutput>RoleEntityModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -272,6 +359,23 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EntityDeploy Include="Models\RolesAction.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RolesAction.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\RolesAction.edmx.diagram">
+      <DependentUpon>RolesAction.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\a120180723110343 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\a120180723111529 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\a120180723112025 - Web Deploy.pubxml" />
+    <EntityDeploy Include="RoleEntityModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RoleEntityModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="RoleEntityModel.edmx.diagram">
+      <DependentUpon>RoleEntityModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -283,6 +387,112 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="src\bootstrap-table.css" />
+    <Content Include="src\bootstrap-table.js" />
+    <Content Include="src\extensions\accent-neutralise\bootstrap-table-accent-neutralise.js" />
+    <Content Include="src\extensions\angular\bootstrap-table-angular.js" />
+    <Content Include="src\extensions\auto-refresh\bootstrap-table-auto-refresh.css" />
+    <Content Include="src\extensions\auto-refresh\bootstrap-table-auto-refresh.js" />
+    <Content Include="src\extensions\click-edit-row\bootstrap-table-click-edit-row.css" />
+    <Content Include="src\extensions\click-edit-row\bootstrap-table-click-edit-row.js" />
+    <Content Include="src\extensions\confirmations\bootstrap-confirmation.js" />
+    <Content Include="src\extensions\confirmations\bootstrap-confirmation.min.js" />
+    <Content Include="src\extensions\cookie\bootstrap-table-cookie.js" />
+    <Content Include="src\extensions\copy-rows\bootstrap-table-copy-rows.js" />
+    <Content Include="src\extensions\defer-url\bootstrap-table-defer-url.js" />
+    <Content Include="src\extensions\editable\bootstrap-table-editable.js" />
+    <Content Include="src\extensions\export\bootstrap-table-export.js" />
+    <Content Include="src\extensions\filter-control\bootstrap-table-filter-control.css" />
+    <Content Include="src\extensions\filter-control\bootstrap-table-filter-control.js" />
+    <Content Include="src\extensions\filter-control\bootstrap-table.css" />
+    <Content Include="src\extensions\filter-control\bootstrap-table.js" />
+    <Content Include="src\extensions\filter\bootstrap-table-filter.js" />
+    <Content Include="src\extensions\flat-json\bootstrap-table-flat-json.js" />
+    <Content Include="src\extensions\group-by-v2\bootstrap-table-group-by.css" />
+    <Content Include="src\extensions\group-by-v2\bootstrap-table-group-by.js" />
+    <Content Include="src\extensions\group-by\bootstrap-table-group-by.css" />
+    <Content Include="src\extensions\group-by\bootstrap-table-group-by.js" />
+    <Content Include="src\extensions\i18n-enhance\bootstrap-table-i18n-enhance.js" />
+    <Content Include="src\extensions\key-events\bootstrap-table-key-events.js" />
+    <Content Include="src\extensions\mobile\bootstrap-table-mobile.js" />
+    <Content Include="src\extensions\multi-column-toggle\bootstrap-table-multi-toggle.js" />
+    <Content Include="src\extensions\multiple-search\bootstrap-table-multiple-search.js" />
+    <Content Include="src\extensions\multiple-selection-row\bootstrap-table-multiple-selection-row.css" />
+    <Content Include="src\extensions\multiple-selection-row\bootstrap-table-multiple-selection-row.js" />
+    <Content Include="src\extensions\multiple-sort\bootstrap-table-multiple-sort.js" />
+    <Content Include="src\extensions\natural-sorting\bootstrap-table-natural-sorting.js" />
+    <Content Include="src\extensions\page-jumpto\bootstrap-table-jumpto.css" />
+    <Content Include="src\extensions\page-jumpto\bootstrap-table-jumpto.js" />
+    <Content Include="src\extensions\print\bootstrap-table-print.js" />
+    <Content Include="src\extensions\reorder-columns\bootstrap-table-reorder-columns.js" />
+    <Content Include="src\extensions\reorder-rows\bootstrap-table-reorder-rows.css" />
+    <Content Include="src\extensions\reorder-rows\bootstrap-table-reorder-rows.js" />
+    <Content Include="src\extensions\resizable\bootstrap-table-resizable.js" />
+    <Content Include="src\extensions\select2-filter\bootstrap-table-select2-filter.js" />
+    <Content Include="src\extensions\sticky-header\bootstrap-table-sticky-header.css" />
+    <Content Include="src\extensions\sticky-header\bootstrap-table-sticky-header.js" />
+    <Content Include="src\extensions\toolbar\bootstrap-table-toolbar.js" />
+    <Content Include="src\extensions\tree-column\bootstrap-table-tree-column.css" />
+    <Content Include="src\extensions\tree-column\bootstrap-table-tree-column.js" />
+    <Content Include="src\extensions\tree-column\icon.png" />
+    <Content Include="src\extensions\treegrid\bootstrap-table-treegrid.js" />
+    <Content Include="src\locale\bootstrap-table-af-ZA.js" />
+    <Content Include="src\locale\bootstrap-table-ar-SA.js" />
+    <Content Include="src\locale\bootstrap-table-ca-ES.js" />
+    <Content Include="src\locale\bootstrap-table-cs-CZ.js" />
+    <Content Include="src\locale\bootstrap-table-da-DK.js" />
+    <Content Include="src\locale\bootstrap-table-de-DE.js" />
+    <Content Include="src\locale\bootstrap-table-el-GR.js" />
+    <Content Include="src\locale\bootstrap-table-en-US.js" />
+    <Content Include="src\locale\bootstrap-table-es-AR.js" />
+    <Content Include="src\locale\bootstrap-table-es-CL.js" />
+    <Content Include="src\locale\bootstrap-table-es-CR.js" />
+    <Content Include="src\locale\bootstrap-table-es-ES.js" />
+    <Content Include="src\locale\bootstrap-table-es-MX.js" />
+    <Content Include="src\locale\bootstrap-table-es-NI.js" />
+    <Content Include="src\locale\bootstrap-table-es-SP.js" />
+    <Content Include="src\locale\bootstrap-table-et-EE.js" />
+    <Content Include="src\locale\bootstrap-table-eu-EU.js" />
+    <Content Include="src\locale\bootstrap-table-fa-IR.js" />
+    <Content Include="src\locale\bootstrap-table-fr-BE.js" />
+    <Content Include="src\locale\bootstrap-table-fr-FR.js" />
+    <Content Include="src\locale\bootstrap-table-he-IL.js" />
+    <Content Include="src\locale\bootstrap-table-hr-HR.js" />
+    <Content Include="src\locale\bootstrap-table-hu-HU.js" />
+    <Content Include="src\locale\bootstrap-table-id-ID.js" />
+    <Content Include="src\locale\bootstrap-table-it-IT.js" />
+    <Content Include="src\locale\bootstrap-table-ja-JP.js" />
+    <Content Include="src\locale\bootstrap-table-ka-GE.js" />
+    <Content Include="src\locale\bootstrap-table-ko-KR.js" />
+    <Content Include="src\locale\bootstrap-table-ms-MY.js" />
+    <Content Include="src\locale\bootstrap-table-nb-NO.js" />
+    <Content Include="src\locale\bootstrap-table-nl-NL.js" />
+    <Content Include="src\locale\bootstrap-table-pl-PL.js" />
+    <Content Include="src\locale\bootstrap-table-pt-BR.js" />
+    <Content Include="src\locale\bootstrap-table-pt-PT.js" />
+    <Content Include="src\locale\bootstrap-table-ro-RO.js" />
+    <Content Include="src\locale\bootstrap-table-ru-RU.js" />
+    <Content Include="src\locale\bootstrap-table-sk-SK.js" />
+    <Content Include="src\locale\bootstrap-table-sv-SE.js" />
+    <Content Include="src\locale\bootstrap-table-th-TH.js" />
+    <Content Include="src\locale\bootstrap-table-tr-TR.js" />
+    <Content Include="src\locale\bootstrap-table-uk-UA.js" />
+    <Content Include="src\locale\bootstrap-table-ur-PK.js" />
+    <Content Include="src\locale\bootstrap-table-uz-Latn-UZ.js" />
+    <Content Include="src\locale\bootstrap-table-vi-VN.js" />
+    <Content Include="src\locale\bootstrap-table-zh-CN.js" />
+    <Content Include="src\locale\bootstrap-table-zh-TW.js" />
+    <Content Include="UserEntityModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UserEntityModel.edmx</DependentUpon>
+      <LastGenOutput>UserEntityModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="UserEntityModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UserEntityModel.edmx</DependentUpon>
+      <LastGenOutput>UserEntityModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Delete_Confirmation.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -297,6 +507,81 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <EntityDeploy Include="UserEntityModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UserEntityModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="UserEntityModel.edmx.diagram">
+      <DependentUpon>UserEntityModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Views\Users\View.cshtml" />
+    <Content Include="Views\New\Create.cshtml" />
+    <Content Include="Views\New\Delete.cshtml" />
+    <Content Include="Views\New\Details.cshtml" />
+    <Content Include="Views\New\Edit.cshtml" />
+    <Content Include="Views\New\Index.cshtml" />
+    <Content Include="src\extensions\accent-neutralise\extension.json" />
+    <Content Include="src\extensions\accent-neutralise\README.md" />
+    <Content Include="src\extensions\auto-refresh\extension.json" />
+    <Content Include="src\extensions\auto-refresh\README.md" />
+    <Content Include="src\extensions\click-edit-row\README.md" />
+    <Content Include="src\extensions\cookie\extension.json" />
+    <Content Include="src\extensions\cookie\README.md" />
+    <Content Include="src\extensions\copy-rows\extension.json" />
+    <Content Include="src\extensions\copy-rows\README.md" />
+    <Content Include="src\extensions\defer-url\extension.json" />
+    <Content Include="src\extensions\defer-url\README.md" />
+    <Content Include="src\extensions\editable\extension.json" />
+    <Content Include="src\extensions\editable\README.md" />
+    <Content Include="src\extensions\export\extension.json" />
+    <Content Include="src\extensions\export\README.md" />
+    <Content Include="src\extensions\filter-control\extension.json" />
+    <Content Include="src\extensions\filter-control\README.md" />
+    <Content Include="src\extensions\filter\extension.json" />
+    <Content Include="src\extensions\filter\README.md" />
+    <Content Include="src\extensions\flat-json\extension.json" />
+    <Content Include="src\extensions\flat-json\README.md" />
+    <Content Include="src\extensions\group-by-v2\extension.json" />
+    <Content Include="src\extensions\group-by-v2\README.md" />
+    <Content Include="src\extensions\group-by\extension.json" />
+    <Content Include="src\extensions\group-by\README.md" />
+    <Content Include="src\extensions\i18n-enhance\extension.json" />
+    <Content Include="src\extensions\i18n-enhance\README.md" />
+    <Content Include="src\extensions\key-events\extension.json" />
+    <Content Include="src\extensions\key-events\README.md" />
+    <Content Include="src\extensions\mobile\extension.json" />
+    <Content Include="src\extensions\mobile\README.md" />
+    <Content Include="src\extensions\multi-column-toggle\extension.json" />
+    <Content Include="src\extensions\multi-column-toggle\README.md" />
+    <Content Include="src\extensions\multiple-search\extension.json" />
+    <Content Include="src\extensions\multiple-search\README.md" />
+    <Content Include="src\extensions\multiple-selection-row\extension.json" />
+    <Content Include="src\extensions\multiple-selection-row\README.md" />
+    <Content Include="src\extensions\multiple-sort\extension.json" />
+    <Content Include="src\extensions\multiple-sort\README.md" />
+    <Content Include="src\extensions\natural-sorting\extension.json" />
+    <Content Include="src\extensions\natural-sorting\README.md" />
+    <Content Include="src\extensions\page-jumpto\README.md" />
+    <Content Include="src\extensions\print\README.md" />
+    <Content Include="src\extensions\reorder-columns\extension.json" />
+    <Content Include="src\extensions\reorder-columns\README.md" />
+    <Content Include="src\extensions\reorder-rows\extension.json" />
+    <Content Include="src\extensions\reorder-rows\README.md" />
+    <Content Include="src\extensions\resizable\extension.json" />
+    <Content Include="src\extensions\resizable\README.md" />
+    <Content Include="src\extensions\select2-filter\extension.json" />
+    <Content Include="src\extensions\select2-filter\README.md" />
+    <Content Include="src\extensions\sticky-header\extension.json" />
+    <Content Include="src\extensions\sticky-header\README.md" />
+    <Content Include="src\extensions\toolbar\extension.json" />
+    <Content Include="src\extensions\toolbar\README.md" />
+    <Content Include="src\extensions\tree-column\bootstrap-table-tree-column.less" />
+    <Content Include="src\extensions\tree-column\extension.json" />
+    <Content Include="src\extensions\treegrid\extension.json" />
+    <Content Include="src\extensions\treegrid\README.md" />
+    <Content Include="src\locale\bootstrap-table-en-US.js.template" />
+    <Content Include="src\locale\README.md" />
+    <Content Include="Views\Shared\Navbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -313,6 +598,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

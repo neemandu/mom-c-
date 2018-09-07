@@ -1,0 +1,86 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" data-toggle="modal" data-target="#login-modal">התחבר</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="loginmodal-container">
+            <h1>כניסה לחשבון</h1><br>
+            <form>
+                <input id="txtUsername" style="text-align:right" type="text" placeholder="שם משתמש">
+                <input id="txtPassword" style="text-align:right" type="password" placeholder="סיסמא">
+                <input id="btnLogin" style="width: 100%" class="login loginmodal-submit" type="button" value="היכנס/י" />
+            </form>
+            <div id="divError" class="alert alert-danger collapse">
+                <a id="linkClose" href="#" class="close">&times;</a>
+                <div style="text-align:center" id="divErrorText"></div>
+            </div>
+            <div style="text-align:right" class="login-help">
+                <a href="#">שכחתי סיסמא</a>
+            </div>
+        </div>
+        <!--Bootstrap alert to display error message if the login fails-->
+
+    </div>
+</div>
+
+
+<script src="Scripts/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#linkClose').click(function () {
+            $('#divError').hide('fade');
+        });
+
+        $('#btnLogin').click(function () {
+            $.ajax({
+                // Post username, password & the grant type to /token
+                url: '/token',
+                method: 'POST',
+                contentType: 'application/json',
+                data: {
+                    username: $('#txtUsername').val(),
+                    password: $('#txtPassword').val(),
+                    grant_type: 'password'
+                },
+                success: function (response) {
+                    localStorage.setItem("accessToken", response.access_token);
+                    $.ajax({
+                        url: '/api/users/isUserAdmin',
+                        method: 'Get',
+                        headers: {
+                            'Authorization': 'Bearer '
+                                + localStorage.getItem("accessToken")
+                        },
+                        success: function (res) {
+                            console.log(res);
+                            localStorage.setItem("isAdmin", res)
+                        }
+                    });
+                    window.location.href = "Data.html";
+                },
+                // Display errors if any in the Bootstrap alert <div>
+                error: function (jqXHR) {
+                    console.log(jqXHR);
+                    $('#divErrorText').text('שם המשתמש או הסיסמא אינם נכונים');
+                    $('#divError').show('fade');
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<a1.User>
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<p>
+    @Html.ActionLink("צור חדש", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.ActionLink("ערוך", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("שכפל", "Copy", new { id=item.Id }) |
+            @Html.ActionLink("מחק", "Delete", new { id=item.Id }) |
+            @Html.ActionLinK("שלח מייל", "EmailUser", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
