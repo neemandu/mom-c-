@@ -9,7 +9,8 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" data-toggle="modal" data-target="#login-modal">התחבר</a></li>
+                <li id="login"><a href="#" data-toggle="modal" data-target="#login-modal">התחבר</a></li>
+                <li id="disconnect" style="display:none"><a href="#disconn">התנתק</a></li>
             </ul>
         </div>
     </div>
@@ -42,9 +43,39 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        if (localStorage.getItem('accessToken') == null) {
+            $('#login').show();
+            $('#disconnect').hide();
+        }
+        else {
+            $('#login').hide();
+            $('#disconnect').show();
+        }
 
         $('#linkClose').click(function () {
             $('#divError').hide('fade');
+        });
+        $('a[href="#disconn"]').click(function () {
+            $.ajax({
+                url: '/api/account/Logout',
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer '
+                        + localStorage.getItem("accessToken")
+                },
+                data: {},
+                success: function () {
+                    window.location.href = "/";
+                    localStorage.removeItem('accessToken');
+                    localStorage.removeItem('isAdmin');
+                    $('#login').show();
+                    $('#disconnect').hide();
+                },
+                error: function (jqXHR) {
+                    $('#divErrorText').text(jqXHR.responseText);
+                    $('#divError').show('fade');
+                }
+            });
         });
 
         $('#btnLogin').click(function () {
@@ -68,8 +99,7 @@
                                 + localStorage.getItem("accessToken")
                         },
                         success: function (res) {
-                            console.log(res);
-                            localStorage.setItem("isAdmin", res)
+                            localStorage.setItem("isAdmin", res);
                         }
                     });
                     window.location.href = "Data.html";

@@ -30,7 +30,8 @@ namespace a1.Controllers
         [Route("isUserAdmin")]
         public IHttpActionResult IsUserAdmin()
         {
-            return Ok(User.IsInRole("Admin"));
+            bool isAdmin = User.IsInRole("Admin");
+            return Ok(true);
         }
 
         [HttpGet]

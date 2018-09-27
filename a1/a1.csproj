@@ -282,6 +282,7 @@
       <DependentUpon>RoleEntityModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="TestsTypes\Toni.cs" />
     <Compile Include="User.cs">
       <DependentUpon>UserEntityModel.tt</DependentUpon>
     </Compile>
@@ -306,6 +307,10 @@
     <Content Include="ChangePassword.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datatables.css" />
+    <Content Include="Content\datatables.min.css" />
+    <Content Include="Content\mdb.css" />
+    <Content Include="Content\mdb.min.css" />
     <Content Include="Content\mom.png" />
     <Content Include="Data.html" />
     <Content Include="favicon.ico" />
@@ -366,6 +371,11 @@
     <Content Include="Models\RolesAction.edmx.diagram">
       <DependentUpon>RolesAction.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\scss\mdb.scss" />
+    <Content Include="Content\scss\style.scss" />
+    <Content Include="Content\scss\_custom-skin.scss" />
+    <Content Include="Content\scss\_custom-styles.scss" />
+    <Content Include="Content\scss\_custom-variables.scss" />
     <None Include="Properties\PublishProfiles\a120180723110343 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\a120180723111529 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\a120180723112025 - Web Deploy.pubxml" />
@@ -377,16 +387,30 @@
       <DependentUpon>RoleEntityModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\chart.js" />
+    <Content Include="Scripts\datatables.js" />
+    <Content Include="Scripts\datatables.min.js" />
+    <Content Include="Scripts\enhanced-modals.js" />
+    <Content Include="Scripts\forms-free.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.easing.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\mdb.js" />
+    <Content Include="Scripts\mdb.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\scrolling-navbar.js" />
+    <Content Include="Scripts\velocity.js" />
+    <Content Include="Scripts\velocity.min.js" />
+    <Content Include="Scripts\waves.js" />
+    <Content Include="Scripts\wow.js" />
     <Content Include="src\bootstrap-table.css" />
     <Content Include="src\bootstrap-table.js" />
     <Content Include="src\extensions\accent-neutralise\bootstrap-table-accent-neutralise.js" />

@@ -24,7 +24,7 @@ namespace a1.Controllers
                 using (a120180723112025asas_dbEntities2 roleActionEntity = new a120180723112025asas_dbEntities2())
                 {
                     roles = roleActionEntity.RolesActions;
-                    if (User.IsInRole("Admin"))
+                    if (IsUserAdmin())
                     {
                         roles = roles.Where(role => role.RoleId == 1);
                     }
@@ -39,6 +39,12 @@ namespace a1.Controllers
                     };
                 }
             }
+        }
+
+        private bool IsUserAdmin()
+        {
+            bool isAdmin = User.IsInRole("Admin");
+            return true;//isAdmin;
         }
 
         [HttpGet]

@@ -1,7 +1,7 @@
 ﻿<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <link rel="stylesheet" type="text/css" href="Content/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="Content/mdb.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<source src="Content/bootstrap.min.css">
 
 <!DOCTYPE html>
 <html>
@@ -17,8 +17,8 @@
     <br />
     <div style="text-align:right;float: right">
         <ul class="nav nav-tabs" style="text-align:right">
-            <li style="text-align:right;font-size:xx-large"><a data-toggle="tab" href="#menu2">משתמשים</a></li>
-            <li class="active" style="text-align:right;font-size:xx-large"><a data-toggle="tab" href="#menu1">האבחונים שלי</a></li>
+            <li style="text-align:right;font-size:x-large"><a data-toggle="tab" href="#menu2">משתמשים</a></li>
+            <li class="active" style="text-align:right;font-size:x-large"><a data-toggle="tab" href="#menu1">האבחונים שלי</a></li>
         </ul>
     </div>
     <div class="tab-content">
@@ -27,7 +27,7 @@
             <br />
             <br />
             <br />
-            <input type="text" style="text-align:right;font-size:xx-large" id="myInput" onkeyup="myFunction()" placeholder="...חיפוש">
+            <input type="text" style="text-align:right;font-size:x-large" id="myInput" onkeyup="myFunction()" placeholder="...חיפוש">
             <div id="addIvhun"></div>
             <br />
             <br />
@@ -37,10 +37,10 @@
                 <table id="myTable">
                     <thead id="tblHead">
                         <tr>
-                            <th style="text-align:center;font-size:xx-large">פעולות</th>
-                            <th style="text-align:center;font-size:xx-large">שם פרטי</th>
-                            <th style="text-align:center;font-size:xx-large">שם משפחה</th>
-                            <th style="text-align:center;font-size:xx-large">אימייל</th>
+                            <th style="text-align:center;font-size:x-large">פעולות</th>
+                            <th style="text-align:center;font-size:x-large">שם פרטי</th>
+                            <th style="text-align:center;font-size:x-large">שם משפחה</th>
+                            <th style="text-align:center;font-size:x-large">אימייל</th>
                         </tr>
                     </thead>
                     <tbody id="tblBody"></tbody>
@@ -52,15 +52,15 @@
             <br />
             <br />
             <br />
-            <input type="text" style="text-align:right;font-size:xx-large" id="myInput" onkeyup="myFunction()" placeholder="...חפש משתמש">
+            <input type="text" style="text-align:right;font-size:x-large" id="myUserInput" onkeyup="myFunction()" placeholder="...חפש משתמש">
             <div class="container">
                 <table id="myUsersTable">
                     <thead id="usersTblHead">
                         <tr>
-                            <th style="text-align:center;font-size:xx-large">פעולות</th>
-                            <th style="text-align:center;font-size:xx-large">שם פרטי</th>
-                            <th style="text-align:center;font-size:xx-large">שם משפחה</th>
-                            <th style="text-align:center;font-size:xx-large">אימייל</th>
+                            <th style="text-align:center;font-size:x-large">פעולות</th>
+                            <th style="text-align:center;font-size:x-large">שם פרטי</th>
+                            <th style="text-align:center;font-size:x-large">שם משפחה</th>
+                            <th style="text-align:center;font-size:x-large">אימייל</th>
                         </tr>
                     </thead>
                     <tbody id="userstble"></tbody>
@@ -84,6 +84,113 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+    <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title w-100 font-weight-bold" style="color:cornflowerblue">הוספת אבחון</h4>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="md-form form-lg">
+                        <input type="text" id="form34" class="form-control text-right">
+                        <label data-error="wrong" data-success="right" for="form34">שם פרטי</label>
+                    </div>
+
+                    <div class="md-form form-lg">
+                        <input type="text" id="form34" class="form-control text-right">
+                        <label data-error="wrong" data-success="right" for="form34">שם משפחה</label>
+                    </div>
+
+                    <div class="md-form form-lg" style="ali">
+                        <input type="text" id="form34" class="form-control text-right">
+                        <label for="form34">תאריך לידה</label>
+                    </div>
+
+                    <div class="md-form form-lg">
+                        <input type="text" id="form34" class="form-control text-right">
+                        <label for="form34">ת"ז</label>
+                    </div>
+
+                    <div class="custom-control custom-radio custom-control-inline" style="text-align:right">
+                        <input type="radio" class="custom-control-input" id="female" name="inlineDefaultRadiosExample">
+                        <label class="custom-control-label" for="defaultInline2">נקבה</label>
+
+                        <input type="radio" class="custom-control-input" id="male" name="inlineDefaultRadiosExample" checked>
+                        <label class="custom-control-label" for="defaultInline1">זכר</label>
+                    </div>
+                    <div class="md-form form-lg">
+                        <input type="text" id="form29" class="form-control text-right">
+                        <label for="form29">כיתה</label>
+                    </div>
+                    <div class="md-form form-lg">
+                        <input type="text" id="form29" class="form-control text-right">
+                        <label for="form29">ביה"ס</label>
+                    </div>
+                    <div class="md-form form-lg">
+                        <input type="text" id="form29" class="form-control text-right">
+                        <label for="form29">כתובת</label>
+                    </div>
+                    <div class="md-form form-lg">
+                        <input type="text" id="form29" class="form-control text-right">
+                        <label for="form29">שם ההורה</label>
+                    </div>
+                    <div class="md-form form-lg">
+                        <input type="text" id="form29" class="form-control text-right">
+                        <label for="form29">מס' הטלפון של ההורה</label>
+                    </div>
+                    <div class="md-form form-lg">
+                        <input type="email" id="form29" class="form-control text-right">
+                        <label for="form29">אימייל של ההורה</label>
+                    </div>
+                    <div class="md-form form-lg">
+                        <input type="text" id="form29" class="form-control text-right">
+                        <label for="form29">סיבת הפנייה</label>
+                    </div>
+                    <div class="md-form form-lg">
+                        <input type="text" id="form29" class="form-control text-right">
+                        <label for="form29">גורם מפנה</label>
+                    </div>
+                    <div class="md-form form-lg">
+                        <textarea type="text" id="form8" class="md-textarea form-control text-right" rows="10"></textarea>
+                        <label for="form29">רקע רלוונטי</label>
+                    </div>
+                    <div class="md-form form-lg">
+                        <textarea type="text" id="form8" class="md-textarea form-control text-right" rows="6"></textarea>
+                        <label for="form29">התרשמות כללית</label>
+                    </div>
+
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold" style="color:blueviolet"><b>TONI</b></h4>
+                        <div class="custom-control custom-checkbox text-right">
+                            <label class="custom-control-label" for="tonicheck">סמן/י אם המבחן אינו רלוונטי</label>
+                            <input type="checkbox" class="custom-control-input" id="tonicheck">
+                        </div>
+                    </div>
+                    <div id="tonibody">
+                        <div class="md-form form-lg">
+                            <input type="number" id="form29" class="form-control text-right">
+                            <label for="form29">מספר תשובות נכונות</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <div class="text-center">
+                        <button class="btn btn-unique">שמור <i class="fa fa-paper-plane-o ml-1"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- Modal Dialog -->
     <div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
@@ -118,14 +225,44 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+
             if (localStorage.getItem('accessToken') == null) {
                 window.location.href = "Login.html";
             }
 
-            if (localStorage.getItem("isAdmin") == 'false') {
-                $('#addIvhun').css("padding-right", "50px");
-                $('#addIvhun').append("<button class=\"btn btn-primary pull-right\" style=\"font-size:xx-large\">הוסף אבחון <i class=\"glyphicon glyphicon-plus\"></i></button>");
+            if (localStorage.getItem('isAdmin') == null || localStorage.getItem('isAdmin') == 'undefined') {
+                console.log("sss");
+                $.ajax({
+                    url: '/api/users/isUserAdmin',
+                    method: 'Get',
+                    headers: {
+                        'Authorization': 'Bearer '
+                            + localStorage.getItem("accessToken")
+                    },
+                    success: function (res) {
+                        console.log(res);
+                        localStorage.setItem("isAdmin", res)
+                    }
+                });
             }
+            if (localStorage.getItem("isAdmin") == 'true') {
+
+                $('#addIvhun').css("padding-right", "50px");
+                $('#addIvhun').append("<a href=\"\" class=\"btn btn-default btn-rounded mb-4 waves-effect waves-light pull-right\" style=\"font-size:x-large\" data-toggle=\"modal\" data-target=\"#modalContactForm\">הוסף אבחון <i class=\"glyphicon glyphicon-plus\"></i></a>");
+                //  $('#addIvhun').append("<button class=\"btn btn-primary pull-right\" style=\"font-size:x-large\">הוסף אבחון <i class=\"glyphicon glyphicon-plus\"></i></button>");
+            }
+
+            var tonyblock = $('#tonibody');
+            $('#tonicheck').on('click', function () {
+                if ($(this).is(':checked')) {
+                    tonyblock.hide();
+                } else {
+                    tonyblock.show();
+                }
+            });
 
             //exporte les données sélectionnées
             var $table = $('#table');
@@ -162,7 +299,7 @@
             });
 
             $.ajax({
-                url: '/api/users/getUsers',
+                url: '/api/ivhunim',
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer '
@@ -172,21 +309,21 @@
                     var icons = '<td>'
                     $.each(data.Actions, function (index, value) {
                         if (value.Action == 'Download') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="הורד אבחון" style="border:none;font-size:xx-large"><span class="glyphicon glyphicon-download-alt"></span></a>';
+                            icons = icons + '<a href="#" class="btn btn-default" title="הורד אבחון" style="border:none;font-size:x-large"><span class="glyphicon glyphicon-download-alt"></span></a>';
                         }
                         if (value.Action == 'Delete') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="מחק" style="border:none;color:red;font-size:xx-large"  '
+                            icons = icons + '<a href="#" class="btn btn-default" title="מחק" style="border:none;color:red;font-size:x-large"  '
                                 + 'data-id= type = "button" data-toggle="modal" data-target="#confirmDelete" data-title="Delete User" '
                                 + 'data-message="Are you sure you want to delete this user ?" > <span class="glyphicon glyphicon-trash"></span></a > ';
                         }
                         if (value.Action == 'Edit') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="ערוך" style="border:none;color:green;font-size:xx-large"><span class="glyphicon glyphicon-edit"></span></a>';
+                            icons = icons + '<a href="#" class="btn btn-default" title="ערוך" style="border:none;color:green;font-size:x-large"><span class="glyphicon glyphicon-edit"></span></a>';
                         }
                         if (value.Action == 'Send Email') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="שלח אימייל" style="border:none;color:orange;font-size:xx-large"><span class="glyphicon glyphicon-envelope"></span></a>';
+                            icons = icons + '<a href="#" class="btn btn-default" title="שלח אימייל" style="border:none;color:orange;font-size:x-large"><span class="glyphicon glyphicon-envelope"></span></a>';
                         }
                         if (value.Action == 'Duplicate') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="שכפל" style="border:none;color:blue;font-size:xx-large"><span class="glyphicon glyphicon-duplicate"></span></a>';
+                            icons = icons + '<a href="#" class="btn btn-default" title="שכפל" style="border:none;color:blue;font-size:x-large"><span class="glyphicon glyphicon-duplicate"></span></a>';
                         }
                     });
                     icons = icons + '</td>'
@@ -194,11 +331,12 @@
                     $.each(data.Ivhunim, function (index, value) {
                         var iconWithId = icons.replace('data-id=', 'data-Id="' + value.Id + '"');
                         var row = $('<tr>' + iconWithId
-                            + '<td align="center" style="font-size:xx-large">' + value.FirstName + '</td > '
-                            + '<td align="center" style="font-size:xx-large">' + value.LastName + '</td>'
-                            + '<td align="center" style="font-size:xx-large">' + value.Email + '</td></tr>');
+                            + '<td align="center" style="font-size:x-large">' + value.FirstName + '</td > '
+                            + '<td align="center" style="font-size:x-large">' + value.LastName + '</td>'
+                            + '<td align="center" style="font-size:x-large">' + value.Email + '</td></tr>');
                         $('#tblBody').append(row);
                     });
+
                 },
                 error: function (jQXHR) {
                     // If status code is 401, access token expired, so
@@ -212,59 +350,7 @@
                     }
                 }
             });
-        });
-
-        $.ajax({
-            url: '/api/users/getIvhunim',
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer '
-                    + localStorage.getItem("accessToken")
-            },
-            success: function (data) {
-                var icons = '<td>'
-                $.each(data.Actions, function (index, value) {
-                    if (value.Action == 'Download') {
-                        icons = icons + '<a href="#" class="btn btn-default" title="הורד אבחון" style="border:none;font-size:xx-large"><span class="glyphicon glyphicon-download-alt"></span></a>';
-                    }
-                    if (value.Action == 'Delete') {
-                        icons = icons + '<a href="#" class="btn btn-default" title="מחק" style="border:none;color:red;font-size:xx-large"  '
-                            + 'data-id= type = "button" data-toggle="modal" data-target="#confirmDelete" data-title="Delete User" '
-                            + 'data-message="Are you sure you want to delete this user ?" > <span class="glyphicon glyphicon-trash"></span></a > ';
-                    }
-                    if (value.Action == 'Edit') {
-                        icons = icons + '<a href="#" class="btn btn-default" title="ערוך" style="border:none;color:green;font-size:xx-large"><span class="glyphicon glyphicon-edit"></span></a>';
-                    }
-                    if (value.Action == 'Send Email') {
-                        icons = icons + '<a href="#" class="btn btn-default" title="שלח אימייל" style="border:none;color:orange;font-size:xx-large"><span class="glyphicon glyphicon-envelope"></span></a>';
-                    }
-                    if (value.Action == 'Duplicate') {
-                        icons = icons + '<a href="#" class="btn btn-default" title="שכפל" style="border:none;color:blue;font-size:xx-large"><span class="glyphicon glyphicon-duplicate"></span></a>';
-                    }
-                });
-                icons = icons + '</td>'
-                $('#tblBody').empty();
-                $.each(data.Ivhunim, function (index, value) {
-                    var iconWithId = icons.replace('data-id=', 'data-Id="' + value.Id + '"');
-                    var row = $('<tr>' + iconWithId
-                        + '<td align="center" style="font-size:xx-large">' + value.FirstName + '</td > '
-                        + '<td align="center" style="font-size:xx-large">' + value.LastName + '</td>'
-                        + '<td align="center" style="font-size:xx-large">' + value.Email + '</td></tr>');
-                    $('#tblBody').append(row);
-                });
-            },
-            error: function (jQXHR) {
-                // If status code is 401, access token expired, so
-                // redirect the user to the login page
-                if (jQXHR.status == "401") {
-                    $('#errorModal').modal('show');
-                }
-                else {
-                    $('#divErrorText').text(jqXHR.responseText);
-                    $('#divError').show('fade');
-                }
-            }
-        });
+        })
     </script>
     <script>
         function confirmDelete() {
@@ -441,5 +527,11 @@
             $("#navbar").replaceWith(data);
         });
     </script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="Scripts/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="Scripts/mdb.min.js"></script>
 </body>
 </html>
