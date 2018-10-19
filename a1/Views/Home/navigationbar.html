@@ -1,0 +1,139 @@
+﻿<!--<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li id="login"><a href="#" data-toggle="modal" data-target="#login-modal">התחבר</a></li>
+                <li id="disconnect"><a href="#disconn">התנתק</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>-->
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="#">Hidden brand</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+</div>
+
+<div class="modal" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="loginmodal-container">
+            <h1>כניסה לחשבון</h1><br>
+            <form>
+                <input id="txtUsername" style="text-align:right" type="text" placeholder="שם משתמש">
+                <input id="txtPassword" style="text-align:right" type="password" placeholder="סיסמא">
+                <input id="btnLogin" style="width: 100%" class="login loginmodal-submit" type="button" value="היכנס/י" />
+            </form>
+            <div id="divError" class="alert alert-danger collapse">
+                <a id="linkClose" href="#" class="close">&times;</a>
+                <div style="text-align:center" id="divErrorText"></div>
+            </div>
+            <div style="text-align:right" class="login-help">
+                <a href="#">שכחתי סיסמא</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="Scripts/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (localStorage.getItem('accessToken') == null) {
+            $('#login').show();
+            $('#disconnect').hide();
+        }
+        else {
+            $('#login').hide();
+            $('#disconnect').show();
+        }
+
+        $('#linkClose').click(function () {
+            $('#divError').hide('fade');
+        });
+        $('a[href="#disconn"]').click(function () {
+            $.ajax({
+                url: '/api/account/Logout',
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer '
+                        + localStorage.getItem("accessToken")
+                },
+                data: {},
+                success: function () {
+                    window.location.href = "/";
+                    localStorage.removeItem('accessToken');
+                    localStorage.removeItem('isAdmin');
+                    $('#login').show();
+                    $('#disconnect').hide();
+                },
+                error: function (jqXHR) {
+                    $('#divErrorText').text(jqXHR.responseText);
+                    $('#divError').show('fade');
+                }
+            });
+        });
+
+        $('#btnLogin').click(function () {
+            $.ajax({
+                // Post username, password & the grant type to /token
+                url: '/token',
+                method: 'POST',
+                contentType: 'application/json',
+                data: {
+                    username: $('#txtUsername').val(),
+                    password: $('#txtPassword').val(),
+                    grant_type: 'password'
+                },
+                success: function (response) {
+                    localStorage.setItem("accessToken", response.access_token);
+                    $.ajax({
+                        url: '/api/users/isUserAdmin',
+                        method: 'Get',
+                        headers: {
+                            'Authorization': 'Bearer '
+                                + localStorage.getItem("accessToken")
+                        },
+                        success: function (res) {
+                            localStorage.setItem("isAdmin", res);
+                        }
+                    });
+                    window.location.href = "Data.html";
+                },
+                // Display errors if any in the Bootstrap alert <div>
+                error: function (jqXHR) {
+                    console.log(jqXHR);
+                    $('#divErrorText').text('שם המשתמש או הסיסמא אינם נכונים');
+                    $('#divError').show('fade');
+                }
+            });
+        });
+    });
+</script>

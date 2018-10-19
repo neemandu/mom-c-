@@ -306,15 +306,21 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="ChangePassword.html" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\datatables.css" />
-    <Content Include="Content\datatables.min.css" />
-    <Content Include="Content\mdb.css" />
-    <Content Include="Content\mdb.min.css" />
-    <Content Include="Content\mom.png" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\datatables.css" />
+    <Content Include="Content\css\datatables.min.css" />
+    <Content Include="Content\css\mdb.css" />
+    <Content Include="Content\css\mdb.min.css" />
+    <Content Include="Content\css\mom.png" />
+    <Content Include="Content\css\Site.css" />
+    <Content Include="Content\css\new-age.css" />
+    <Content Include="Content\css\new-age.min.css" />
+    <Content Include="Content\gifs\ajax-loader.gif" />
+    <Content Include="Content\gifs\Ellipsis-1.8s-190px.gif" />
     <Content Include="Data.html" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Login.html" />
     <Content Include="Models\RolesAction.Context.tt">
@@ -376,6 +382,26 @@
     <Content Include="Content\scss\_custom-skin.scss" />
     <Content Include="Content\scss\_custom-styles.scss" />
     <Content Include="Content\scss\_custom-variables.scss" />
+    <Content Include="Content\fonts\roboto\Roboto-Bold.eot" />
+    <Content Include="Content\fonts\roboto\Roboto-Bold.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Bold.woff" />
+    <Content Include="Content\fonts\roboto\Roboto-Bold.woff2" />
+    <Content Include="Content\fonts\roboto\Roboto-Light.eot" />
+    <Content Include="Content\fonts\roboto\Roboto-Light.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Light.woff" />
+    <Content Include="Content\fonts\roboto\Roboto-Light.woff2" />
+    <Content Include="Content\fonts\roboto\Roboto-Medium.eot" />
+    <Content Include="Content\fonts\roboto\Roboto-Medium.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Medium.woff" />
+    <Content Include="Content\fonts\roboto\Roboto-Medium.woff2" />
+    <Content Include="Content\fonts\roboto\Roboto-Regular.eot" />
+    <Content Include="Content\fonts\roboto\Roboto-Regular.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Regular.woff" />
+    <Content Include="Content\fonts\roboto\Roboto-Regular.woff2" />
+    <Content Include="Content\fonts\roboto\Roboto-Thin.eot" />
+    <Content Include="Content\fonts\roboto\Roboto-Thin.ttf" />
+    <Content Include="Content\fonts\roboto\Roboto-Thin.woff" />
+    <Content Include="Content\fonts\roboto\Roboto-Thin.woff2" />
     <None Include="Properties\PublishProfiles\a120180723110343 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\a120180723111529 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\a120180723112025 - Web Deploy.pubxml" />
@@ -386,6 +412,7 @@
     <Content Include="RoleEntityModel.edmx.diagram">
       <DependentUpon>RoleEntityModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Ivhunim - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\chart.js" />
     <Content Include="Scripts\datatables.js" />
@@ -516,6 +543,7 @@
       <DependentUpon>UserEntityModel.edmx</DependentUpon>
       <LastGenOutput>UserEntityModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Home\navigationbar.html" />
     <Content Include="Views\Shared\Delete_Confirmation.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -525,10 +553,8 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Content\Site.css" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <EntityDeploy Include="UserEntityModel.edmx">
@@ -606,18 +632,20 @@
     <Content Include="src\locale\bootstrap-table-en-US.js.template" />
     <Content Include="src\locale\README.md" />
     <Content Include="Views\Shared\Navbar.cshtml" />
+    <Content Include="simple-line-icons.scss" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

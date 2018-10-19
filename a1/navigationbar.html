@@ -1,5 +1,8 @@
-﻿<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+﻿<link rel="stylesheet" type="text/css" href="/Content/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/Content/css/mdb.css">
+
+<nav class="navbar navbar-dark bg-primary" style="background-color: #e3f2fd;">
+    <div class="container" style="margin-right:20px">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
@@ -9,22 +12,26 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li id="login"><a href="#" data-toggle="modal" data-target="#login-modal">התחבר</a></li>
-                <li id="disconnect" style="display:none"><a href="#disconn">התנתק</a></li>
+                <li id="users" style="display:none"><a href="Users.html" style="color:white;text-align:right;font-size:large">משתמשים</a></li>
+                <li id="myIvhunim" style="display:none"><a href="Data.html" style="color:white;text-align:right;font-size:large">האבחונים שלי</a></li>
+                <li id="login" style="display:none"><a href="#" data-toggle="modal" data-target="#login-modal" style="color:white;font-size:large;text-align:right">התחבר</a></li>
+                <li id="disconnect" style="display:none"><a href="#disconn" style="text-align:right;font-size:large;color:white">התנתק</a></li>
             </ul>
         </div>
     </div>
-</div>
+</nav>
 
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+
+<div class="modal" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none">
     <div class="modal-dialog">
         <div class="loginmodal-container">
             <h1>כניסה לחשבון</h1><br>
-            <form>
-                <input id="txtUsername" style="text-align:right" type="text" placeholder="שם משתמש">
-                <input id="txtPassword" style="text-align:right" type="password" placeholder="סיסמא">
-                <input id="btnLogin" style="width: 100%" class="login loginmodal-submit" type="button" value="היכנס/י" />
-            </form>
+                                 <form>
+                                     <input id="txtUsername" style="text-align:right" type="text" placeholder="שם משתמש">
+                                     <input id="txtPassword" style="text-align:right" type="password" placeholder="סיסמא">
+                                     <input id="btnLogin" style="width: 100%" class="login loginmodal-submit" type="button" value="היכנס/י" />
+                                     <img id="loaderImage" style="display:block;margin: 0 auto;" src="/Content/gifs/Ellipsis-1.8s-190px.gif" alt="Loading" title="Loading" />
+                                 </form>
             <div id="divError" class="alert alert-danger collapse">
                 <a id="linkClose" href="#" class="close">&times;</a>
                 <div style="text-align:center" id="divErrorText"></div>
@@ -33,23 +40,30 @@
                 <a href="#">שכחתי סיסמא</a>
             </div>
         </div>
-        <!--Bootstrap alert to display error message if the login fails-->
-
     </div>
 </div>
 
 
-<script src="Scripts/jquery-1.10.2.min.js"></script>
+<script src="../Scripts/jquery-1.10.2.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
         if (localStorage.getItem('accessToken') == null) {
             $('#login').show();
             $('#disconnect').hide();
+            $('#myIvhunim').hide();
+            $('#users').hide();
         }
         else {
             $('#login').hide();
             $('#disconnect').show();
+            $('#myIvhunim').show();
+            if (localStorage.getItem("isAdmin") == 'true') {
+                $('#users').show();
+            }
+            else {
+                $('#users').hide();
+            }
         }
 
         $('#linkClose').click(function () {
@@ -77,8 +91,9 @@
                 }
             });
         });
-
+        $('#loaderImage').hide();
         $('#btnLogin').click(function () {
+            $('#loaderImage').show();
             $.ajax({
                 // Post username, password & the grant type to /token
                 url: '/token',
@@ -102,10 +117,11 @@
                             localStorage.setItem("isAdmin", res);
                         }
                     });
-                    window.location.href = "Data.html";
+                    window.location.href = "/";
                 },
                 // Display errors if any in the Bootstrap alert <div>
                 error: function (jqXHR) {
+                    $('#loaderImage').hide();
                     console.log(jqXHR);
                     $('#divErrorText').text('שם המשתמש או הסיסמא אינם נכונים');
                     $('#divError').show('fade');

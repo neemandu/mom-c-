@@ -1,71 +1,40 @@
 ﻿<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<link rel="stylesheet" type="text/css" href="Content/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="Content/mdb.css">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="Content/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="Content/css/mdb.css">
 
 <!DOCTYPE html>
 <html>
 <head>
     <title></title>
     <meta charset="utf-8" />
-    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body style="padding-top:20px">
+<body style="padding-top:0">
     <div id="navbar"></div>
-
-    <br />
-    <br />
-    <div style="text-align:right;float: right">
-        <ul class="nav nav-tabs" style="text-align:right">
-            <li style="text-align:right;font-size:x-large"><a data-toggle="tab" href="#menu2">משתמשים</a></li>
-            <li class="active" style="text-align:right;font-size:x-large"><a data-toggle="tab" href="#menu1">האבחונים שלי</a></li>
-        </ul>
-    </div>
-    <div class="tab-content">
-        <div id="menu1" class="tab-pane fade in active">
-            <br />
-            <br />
-            <br />
-            <br />
-            <input type="text" style="text-align:right;font-size:x-large" id="myInput" onkeyup="myFunction()" placeholder="...חיפוש">
-            <div id="addIvhun"></div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <div class="container">
-                <table id="myTable">
-                    <thead id="tblHead">
-                        <tr>
-                            <th style="text-align:center;font-size:x-large">פעולות</th>
-                            <th style="text-align:center;font-size:x-large">שם פרטי</th>
-                            <th style="text-align:center;font-size:x-large">שם משפחה</th>
-                            <th style="text-align:center;font-size:x-large">אימייל</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tblBody"></tbody>
-                </table>
-            </div>
-        </div>
-        <div id="menu2" class="tab-pane fade">
-            <<br />
-            <br />
-            <br />
-            <br />
-            <input type="text" style="text-align:right;font-size:x-large" id="myUserInput" onkeyup="myFunction()" placeholder="...חפש משתמש">
-            <div class="container">
-                <table id="myUsersTable">
-                    <thead id="usersTblHead">
-                        <tr>
-                            <th style="text-align:center;font-size:x-large">פעולות</th>
-                            <th style="text-align:center;font-size:x-large">שם פרטי</th>
-                            <th style="text-align:center;font-size:x-large">שם משפחה</th>
-                            <th style="text-align:center;font-size:x-large">אימייל</th>
-                        </tr>
-                    </thead>
-                    <tbody id="userstble"></tbody>
-                </table>
-            </div>
+    <div id="menu1">
+        <h2 style="text-align:right">האבחונים שלי&nbsp&nbsp</h2>
+        <input type="text" style="background-color:antiquewhite; text-align:right;font-size:large" id="myInput" onkeyup="myFunction()" placeholder="...חיפוש">
+        <div id="addIvhun"></div>
+        <img style="display:none;padding-left:350px" src="/Content/gifs/Ellipsis-1.8s-190px.gif" alt="Loading" />
+        <br />
+        <br />
+        <br />
+        <div class="container">
+            <table id="myTable">
+                <thead id="tblHead">
+                    <tr>
+                        <th style="text-align:center;font-size:large">פעולות</th>
+                        <th style="text-align:center;font-size:large">?מוכן לשליחה</th>
+                        <th style="text-align:center;font-size:large">שם פרטי</th>
+                        <th style="text-align:center;font-size:large">שם משפחה</th>
+                        <th style="text-align:center;font-size:large">אימייל</th>
+                        <th style="text-align:center;font-size:large">המכון המאבחן</th>
+                    </tr>
+                </thead>
+                <tbody id="tblBody"></tbody>
+            </table>
         </div>
     </div>
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -99,24 +68,40 @@
                     <h4 class="modal-title w-100 font-weight-bold" style="color:cornflowerblue">הוספת אבחון</h4>
                 </div>
                 <div class="modal-body mx-3">
-                    <div class="md-form form-lg">
-                        <input type="text" id="form34" class="form-control text-right">
-                        <label data-error="wrong" data-success="right" for="form34">שם פרטי</label>
+                    <div class="form-group form-lg text-right">
+                        <label for="sel1">?האם האבחון מוכן לשליחה</label>
+                        <br />
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="form-group form-lg text-right" style="text-align:right">
+                        <label for="sel1">המכון המאבחן</label>
+                        <select class="form-control" dir="rtl" id="institue">
+                            <option>איה נאמן</option>
+                            <option>הצעד הבא</option>
+                        </select>
                     </div>
 
                     <div class="md-form form-lg">
-                        <input type="text" id="form34" class="form-control text-right">
-                        <label data-error="wrong" data-success="right" for="form34">שם משפחה</label>
-                    </div>
-
-                    <div class="md-form form-lg" style="ali">
-                        <input type="text" id="form34" class="form-control text-right">
-                        <label for="form34">תאריך לידה</label>
+                        <input type="text" id="first_name" class="form-control text-right">
+                        <label data-error="wrong" data-success="right" for="first_name">שם פרטי</label>
                     </div>
 
                     <div class="md-form form-lg">
-                        <input type="text" id="form34" class="form-control text-right">
-                        <label for="form34">ת"ז</label>
+                        <input type="text" id="last_name" class="form-control text-right">
+                        <label data-error="wrong" data-success="right" for="last_name">שם משפחה</label>
+                    </div>
+
+                    <div class="md-form form-lg">
+                        <input type="text" id="birth_date" class="form-control text-right">
+                        <label for="birth_date">תאריך לידה</label>
+                    </div>
+
+                    <div class="md-form form-lg">
+                        <input type="text" id="id" class="form-control text-right">
+                        <label for="id">ת"ז</label>
                     </div>
 
                     <div class="custom-control custom-radio custom-control-inline" style="text-align:right">
@@ -127,44 +112,44 @@
                         <label class="custom-control-label" for="defaultInline1">זכר</label>
                     </div>
                     <div class="md-form form-lg">
-                        <input type="text" id="form29" class="form-control text-right">
-                        <label for="form29">כיתה</label>
+                        <input type="text" id="grade" class="form-control text-right">
+                        <label for="grade">כיתה</label>
                     </div>
                     <div class="md-form form-lg">
-                        <input type="text" id="form29" class="form-control text-right">
-                        <label for="form29">ביה"ס</label>
+                        <input type="text" id="school" class="form-control text-right">
+                        <label for="school">ביה"ס</label>
                     </div>
                     <div class="md-form form-lg">
-                        <input type="text" id="form29" class="form-control text-right">
-                        <label for="form29">כתובת</label>
+                        <input type="text" id="address" class="form-control text-right">
+                        <label for="address">כתובת</label>
                     </div>
                     <div class="md-form form-lg">
-                        <input type="text" id="form29" class="form-control text-right">
-                        <label for="form29">שם ההורה</label>
+                        <input type="text" id="parent" class="form-control text-right">
+                        <label for="parent">שם ההורה</label>
                     </div>
                     <div class="md-form form-lg">
-                        <input type="text" id="form29" class="form-control text-right">
-                        <label for="form29">מס' הטלפון של ההורה</label>
+                        <input type="text" id="parent_phone" class="form-control text-right">
+                        <label for="parent_phone">מס' הטלפון של ההורה</label>
                     </div>
                     <div class="md-form form-lg">
-                        <input type="email" id="form29" class="form-control text-right">
-                        <label for="form29">אימייל של ההורה</label>
+                        <input type="email" id="parent_email" class="form-control text-right">
+                        <label for="parent_email">אימייל של ההורה</label>
                     </div>
                     <div class="md-form form-lg">
-                        <input type="text" id="form29" class="form-control text-right">
-                        <label for="form29">סיבת הפנייה</label>
+                        <input type="text" id="reason" class="form-control text-right">
+                        <label for="reason">סיבת הפנייה</label>
                     </div>
                     <div class="md-form form-lg">
-                        <input type="text" id="form29" class="form-control text-right">
-                        <label for="form29">גורם מפנה</label>
+                        <input type="text" id="who_sent" class="form-control text-right">
+                        <label for="who_sent">גורם מפנה</label>
                     </div>
                     <div class="md-form form-lg">
-                        <textarea type="text" id="form8" class="md-textarea form-control text-right" rows="10"></textarea>
-                        <label for="form29">רקע רלוונטי</label>
+                        <textarea type="text" id="background" class="md-textarea form-control text-right" rows="10"></textarea>
+                        <label for="background">רקע רלוונטי</label>
                     </div>
                     <div class="md-form form-lg">
-                        <textarea type="text" id="form8" class="md-textarea form-control text-right" rows="6"></textarea>
-                        <label for="form29">התרשמות כללית</label>
+                        <textarea type="text" id="overall_impression" class="md-textarea form-control text-right" rows="6"></textarea>
+                        <label for="overall_impression">התרשמות כללית</label>
                     </div>
 
                     <div class="modal-header text-center">
@@ -176,14 +161,272 @@
                     </div>
                     <div id="tonibody">
                         <div class="md-form form-lg">
-                            <input type="number" id="form29" class="form-control text-right">
-                            <label for="form29">מספר תשובות נכונות</label>
+                            <input type="number" id="toni_right_answers" class="form-control text-right">
+                            <label for="toni_right_answers">מספר תשובות נכונות</label>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <div class="text-center">
-                        <button class="btn btn-unique">שמור <i class="fa fa-paper-plane-o ml-1"></i></button>
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold" style="color:blueviolet"><b>I.P.T.A</b></h4>
+                        <div class="custom-control custom-checkbox text-right">
+                            <label class="custom-control-label" for="iptacheck">סמן/י אם המבחן אינו רלוונטי</label>
+                            <input type="checkbox" class="custom-control-input" id="iptacheck">
+                        </div>
+                    </div>
+                    <div id="iptabody">
+                        <div class="md-form form-lg">
+                            <input type="number" id="ipta_right_answers" class="form-control text-right">
+                            <label for="ipta_right_answers">מספר תשובות נכונות</label>
+                        </div>
+                    </div>
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold" style="color:blueviolet"><b>מ"מ גלנץ</b></h4>
+                        <div class="custom-control custom-checkbox text-right">
+                            <label class="custom-control-label" for="glanzcheck">סמן/י אם המבחן אינו רלוונטי</label>
+                            <input type="checkbox" class="custom-control-input" id="glanzcheck">
+                        </div>
+                    </div>
+                    <div id="glanzbody">
+                        <div class="md-form form-lg">
+                            <input type="number" id="glanz_nigudiyut" class="form-control text-right">
+                            <label for="glanz_nigudiyut">ניגודיות</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <input type="number" id="glanz_nirdafot" class="form-control text-right">
+                            <label for="glanz_nirdafot">נרדפות</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <input type="number" id="glanz_mahutiyut" class="form-control text-right">
+                            <label for="glanz_mahutiyut">מהותיות</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <input type="number" id="glanz_hagdara" class="form-control text-right">
+                            <label for="glanz_hagdara">הגדרה</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <input type="number" id="glanz_miyun" class="form-control text-right">
+                            <label for="glanz_miyun">מיון</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <input type="number" id="glanz_sivug" class="form-control text-right">
+                            <label for="glanz_sivug">סיווג</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <input type="number" id="glanz_pitgamim" class="form-control text-right">
+                            <label for="glanz_pitgamim">פתגמים</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <input type="number" id="glanz_analogia" class="form-control text-right">
+                            <label for="glanz_analogia">אנלוגיה</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <input type="number" id="glanz_hasakat_maskanot" class="form-control text-right">
+                            <label for="glanz_hasakat_maskanot">הסקת מסקנות</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="glanz_sikum" class="md-textarea form-control text-right" rows="10"></textarea>
+                            <label for="glanz_sikum">סיכום מבחן גלנץ</label>
+                        </div>
+                    </div>
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold" style="color:blueviolet"><b>תהליכי קריאה</b></h4>
+                    </div>
+                    <div class="md-form form-lg">
+                        <input type="text" id="Yeda_ortografi" class="form-control text-right">
+                        <label for="Yeda_ortografi">ידע אורטוגרפי</label>
+                    </div>
+                    <table class="table table-bordered table-responsive-md table-striped text-center">
+                        <tr>
+                            <th class="text-center"><b>קריאת מילים בהקשר</b></th>
+                            <th class="text-center"><b>קריאת מילים בודדות</b></th>
+                            <th class="text-center"><b>קריאת מילות תפל</b></th>
+                            <th class="text-center"><b>קריאת עיצורים ותנועות</b></th>
+                            <th class="text-center"></th>
+                        </tr>
+                        <tr>
+                            <td class="pt-3-half" id="milim_beheksher_diyuk" contenteditable="true"></td>
+                            <td class="pt-3-half" id="milim_bodedot_diyuk"contenteditable="true"></td>
+                            <td class="pt-3-half" id="milot_tefel_diyuk"contenteditable="true"></td>
+                            <td class="pt-3-half" id="itzurim_vetnuot_diyuk"contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"><b>דיוק</b></td>
+                        </tr>
+                        <tr>
+                            <td class="pt-3-half" id="milim_beheksher_ketzev" contenteditable="true"></td>
+                            <td class="pt-3-half" id="milim_bodedot_ketzev" contenteditable="true"></td>
+                            <td class="pt-3-half" id="milot_tefel_ketzev" contenteditable="true"></td>
+                            <td class="pt-3-half" id="itzurim_vetnuot_ketzev" contenteditable="true"></td>
+                            <td class="pt-3-half" contenteditable="true"><b>קצב</b></td>
+                        </tr>
+                    </table>
+                    <div class="md-form form-lg">
+                        <textarea type="text" id="sikum_tahalihei_kria" class="md-textarea form-control text-right" rows="5"></textarea>
+                        <label for="sikum_tahalihei_kria">סיכום תהליכי קריאה</label>
+                    </div>
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold" style="color:blueviolet"><b>הבנת הנקרא</b></h4>
+                        <div class="custom-control custom-checkbox text-right">
+                            <label class="custom-control-label" for="nikramacheck">סמן/י אם המבחן אינו רלוונטי</label>
+                            <input type="checkbox" class="custom-control-input" id="nikramacheck">
+                        </div>
+                    </div>
+                    <div id="nikramabody">
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="sikum_havanat_hanikra" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="sikum_havanat_hanikra">סיכום הבנת הנקרא</label>
+                        </div>
+                    </div>
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold" style="color:blueviolet"><b>הבנת הנשמע</b></h4>
+                        <div class="custom-control custom-checkbox text-right">
+                            <label class="custom-control-label" for="nishmacheck">סמן/י אם המבחן אינו רלוונטי</label>
+                            <input type="checkbox" class="custom-control-input" id="nishmacheck">
+                        </div>
+                    </div>
+                    <div id="nishmabody">
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="sikum_havanat_hanishma" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="sikum_havanat_hanishma">סיכום הבנת הנשמע</label>
+                        </div>
+                    </div>
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold" style="color:blueviolet"><b>כתיבה</b></h4>
+                        <div class="custom-control custom-checkbox text-right">
+                            <label class="custom-control-label" for="ktivacheck">סמן/י אם המבחן אינו רלוונטי</label>
+                            <input type="checkbox" class="custom-control-input" id="ktivacheck">
+                        </div>
+                    </div>
+                    <div id="ktivabody">
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="ktav" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="ktav">כתב</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="ktiv" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="ktiv">כתיב</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="tshuvot_lesheelot_bezika_letext" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="tshuvot_lesheelot_bezika_letext">תשובות לשאלות בזיקה לטקסט</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="habaa_bektav" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="habaa_bektav">הבעה בכתב</label>
+                        </div>
+                    </div>
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold" style="color:blueviolet"><b>הבעה בע"פ</b></h4>
+                        <div class="custom-control custom-checkbox text-right">
+                            <label class="custom-control-label" for="habaabealpecheck">סמן/י אם המבחן אינו רלוונטי</label>
+                            <input type="checkbox" class="custom-control-input" id="habaabealpecheck">
+                        </div>
+                    </div>
+                    <div id="habaabealpebody">
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="sikum_habaa_bealpe" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="sikum_habaa_bealpe">סיכום הבעה בע"פ</label>
+                        </div>
+                    </div>
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold" style="color:blueviolet"><b>ערנות מטה לשונית</b></h4>
+                        <div class="custom-control custom-checkbox text-right">
+                            <label class="custom-control-label" for="eranut_meta_leshonit_check">סמן/י אם המבחן אינו רלוונטי</label>
+                            <input type="checkbox" class="custom-control-input" id="eranut_meta_leshonit_check">
+                        </div>
+                    </div>
+                    <div id="eranut_meta_leshonit_body">
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="mudaut_phonologit" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="mudaut_phonologit">מודעות פונולוגית</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="ran" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="ran">עפ"י ערכת א-ת RAN מהירות שיום אוטומטי עפ"י מבחן</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="shetef_miluli" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="shetef_miluli">שטף מילולי</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="eranut_morfo_tahbirit" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="eranut_morfo_tahbirit">ערנות מורפו-תחבירית</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="eranut_tahbirit" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="eranut_tahbirit">ערנות תחבירית</label>
+                        </div>
+                    </div>
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold" style="color:blueviolet"><b>תפקודי זיכרון מילולי</b></h4>
+                        <div class="custom-control custom-checkbox text-right">
+                            <label class="custom-control-label" for="zikaronmilulicheck">סמן/י אם המבחן אינו רלוונטי</label>
+                            <input type="checkbox" class="custom-control-input" id="zikaronmilulicheck">
+                        </div>
+                    </div>
+                    <div id="zikaronmilulibody">
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="kidron" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="kidron">זכירת פרטים בהקשר עפ"י קדרון</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <input type="text" id="rey" class="form-control text-right">
+                            <label for="rey">(וקיל 1991) REY מבחן למידה מילולי - שמיעתי</label>
+                        </div>
+                        <table class="table table-bordered table-responsive-md table-striped text-center">
+                            <tr>
+                                <th class="text-center"><b>מספר מילים שזכרה</b></th>
+                                <th class="text-center"><b>מספר העברה</b></th>
+                                <th class="text-center"><b>אופני הזכירה</b></th>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half" id="rey_1" contenteditable="true"></td>
+                                <td class="pt-3-half" contenteditable="true">ראשונה</td>
+                                <td class="pt-3-half" contenteditable="true">זיכרון מיידי</td>
+                            </tr>                     
+                            <tr>                      
+                                <td class="pt-3-half" id="rey_2" contenteditable="true"></td>
+                                <td class="pt-3-half" contenteditable="true">שנייה</td>
+                                <td class="pt-3-half" contenteditable="true">זיכרון בעקבות שינון</td>
+                            </tr>                     
+                            <tr>                      
+                                <td class="pt-3-half" id="rey_3" contenteditable="true"></td>
+                                <td class="pt-3-half" contenteditable="true">שלישית</td>
+                                <td class="pt-3-half" contenteditable="true">זיכרון בעקבות שינון</td>
+                            </tr>                     
+                            <tr>                      
+                                <td class="pt-3-half" id="rey_4" contenteditable="true"></td>
+                                <td class="pt-3-half" contenteditable="true">רביעית</td>
+                                <td class="pt-3-half" contenteditable="true">זיכרון בעקבות שינון</td>
+                            </tr>                     
+                            <tr>                      
+                                <td class="pt-3-half" id="rey_5" contenteditable="true"></td>
+                                <td class="pt-3-half" contenteditable="true">חמישית</td>
+                                <td class="pt-3-half" contenteditable="true">זיכרון בעקבות שינון</td>
+                            </tr>                     
+                            <tr>                      
+                                <td class="pt-3-half" id="rey_6" contenteditable="true"></td>
+                                <td class="pt-3-half" contenteditable="true">שישית</td>
+                                <td class="pt-3-half" contenteditable="true">זכירה בעקבות מידע חדש</td>
+                            </tr>                     
+                            <tr>                      
+                                <td class="pt-3-half" id="rey_7" contenteditable="true"></td>
+                                <td class="pt-3-half" contenteditable="true">שביעית</td>
+                                <td class="pt-3-half" contenteditable="true">זכירת מידע קודם בעקבות הסחה</td>
+                            </tr>                     
+                            <tr>                      
+                                <td class="pt-3-half" id="rey_8" contenteditable="true"></td>
+                                <td class="pt-3-half" contenteditable="true">שמינית</td>
+                                <td class="pt-3-half" contenteditable="true">זכירה בעקבות השהייה</td>
+                            </tr>                     
+                            <tr>                      
+                                <td class="pt-3-half" id="rey_9" contenteditable="true"></td>
+                                <td class="pt-3-half" contenteditable="true">תשיעית</td>
+                                <td class="pt-3-half" contenteditable="true">"זכירה בטכניקה של "היכר</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <div class="text-center">
+                            <button class="btn btn-unique">שמור <i class="fa fa-paper-plane-o ml-1"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -220,14 +463,9 @@
             <h4>העדכון נכשל, נסה שנית</h4>
         </div>
     </div>
-    <script src="Scripts/jquery-1.10.2.min.js"></script>
-    <script src="Scripts/bootstrap.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
-            })
 
             if (localStorage.getItem('accessToken') == null) {
                 window.location.href = "Login.html";
@@ -251,8 +489,8 @@
             if (localStorage.getItem("isAdmin") == 'true') {
 
                 $('#addIvhun').css("padding-right", "50px");
-                $('#addIvhun').append("<a href=\"\" class=\"btn btn-default btn-rounded mb-4 waves-effect waves-light pull-right\" style=\"font-size:x-large\" data-toggle=\"modal\" data-target=\"#modalContactForm\">הוסף אבחון <i class=\"glyphicon glyphicon-plus\"></i></a>");
-                //  $('#addIvhun').append("<button class=\"btn btn-primary pull-right\" style=\"font-size:x-large\">הוסף אבחון <i class=\"glyphicon glyphicon-plus\"></i></button>");
+                $('#addIvhun').append("<a href=\"\" class=\"btn btn-default btn-rounded mb-4 waves-effect waves-light pull-right\" style=\"border:solid;border-color:antiquewhite;margin:15px;font-size:large;color:black\" data-toggle=\"modal\" data-target=\"#modalContactForm\">הוסף אבחון <i class=\"glyphicon glyphicon-plus\"></i></a>");
+                //  $('#addIvhun').append("<button class=\"btn btn-primary pull-right\" style=\"font-size:large\">הוסף אבחון <i class=\"glyphicon glyphicon-plus\"></i></button>");
             }
 
             var tonyblock = $('#tonibody');
@@ -261,6 +499,24 @@
                     tonyblock.hide();
                 } else {
                     tonyblock.show();
+                }
+            });
+
+            var glanzblock = $('#glanzbody');
+            $('#glanzcheck').on('click', function () {
+                if ($(this).is(':checked')) {
+                    glanzblock.hide();
+                } else {
+                    glanzblock.show();
+                }
+            });
+
+            var iptablock = $('#iptabody');
+            $('#iptacheck').on('click', function () {
+                if ($(this).is(':checked')) {
+                    iptablock.hide();
+                } else {
+                    iptablock.show();
                 }
             });
 
@@ -280,24 +536,15 @@
                 $(this).toggleClass("bold-blue");
             });
 
-            $('#btnLogoff').click(function () {
-                localStorage.removeItem('accessToken');
-                window.location.href = "Login.html";
-            });
-
-            $('#btnChangePass').click(function () {
-                window.location.href = "ChangePassword.html";
-            });
-
-
             $('#linkClose').click(function () {
                 $('#divError').hide('fade');
             });
 
             $('#errorModal').on('hidden.bs.modal', function () {
-                window.location.href = "Login.html";
+                window.location.href = "/";
             });
-
+            $('img').show();
+            $('#myTable').hide();
             $.ajax({
                 url: '/api/ivhunim',
                 method: 'GET',
@@ -306,47 +553,57 @@
                         + localStorage.getItem("accessToken")
                 },
                 success: function (data) {
+                    console.log('success');
                     var icons = '<td>'
                     $.each(data.Actions, function (index, value) {
                         if (value.Action == 'Download') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="הורד אבחון" style="border:none;font-size:x-large"><span class="glyphicon glyphicon-download-alt"></span></a>';
+                            icons = icons + '<a href="#" class="btn btn-default" title="הורד אבחון" style="border:none;font-size:large;color:black"><span class="glyphicon glyphicon-download-alt"></span></a>';
                         }
                         if (value.Action == 'Delete') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="מחק" style="border:none;color:red;font-size:x-large"  '
-                                + 'data-id= type = "button" data-toggle="modal" data-target="#confirmDelete" data-title="Delete User" '
+                            icons = icons + '<a href="#" class="btn btn-default" title="מחק" style="border:none;color:red;font-size:large"  '
+                                + 'data-id= type = "button" data-toggle="modal" data-target="#confirmDelete" data-title="מחיקת אבחון" '
                                 + 'data-message="Are you sure you want to delete this user ?" > <span class="glyphicon glyphicon-trash"></span></a > ';
                         }
                         if (value.Action == 'Edit') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="ערוך" style="border:none;color:green;font-size:x-large"><span class="glyphicon glyphicon-edit"></span></a>';
+                            icons = icons + '<a href="#" class="btn btn-default" title="ערוך" style="border:none;color:green;font-size:large"><span class="glyphicon glyphicon-edit"></span></a>';
                         }
                         if (value.Action == 'Send Email') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="שלח אימייל" style="border:none;color:orange;font-size:x-large"><span class="glyphicon glyphicon-envelope"></span></a>';
+                            icons = icons + '<a href="#" class="btn btn-default" title="שלח אימייל" style="border:none;color:orange;font-size:large"><span class="glyphicon glyphicon-envelope"></span></a>';
                         }
                         if (value.Action == 'Duplicate') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="שכפל" style="border:none;color:blue;font-size:x-large"><span class="glyphicon glyphicon-duplicate"></span></a>';
+                            icons = icons + '<a href="#" class="btn btn-default" title="שכפל" style="border:none;color:blue;font-size:large"><span class="glyphicon glyphicon-duplicate"></span></a>';
                         }
                     });
                     icons = icons + '</td>'
                     $('#tblBody').empty();
                     $.each(data.Ivhunim, function (index, value) {
+                        var haserrors = false;
+                        var noErrorSign = haserrors ? '<td align="center" style="font-size:large;border:none;color:red"><i class="glyphicon glyphicon-remove"></i></td>'
+                            : '<td align="center" style="font-size:large;border:none;color:green"><i class="glyphicon glyphicon-ok"></i></td>';
                         var iconWithId = icons.replace('data-id=', 'data-Id="' + value.Id + '"');
                         var row = $('<tr>' + iconWithId
-                            + '<td align="center" style="font-size:x-large">' + value.FirstName + '</td > '
-                            + '<td align="center" style="font-size:x-large">' + value.LastName + '</td>'
-                            + '<td align="center" style="font-size:x-large">' + value.Email + '</td></tr>');
+                            + noErrorSign
+                            + '<td align="center" style="font-size:large">' + value.FirstName + '</td > '
+                            + '<td align="center" style="font-size:large">' + value.LastName + '</td>'
+                            + '<td align="center" style="font-size:large">' + value.Email + '</td>'
+                            + '<td align="center" style="font-size:large">' + value.Institute + '</td></tr>');
                         $('#tblBody').append(row);
                     });
-
+                    $('img').hide();
+                    $('#myTable').show();
                 },
                 error: function (jQXHR) {
+                    $('img').hide();
                     // If status code is 401, access token expired, so
                     // redirect the user to the login page
                     if (jQXHR.status == "401") {
                         $('#errorModal').modal('show');
+                        $('#myTable').hide();
                     }
                     else {
-                        $('#divErrorText').text(jqXHR.responseText);
+                        $('#divErrorText').text(jQXHR.responseText);
                         $('#divError').show('fade');
+                        $('#myTable').hide();
                     }
                 }
             });
@@ -417,7 +674,7 @@
                         }
                         if (value.Action == 'Delete') {
                             icons = icons + '<a href="#" class="btn btn-default" title="מחק" style="border:none;color:red"  '
-                                + 'data-id= type = "button" data-toggle="modal" data-target="#confirmDelete" data-title="Delete User" '
+                                + 'data-id= type = "button" data-toggle="modal" data-target="#confirmDelete" data-title="מחיקת אבחון" '
                                 + 'data-message="Are you sure you want to delete this user ?" > <span class="glyphicon glyphicon-trash"></span></a > ';
                         }
                         if (value.Action == 'Edit') {
@@ -485,7 +742,7 @@
                         }
                         if (value.Action == 'Delete') {
                             icons = icons + '<a href="#" class="btn btn-default" title="מחק" style="border:none;color:red"  '
-                                + 'data-id= type = "button" data-toggle="modal" data-target="#confirmDelete" data-title="Delete User" '
+                                + 'data-id= type = "button" data-toggle="modal" data-target="#confirmDelete" data-title="מחיקת אבחון" '
                                 + 'data-message="Are you sure you want to delete this user ?" > <span class="glyphicon glyphicon-trash">::before&nbsp;&nbsp;</span></a > ';
                         }
                         if (value.Action == 'Edit') {
