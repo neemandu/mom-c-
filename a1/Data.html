@@ -17,7 +17,7 @@
         <h2 style="text-align:right">האבחונים שלי&nbsp&nbsp</h2>
         <input type="text" style="background-color:antiquewhite; text-align:right;font-size:large" id="myInput" onkeyup="myFunction()" placeholder="...חיפוש">
         <div id="addIvhun"></div>
-        <img style="display:none;padding-left:350px" src="/Content/gifs/Ellipsis-1.8s-190px.gif" alt="Loading" />
+        <img style="display:block;text-align:center;margin:0 auto;" src="/Content/gifs/Ellipsis-1.8s-190px.gif" alt="Loading" />
         <br />
         <br />
         <br />
@@ -244,9 +244,9 @@
                         </tr>
                         <tr>
                             <td class="pt-3-half" id="milim_beheksher_diyuk" contenteditable="true"></td>
-                            <td class="pt-3-half" id="milim_bodedot_diyuk"contenteditable="true"></td>
-                            <td class="pt-3-half" id="milot_tefel_diyuk"contenteditable="true"></td>
-                            <td class="pt-3-half" id="itzurim_vetnuot_diyuk"contenteditable="true"></td>
+                            <td class="pt-3-half" id="milim_bodedot_diyuk" contenteditable="true"></td>
+                            <td class="pt-3-half" id="milot_tefel_diyuk" contenteditable="true"></td>
+                            <td class="pt-3-half" id="itzurim_vetnuot_diyuk" contenteditable="true"></td>
                             <td class="pt-3-half" contenteditable="true"><b>דיוק</b></td>
                         </tr>
                         <tr>
@@ -372,62 +372,124 @@
                         </div>
                         <table class="table table-bordered table-responsive-md table-striped text-center">
                             <tr>
-                                <th class="text-center"><b>מספר מילים שזכרה</b></th>
-                                <th class="text-center"><b>מספר העברה</b></th>
-                                <th class="text-center"><b>אופני הזכירה</b></th>
+                                <th class="text-center" style="font-size:medium"><b>מספר מילים שזכרה</b></th>
+                                <th class="text-center" style="font-size:medium"><b>מספר העברה</b></th>
+                                <th class="text-center" style="font-size:medium"><b>אופני הזכירה</b></th>
                             </tr>
                             <tr>
-                                <td class="pt-3-half" id="rey_1" contenteditable="true"></td>
-                                <td class="pt-3-half" contenteditable="true">ראשונה</td>
-                                <td class="pt-3-half" contenteditable="true">זיכרון מיידי</td>
-                            </tr>                     
-                            <tr>                      
-                                <td class="pt-3-half" id="rey_2" contenteditable="true"></td>
-                                <td class="pt-3-half" contenteditable="true">שנייה</td>
-                                <td class="pt-3-half" contenteditable="true">זיכרון בעקבות שינון</td>
-                            </tr>                     
-                            <tr>                      
-                                <td class="pt-3-half" id="rey_3" contenteditable="true"></td>
-                                <td class="pt-3-half" contenteditable="true">שלישית</td>
-                                <td class="pt-3-half" contenteditable="true">זיכרון בעקבות שינון</td>
-                            </tr>                     
-                            <tr>                      
-                                <td class="pt-3-half" id="rey_4" contenteditable="true"></td>
-                                <td class="pt-3-half" contenteditable="true">רביעית</td>
-                                <td class="pt-3-half" contenteditable="true">זיכרון בעקבות שינון</td>
-                            </tr>                     
-                            <tr>                      
-                                <td class="pt-3-half" id="rey_5" contenteditable="true"></td>
-                                <td class="pt-3-half" contenteditable="true">חמישית</td>
-                                <td class="pt-3-half" contenteditable="true">זיכרון בעקבות שינון</td>
-                            </tr>                     
-                            <tr>                      
-                                <td class="pt-3-half" id="rey_6" contenteditable="true"></td>
-                                <td class="pt-3-half" contenteditable="true">שישית</td>
-                                <td class="pt-3-half" contenteditable="true">זכירה בעקבות מידע חדש</td>
-                            </tr>                     
-                            <tr>                      
-                                <td class="pt-3-half" id="rey_7" contenteditable="true"></td>
-                                <td class="pt-3-half" contenteditable="true">שביעית</td>
-                                <td class="pt-3-half" contenteditable="true">זכירת מידע קודם בעקבות הסחה</td>
-                            </tr>                     
-                            <tr>                      
-                                <td class="pt-3-half" id="rey_8" contenteditable="true"></td>
-                                <td class="pt-3-half" contenteditable="true">שמינית</td>
-                                <td class="pt-3-half" contenteditable="true">זכירה בעקבות השהייה</td>
-                            </tr>                     
-                            <tr>                      
-                                <td class="pt-3-half" id="rey_9" contenteditable="true"></td>
-                                <td class="pt-3-half" contenteditable="true">תשיעית</td>
-                                <td class="pt-3-half" contenteditable="true">"זכירה בטכניקה של "היכר</td>
+                                <td class="pt-3-half" style="font-size:medium" id="rey_1" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium">ראשונה</td>
+                                <td class="pt-3-half" style="font-size:medium">זיכרון מיידי</td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half" style="font-size:medium" id="rey_2" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium">שנייה</td>
+                                <td class="pt-3-half" style="font-size:medium">זיכרון בעקבות שינון</td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half" style="font-size:medium" id="rey_3" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium">שלישית</td>
+                                <td class="pt-3-half" style="font-size:medium">זיכרון בעקבות שינון</td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half" style="font-size:medium" id="rey_4" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium">רביעית</td>
+                                <td class="pt-3-half" style="font-size:medium">זיכרון בעקבות שינון</td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half" style="font-size:medium" id="rey_5" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium">חמישית</td>
+                                <td class="pt-3-half" style="font-size:medium">זיכרון בעקבות שינון</td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half" style="font-size:medium" id="rey_6" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium">שישית</td>
+                                <td class="pt-3-half" style="font-size:medium">זכירה בעקבות מידע חדש</td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half" style="font-size:medium" id="rey_7" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium">שביעית</td>
+                                <td class="pt-3-half" style="font-size:medium">זכירת מידע קודם בעקבות הסחה</td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half" style="font-size:medium" id="rey_8" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium">שמינית</td>
+                                <td class="pt-3-half" style="font-size:medium">זכירה בעקבות השהייה</td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half" style="font-size:medium" id="rey_9" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium">תשיעית</td>
+                                <td class="pt-3-half" style="font-size:medium">"זכירה בטכניקה של "היכר</td>
                             </tr>
                         </table>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <div class="text-center">
-                            <button class="btn btn-unique">שמור <i class="fa fa-paper-plane-o ml-1"></i></button>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="kidron" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="zikaron_avoda">זיכרון עבודה</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="kidron" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="zikaron_avoda">תפקודים ניהוליים חזותיים מרחביים</label>
+                        </div>
+                        <table class="table table-bordered table-responsive-md table-striped text-center">
+                            <tr>
+                                <td class="pt-3-half" style="font-size:medium" id="zikaron_miyadi_shlifa" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium">זיכרון מיידי</td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half" style="font-size:medium" id="zikaron_moshhe_shlifa" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium">זיכרון מושהה</td>
+                            </tr>
+                        </table>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="kidron" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="kidud_vehasmala">קידוד והסמלה</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="kidron" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="kim_game">Kims Game זכירת מידע חזותי עפ"י מבחן</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="kidron" class="md-textarea form-control text-right" rows="5"></textarea>
+                            <label for="keshev_hazuti">קשב חזותי</label>
+                        </div>
+                        <table class="table table-bordered table-responsive-md table-striped text-center">
+                            <tr>
+                                <th class="text-center" style="font-size:medium"><b>קצב</b></th>
+                                <th class="text-center" style="font-size:medium"><b>דיוק</b></th>
+                                <th class="text-center" style="font-size:medium"><b></b></th>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half" style="font-size:medium" id="ketzev_yahalom" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium" id="diyuk_yahalom" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium">יהלום</td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3-half" style="font-size:medium" id="ketzev_592" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium" id="diyuk_592" contenteditable="true"></td>
+                                <td class="pt-3-half" style="font-size:medium">592</td>
+                            </tr>
+                        </table>
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold" style="color:blueviolet"><b>סיכום</b></h4>
+                            <div class="md-form form-lg">
+                                <textarea type="text" id="kidron" class="md-textarea form-control text-right" rows="30"></textarea>
+                                <label for="sikum">סיכום</label>
+                            </div>
+
+                            <div class="md-form form-lg">
+                                <textarea type="text" id="kidron" class="md-textarea form-control text-right" rows="30"></textarea>
+                                <label for="hamlazot">המלצות</label>
+                            </div>
+                            <div class="md-form form-lg">
+                                <textarea type="text" id="kidron" class="md-textarea form-control text-right" rows="30"></textarea>
+                                <label for="hatamot_ledarkay_hibahanut">התאמות לדרכי היבחנות</label>
+                            </div>
                         </div>
                     </div>
+                    <div class="text-center">
+                        <button class="btn btn-unique" style="font-size:large" id="submitIvhun">שמור <i class="fa fa-paper-plane-o ml-1"></i></button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -447,8 +509,25 @@
                     <h3 style="text-align:right">?האם את בטוחה שאת רוצה למחוק</h3>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width:200px">לא</button>
-                    <button type="button" class="btn btn-danger" id="confirm" style="width:200px">כן</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width:200px;font-size:large;color:black">לא</button>
+                    <button type="button" class="btn btn-danger" id="confirm" style="width:200px;font-size:large">כן</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="confirmSendEmail" role="dialog" aria-labelledby="confirmSendEmail" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h2 class="modal-title" style="text-align:right">אישור שליחת אימייל</h2>
+                </div>
+                <div class="modal-body">
+                    <h3 style="text-align:right">?האם ברצונך לשלוח אימייל ללקוח על כך שהאיבחון הושלם</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width:200px;font-size:large;color:black">לא</button>
+                    <button type="button" class="btn btn-danger" id="confirmEmail" style="width:200px;font-size:large">כן</button>
                 </div>
             </div>
         </div>
@@ -463,9 +542,48 @@
             <h4>העדכון נכשל, נסה שנית</h4>
         </div>
     </div>
-
     <script type="text/javascript">
         $(document).ready(function () {
+
+            function loadData(data) {
+                var icons = '<td>'
+                $.each(data.Actions, function (index, value) {
+                    if (value.Action == 'Download') {
+                        icons = icons + '<a href="#" class="btn btn-default" title="הורד אבחון" style="border:none;font-size:large;color:black"><span class="glyphicon glyphicon-download-alt"></span></a>';
+                    }
+                    if (value.Action == 'Delete') {
+                        icons = icons + '<a href="#" class="btn btn-default" title="מחק" style="border:none;color:red;font-size:large"'
+                            + 'data-id= type="button" data-toggle="modal" data-target="#confirmDelete" data-title="מחיקת אבחון" '
+                            + 'data-message="Are you sure you want to delete this user ?"> <span class="glyphicon glyphicon-trash"></span></a>';
+                    }
+                    if (value.Action == 'Edit') {
+                        icons = icons + '<a href="#" class="btn btn-default" title="ערוך" style="border:none;color:green;font-size:large"><span class="glyphicon glyphicon-edit"></span></a>';
+                    }
+                    if (value.Action == 'Send Email') {
+                        icons = icons + '<a href="#" class="btn btn-default" title="שלח אימייל" style="border:none;color:red;font-size:large"'
+                            + 'data-id= type="button" data-toggle="modal" data-target="#confirmSendEmail" data-title="שלח אימייל" '
+                            + 'data-message="Are you sure you want to delete this user ?" > <span class="glyphicon glyphicon-envelope"></spa ></a > ';
+                    }
+                    if (value.Action == 'Duplicate') {
+                        icons = icons + '<a href="#" class="btn btn-default" title="שכפל" style="border:none;color:blue;font-size:large"><span class="glyphicon glyphicon-duplicate"></span></a>';
+                    }
+                });
+                icons = icons + '</td>'
+                $('#tblBody').empty();
+                $.each(data.Ivhunim, function (index, value) {
+                    var haserrors = false;
+                    var noErrorSign = haserrors ? '<td align="center" style="font-size:large;border:none;color:red"><i class="glyphicon glyphicon-remove"></i></td>'
+                        : '<td align="center" style="font-size:large;border:none;color:green"><i class="glyphicon glyphicon-ok"></i></td>';
+                    var iconWithId = icons.replace('data-id=', 'data-Id="' + value.Id + '"');
+                    var row = $('<tr>' + iconWithId
+                        + noErrorSign
+                        + '<td align="center" style="font-size:large">' + value.FirstName + '</td > '
+                        + '<td align="center" style="font-size:large">' + value.LastName + '</td>'
+                        + '<td align="center" style="font-size:large">' + value.Email + '</td>'
+                        + '<td align="center" style="font-size:large">' + value.Institute + '</td></tr>');
+                    $('#tblBody').append(row);
+                });
+            }
 
             if (localStorage.getItem('accessToken') == null) {
                 window.location.href = "Login.html";
@@ -553,42 +671,8 @@
                         + localStorage.getItem("accessToken")
                 },
                 success: function (data) {
-                    console.log('success');
-                    var icons = '<td>'
-                    $.each(data.Actions, function (index, value) {
-                        if (value.Action == 'Download') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="הורד אבחון" style="border:none;font-size:large;color:black"><span class="glyphicon glyphicon-download-alt"></span></a>';
-                        }
-                        if (value.Action == 'Delete') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="מחק" style="border:none;color:red;font-size:large"  '
-                                + 'data-id= type = "button" data-toggle="modal" data-target="#confirmDelete" data-title="מחיקת אבחון" '
-                                + 'data-message="Are you sure you want to delete this user ?" > <span class="glyphicon glyphicon-trash"></span></a > ';
-                        }
-                        if (value.Action == 'Edit') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="ערוך" style="border:none;color:green;font-size:large"><span class="glyphicon glyphicon-edit"></span></a>';
-                        }
-                        if (value.Action == 'Send Email') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="שלח אימייל" style="border:none;color:orange;font-size:large"><span class="glyphicon glyphicon-envelope"></span></a>';
-                        }
-                        if (value.Action == 'Duplicate') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="שכפל" style="border:none;color:blue;font-size:large"><span class="glyphicon glyphicon-duplicate"></span></a>';
-                        }
-                    });
-                    icons = icons + '</td>'
-                    $('#tblBody').empty();
-                    $.each(data.Ivhunim, function (index, value) {
-                        var haserrors = false;
-                        var noErrorSign = haserrors ? '<td align="center" style="font-size:large;border:none;color:red"><i class="glyphicon glyphicon-remove"></i></td>'
-                            : '<td align="center" style="font-size:large;border:none;color:green"><i class="glyphicon glyphicon-ok"></i></td>';
-                        var iconWithId = icons.replace('data-id=', 'data-Id="' + value.Id + '"');
-                        var row = $('<tr>' + iconWithId
-                            + noErrorSign
-                            + '<td align="center" style="font-size:large">' + value.FirstName + '</td > '
-                            + '<td align="center" style="font-size:large">' + value.LastName + '</td>'
-                            + '<td align="center" style="font-size:large">' + value.Email + '</td>'
-                            + '<td align="center" style="font-size:large">' + value.Institute + '</td></tr>');
-                        $('#tblBody').append(row);
-                    });
+                    loadData(data);
+
                     $('img').hide();
                     $('#myTable').show();
                 },
@@ -607,181 +691,182 @@
                     }
                 }
             });
-        })
-    </script>
-    <script>
-        function confirmDelete() {
+            $('#submitIvhun').on('click', function () {
+                console.log("submit");
+                $.ajax({
+                    url: '/api/ivhunim/' + $(this).data('id'),
+                    method: 'Post',
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer '
+                            + localStorage.getItem("accessToken")
+                    },
+                    success: function (data) {
+                        $("#modalContactForm .close").click()
+                        loadData(data);
+                    },
+                    error: function (jQXHR) {
+                        // If status code is 401, access token expired, so
+                        // redirect the user to the login page
+                        if (jQXHR.status == "401") {
+                            $('#errorModal').modal('show');
+                        }
+                        else {
+                            $('#failure').modal('show');
+                        }
+                    }
+                });
+            });
 
-        }
-    </script>
-    <script>
-        function myFunction() {
-            // Declare variables
-            var input, filter, table, tr, td, i;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
-            tr = table.getElementsByTagName("tr");
 
-            // Loop through all table rows, and hide those who don't match the search query
-            for (i = 0; i < tr.length; i++) {
-                tds = tr[i].getElementsByTagName("td");
-                var show = false;
-                for (j = 0; j < tds.length; j++) {
-                    td = tds[j];
-                    if (td) {
-                        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                            show = true;
-                        } else {
-                            if (!show) {
-                                tr[i].style.display = "none";
+
+
+
+            function myFunction() {
+                // Declare variables
+                var input, filter, table, tr, td, i;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("myTable");
+                tr = table.getElementsByTagName("tr");
+
+                // Loop through all table rows, and hide those who don't match the search query
+                for (i = 0; i < tr.length; i++) {
+                    tds = tr[i].getElementsByTagName("td");
+                    var show = false;
+                    for (j = 0; j < tds.length; j++) {
+                        td = tds[j];
+                        if (td) {
+                            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                                show = true;
+                            } else {
+                                if (!show) {
+                                    tr[i].style.display = "none";
+                                }
                             }
                         }
                     }
                 }
             }
-        }
-    </script>
-    <script type="text/javascript">
-        $('#confirmDelete').on('show.bs.modal', function (e) {
-            $message = $(e.relatedTarget).attr('data-message');
-            $(this).find('.modal-body p').text($message);
-            $title = $(e.relatedTarget).attr('data-title');
-            $(this).find('.modal-title').text($title);
-            $id = $(e.relatedTarget).attr('data-id');
 
-            // Pass form reference to modal for submission on yes/ok
-            $(this).find('.modal-footer #confirm').data('id', $id);
-        });
+            $('#confirmDelete').on('show.bs.modal', function (e) {
+                $message = $(e.relatedTarget).attr('data-message');
+                $(this).find('.modal-body p').text($message);
+                $title = $(e.relatedTarget).attr('data-title');
+                $(this).find('.modal-title').text($title);
+                $id = $(e.relatedTarget).attr('data-id');
 
-
-        $('#confirmDelete').find('.modal-footer #confirm').on('click', function () {
-            $.ajax({
-                url: '/api/ivhunim/' + $(this).data('id'),
-                method: 'Delete',
-                contentType: 'application/json',
-                headers: {
-                    'Authorization': 'Bearer '
-                        + localStorage.getItem("accessToken")
-                },
-                success: function (data) {
-                    $('#confirmDelete').modal('hide');
-                    var icons = '<td>'
-                    $.each(data.Actions, function (index, value) {
-                        if (value.Action == 'Download') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="הורד אבחון" style="border:none"><span class="glyphicon glyphicon-download-alt"></span></a>';
-                        }
-                        if (value.Action == 'Delete') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="מחק" style="border:none;color:red"  '
-                                + 'data-id= type = "button" data-toggle="modal" data-target="#confirmDelete" data-title="מחיקת אבחון" '
-                                + 'data-message="Are you sure you want to delete this user ?" > <span class="glyphicon glyphicon-trash"></span></a > ';
-                        }
-                        if (value.Action == 'Edit') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="ערוך" style="border:none;color:green"><span class="glyphicon glyphicon-edit"></span></a>';
-                        }
-                        if (value.Action == 'Send Email') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="שלח אימייל" style="border:none;color:orange;"><span class="glyphicon glyphicon-envelope"></span></a>';
-                        }
-                        if (value.Action == 'Duplicate') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="שכפל" style="border:none;color:blue"><span class="glyphicon glyphicon-duplicate"></span></a>';
-                        }
-                    });
-                    icons = icons + '</td>'
-                    $('#tblBody').empty();
-                    $.each(data.Ivhunim, function (index, value) {
-                        var iconWithId = icons.replace('data-id=', 'data-Id="' + value.Id + '"');
-                        var row = $('<tr>' + iconWithId
-                            + '<td align="center">' + value.FirstName + '</td > '
-                            + '<td align="center">' + value.LastName + '</td>'
-                            + '<td align="center">' + value.Email + '</td></tr>');
-                        $('#tblBody').append(row);
-                    });
-                },
-                error: function (jQXHR) {
-                    // If status code is 401, access token expired, so
-                    // redirect the user to the login page
-                    if (jQXHR.status == "401") {
-                        $('#errorModal').modal('show');
-                    }
-                    else {
-                        $('#failure').modal('show');
-                    }
-                }
+                // Pass form reference to modal for submission on yes/ok
+                $(this).find('.modal-footer #confirm').data('id', $id);
             });
-        });
-    </script>
-    <script type="text/javascript">
-        $('#confirmDelete').on('show.bs.modal', function (e) {
-            $message = $(e.relatedTarget).attr('data-message');
-            $(this).find('.modal-body p').text($message);
-            $title = $(e.relatedTarget).attr('data-title');
-            $(this).find('.modal-title').text($title);
-            $id = $(e.relatedTarget).attr('data-id');
+            $('#confirmSendEmail').on('show.bs.modal', function (e) {
+                $message = $(e.relatedTarget).attr('data-message');
+                $(this).find('.modal-body p').text($message);
+                $title = $(e.relatedTarget).attr('data-title');
+                $(this).find('.modal-title').text($title);
+                $id = $(e.relatedTarget).attr('data-id');
 
-            // Pass form reference to modal for submission on yes/ok
-            $(this).find('.modal-footer #confirm').data('id', $id);
-        });
-
-
-        $('#confirmCopy').find('.modal-footer #confirmCopy').on('click', function () {
-            $.ajax({
-                url: '/api/ivhunim/' + $(this).data('id'),
-                method: 'Post',
-                contentType: 'application/json',
-                headers: {
-                    'Authorization': 'Bearer '
-                        + localStorage.getItem("accessToken")
-                },
-                success: function (data) {
-                    $('#confirmCopy').modal('hide');
-                    var icons = '<td>'
-                    $.each(data.Actions, function (index, value) {
-                        if (value.Action == 'Download') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="הורד אבחון" style="border:none"><span class="glyphicon glyphicon-download-alt">::before&nbsp;&nbsp;</span></a>';
-                        }
-                        if (value.Action == 'Delete') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="מחק" style="border:none;color:red"  '
-                                + 'data-id= type = "button" data-toggle="modal" data-target="#confirmDelete" data-title="מחיקת אבחון" '
-                                + 'data-message="Are you sure you want to delete this user ?" > <span class="glyphicon glyphicon-trash">::before&nbsp;&nbsp;</span></a > ';
-                        }
-                        if (value.Action == 'Edit') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="ערוך" style="border:none;color:green"><span class="glyphicon glyphicon-edit">::before&nbsp;&nbsp;</span></a>';
-                        }
-                        if (value.Action == 'Send Email') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="שלח אימייל" style="border:none;color:orange;"><span class="glyphicon glyphicon-envelope">::before&nbsp;&nbsp;</span></a>';
-                        }
-                        if (value.Action == 'Duplicate') {
-                            icons = icons + '<a href="#" class="btn btn-default" title="שכפל" style="border:none;color:blue"><span class="glyphicon glyphicon-duplicate">::before&nbsp;&nbsp;</span></a>';
-                        }
-                    });
-                    icons = icons + '</td>'
-                    $('#tblBody').empty();
-                    $.each(data.Ivhunim, function (index, value) {
-                        var iconWithId = icons.replace('data-id=', 'data-Id="' + value.Id + '"');
-                        var row = $('<tr>' + iconWithId
-                            + '<td align="center">' + value.FirstName + '</td > '
-                            + '<td align="center">' + value.LastName + '</td>'
-                            + '<td align="center">' + value.Email + '</td></tr>');
-                        $('#tblBody').append(row);
-                    });
-                },
-                error: function (jQXHR) {
-                    // If status code is 401, access token expired, so
-                    // redirect the user to the login page
-                    if (jQXHR.status == "401") {
-                        $('#errorModal').modal('show');
-                    }
-                    else {
-                        $('#failure').modal('show');
-                    }
-                }
+                // Pass form reference to modal for submission on yes/ok
+                $(this).find('.modal-footer #confirmEmail').data('id', $id);
             });
-        });
-    </script>
-    <script>
-        $.get("navigationbar.html", function (data) {
-            $("#navbar").replaceWith(data);
+
+
+            $('#confirmDelete').find('.modal-footer #confirm').on('click', function () {
+                $.ajax({
+                    url: '/api/ivhunim/' + $(this).data('id'),
+                    method: 'Delete',
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer '
+                            + localStorage.getItem("accessToken")
+                    },
+                    success: function (data) {
+                        $("#confirmDelete .close").click()
+                        //$('#confirmDelete').modal('toggle');
+                        loadData(data);
+                    },
+                    error: function (jQXHR) {
+                        // If status code is 401, access token expired, so
+                        // redirect the user to the login page
+                        if (jQXHR.status == "401") {
+                            $('#errorModal').modal('show');
+                        }
+                        else {
+                            $('#failure').modal('show');
+                        }
+                    }
+                });
+            });
+
+            $('#confirmSendEmail').find('.modal-footer #confirmEmail').on('click', function () {
+                $.ajax({
+                    url: '/api/ivhunim/email/' + $(this).data('id'),
+                    method: 'Put',
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer '
+                            + localStorage.getItem("accessToken")
+                    },
+                    success: function (data) {
+                        $("#confirmSendEmail .close").click()
+                        //$('#confirmDelete').modal('toggle');
+                        loadData(data);
+                    },
+                    error: function (jQXHR) {
+                        // If status code is 401, access token expired, so
+                        // redirect the user to the login page
+                        if (jQXHR.status == "401") {
+                            $('#errorModal .open').click();
+                        }
+                        else {
+                            $('#failure .open').click();
+                        }
+                    }
+                });
+            });
+
+            $('#confirmDelete').on('show.bs.modal', function (e) {
+                $message = $(e.relatedTarget).attr('data-message');
+                $(this).find('.modal-body p').text($message);
+                $title = $(e.relatedTarget).attr('data-title');
+                $(this).find('.modal-title').text($title);
+                $id = $(e.relatedTarget).attr('data-id');
+
+                // Pass form reference to modal for submission on yes/ok
+                $(this).find('.modal-footer #confirm').data('id', $id);
+            });
+
+
+            $('#confirmCopy').find('.modal-footer #confirmCopy').on('click', function () {
+                $.ajax({
+                    url: '/api/ivhunim/' + $(this).data('id'),
+                    method: 'Post',
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer '
+                            + localStorage.getItem("accessToken")
+                    },
+                    success: function (data) {
+                        $('#confirmCopy').modal('hide');
+                        loadData(data);
+                    },
+                    error: function (jQXHR) {
+                        // If status code is 401, access token expired, so
+                        // redirect the user to the login page
+                        if (jQXHR.status == "401") {
+                            $('#errorModal').modal('show');
+                        }
+                        else {
+                            $('#failure').modal('show');
+                        }
+                    }
+                });
+            });
+
+            $.get("navigationbar.html", function (data) {
+                $("#navbar").replaceWith(data);
+            });
         });
     </script>
     <!-- Bootstrap tooltips -->

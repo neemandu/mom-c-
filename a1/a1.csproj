@@ -412,6 +412,7 @@
     <Content Include="RoleEntityModel.edmx.diagram">
       <DependentUpon>RoleEntityModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\ayaneeman - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Ivhunim - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\chart.js" />
