@@ -6,6 +6,8 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Net;
+using System.Net.Mail;
 
 namespace a1.Controllers
 {
@@ -55,7 +57,7 @@ namespace a1.Controllers
         }
         [HttpPut]
         [Route("duplicate/{id}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IHttpActionResult> Duplicate(int id)
         {
             try
@@ -84,10 +86,50 @@ namespace a1.Controllers
 
         [HttpPut]
         [Route("email/{id}")]
-        [Authorize(Roles = "Admin")]
-        public string EmailClient(int id)
+        //[Authorize(Roles = "Admin")]
+        public async Task<IHttpActionResult> EmailClient(int id)
         {
-            return "value";
+            using (a120180723112025asas_dbEntities entities = new a120180723112025asas_dbEntities())
+            {
+                var ivhunim = entities.Users.Where(o => o.Id == id).FirstOrDefault();
+
+                if (string.IsNullOrWhiteSpace(ivhunim.Email))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    var fromAddress = new MailAddress("neemanaya@gmail.com", "איה נאמן");
+                    var toAddress = new MailAddress(ivhunim.Email, ivhunim.FirstName + " " + ivhunim.LastName);
+                    const string fromPassword = "52345865";
+                    const string subject = "איה נאמן - אבחון";
+                    string body = $@"שלום,
+.האבחון של ילד/תך מוכן
+:בכדי להוריד את האבחון, כנס ל
+ayaneeman.azurewebsites.net
+{ivhunim.Email} :שם המשתמש
+blabla :סיסמא
+לשאלות נוספות, ניתן להשיב לאימייל הזה או להתקשר אלי לטלפון: 0522204509";
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                    };
+                    using (var message = new MailMessage(fromAddress, toAddress)
+                    {
+                        Subject = subject,
+                        Body = body
+                    })
+                    {
+                        smtp.Send(message);
+                    }
+                }
+            }
+            return Ok();
         }
 
         [HttpPut]
@@ -104,7 +146,7 @@ namespace a1.Controllers
                     return Ok(this.Get());
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest();
             }
@@ -119,7 +161,7 @@ namespace a1.Controllers
             try
             {
                 await Delete(id);
-                return await Post(newIvhun);               
+                return await Post(newIvhun);
             }
             catch (Exception ex)
             {

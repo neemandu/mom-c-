@@ -532,6 +532,24 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="confirmDuplicate" role="dialog" aria-labelledby="confirmDuplicate" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h2 class="modal-title" style="text-align:right">אישור שכפול אבחון</h2>
+                </div>
+                <div class="modal-body">
+                    <h3 style="text-align:right">?האם ברצונך לשכפל את האבחון</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width:200px;font-size:large;color:black">לא</button>
+                    <button type="button" class="btn btn-danger" id="confirmDup" style="width:200px;font-size:large">כן</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="success" role="dialog" aria-labelledby="successLabel" aria-hidden="true">
         <div class="modal-body">
             <h4>!העדכון עבר בהצלחה</h4>
@@ -562,10 +580,12 @@
                     if (value.Action == 'Send Email') {
                         icons = icons + '<a href="#" class="btn btn-default" title="שלח אימייל" style="border:none;color:red;font-size:large"'
                             + 'data-id= type="button" data-toggle="modal" data-target="#confirmSendEmail" data-title="שלח אימייל" '
-                            + 'data-message="Are you sure you want to delete this user ?" > <span class="glyphicon glyphicon-envelope"></spa ></a > ';
+                            + 'data-message="Are you sure you want to delete this user ?"> <span class="glyphicon glyphicon-envelope"></span></a> ';
                     }
                     if (value.Action == 'Duplicate') {
-                        icons = icons + '<a href="#" class="btn btn-default" title="שכפל" style="border:none;color:blue;font-size:large"><span class="glyphicon glyphicon-duplicate"></span></a>';
+                        icons = icons + '<a href="#" class="btn btn-default" title="שכפל" style="border:none;color:blue;font-size:large"'
+                            + 'data-id= type="button" data-toggle="modal" data-target="#confirmDuplicate" data-title="שכפל" '
+                            + 'data-message="Are you sure you want to delete this user ?"> <span class="glyphicon glyphicon-duplicate"></span></a> ';
                     }
                 });
                 icons = icons + '</td>'
@@ -574,7 +594,7 @@
                     var haserrors = false;
                     var noErrorSign = haserrors ? '<td align="center" style="font-size:large;border:none;color:red"><i class="glyphicon glyphicon-remove"></i></td>'
                         : '<td align="center" style="font-size:large;border:none;color:green"><i class="glyphicon glyphicon-ok"></i></td>';
-                    var iconWithId = icons.replace('data-id=', 'data-Id="' + value.Id + '"');
+                    var iconWithId = icons.replace(/data-id=/g, 'data-Id="' + value.Id + '"');
                     var row = $('<tr>' + iconWithId
                         + noErrorSign
                         + '<td align="center" style="font-size:large">' + value.FirstName + '</td > '
@@ -770,7 +790,41 @@
                 // Pass form reference to modal for submission on yes/ok
                 $(this).find('.modal-footer #confirmEmail').data('id', $id);
             });
+            $('#confirmDuplicate').on('show.bs.modal', function (e) {
+                $message = $(e.relatedTarget).attr('data-message');
+                $(this).find('.modal-body p').text($message);
+                $title = $(e.relatedTarget).attr('data-title');
+                $(this).find('.modal-title').text($title);
+                $id = $(e.relatedTarget).attr('data-id');
 
+                // Pass form reference to modal for submission on yes/ok
+                $(this).find('.modal-footer #confirmDup').data('id', $id);
+            });
+
+            $('#confirmDuplicate').find('.modal-footer #confirmDup').on('click', function () {
+                $.ajax({
+                    url: '/api/ivhunim/duplicate/' + $(this).data('id'),
+                    method: 'Put',
+                    contentType: 'application/json',
+                    headers: {
+                        'Authorization': 'Bearer '
+                            + localStorage.getItem("accessToken")
+                    },
+                    success: function (data) {
+                        $("#confirmDuplicate .close").click()
+                        //$('#confirmDelete').modal('toggle');
+                        loadData(data);
+                    },
+                    error: function (jQXHR) {
+                        if (jQXHR.status == "401") {
+                            $('#errorModal').modal('show');
+                        }
+                        else {
+                            $('#failure').modal('show');
+                        }
+                    }
+                });
+            });
 
             $('#confirmDelete').find('.modal-footer #confirm').on('click', function () {
                 $.ajax({
