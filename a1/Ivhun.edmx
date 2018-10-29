@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Ivhunim.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ivhunim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReadyToBeSent" Type="bit" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="500" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="500" />
+          <Property Name="Email" Type="nvarchar" MaxLength="500" />
+          <Property Name="Institue" Type="nvarchar" MaxLength="500" />
+          <Property Name="BirthDate" Type="nvarchar" MaxLength="500" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="500" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="500" />
+          <Property Name="School" Type="nvarchar" MaxLength="500" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="ParentName" Type="nvarchar" MaxLength="500" />
+          <Property Name="ParentPhone" Type="nvarchar" MaxLength="500" />
+          <Property Name="ParentEmail" Type="nvarchar" MaxLength="500" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="WhoSent" Type="nvarchar" MaxLength="500" />
+          <Property Name="Background" Type="nvarchar(max)" />
+          <Property Name="OverallImpression" Type="nvarchar(max)" />
+          <Property Name="IsToniEnabled" Type="bit" />
+          <Property Name="ToniRightAnswers" Type="int" />
+          <Property Name="IsIptaEnabled" Type="bit" />
+          <Property Name="IptaRightAnswers" Type="int" />
+          <Property Name="IsGlanzEnabled" Type="bit" />
+          <Property Name="GlanzNigudiyut" Type="int" />
+          <Property Name="GlanzNirdafot" Type="int" />
+          <Property Name="GlanzMahutiyot" Type="int" />
+          <Property Name="GlanzHagdara" Type="int" />
+          <Property Name="GlanzMiyun" Type="int" />
+          <Property Name="GlanzSivug" Type="int" />
+          <Property Name="GlanzPitgamim" Type="int" />
+          <Property Name="GlanzAnalogya" Type="int" />
+          <Property Name="GlanzHasakatMaskanot" Type="int" />
+          <Property Name="GlanzSikum" Type="nvarchar(max)" />
+          <Property Name="YedaOrtography" Type="nvarchar" MaxLength="250" />
+          <Property Name="MilimBeheksherDiyuk" Type="int" />
+          <Property Name="MilimBodedotDiyuk" Type="int" />
+          <Property Name="MilotTefelDiyuk" Type="int" />
+          <Property Name="ItzurimVetnuotDiyuk" Type="int" />
+          <Property Name="MilimBeheksherKetzev" Type="int" />
+          <Property Name="MilimBodedotKetzev" Type="int" />
+          <Property Name="MilotTefelKetzev" Type="int" />
+          <Property Name="ItzurimVetnuotKetzev" Type="int" />
+          <Property Name="SikumTahaliheyKria" Type="nvarchar(max)" />
+          <Property Name="IsHavanatHanikraEnabled" Type="bit" />
+          <Property Name="SikumHavanatHanikra" Type="nvarchar(max)" />
+          <Property Name="IsHavanatHanishmaEnabled" Type="bit" />
+          <Property Name="SikumHavanatHanishma" Type="nvarchar(max)" />
+          <Property Name="IsKtivaEnabled" Type="bit" />
+          <Property Name="Ktav" Type="nvarchar" MaxLength="500" />
+          <Property Name="Ktiv" Type="nvarchar" MaxLength="500" />
+          <Property Name="TshuvotLesheelotBezikaLetext" Type="nvarchar(max)" />
+          <Property Name="HabaaBektav" Type="nvarchar(max)" />
+          <Property Name="IsHabaBealpeEnabled" Type="bit" />
+          <Property Name="SikumHabaBealpe" Type="nvarchar(max)" />
+          <Property Name="IsEranutMetaLeshonitEnabled" Type="bit" />
+          <Property Name="MudautFonologit" Type="nvarchar" MaxLength="500" />
+          <Property Name="Ran" Type="nvarchar" MaxLength="500" />
+          <Property Name="ShetefMiluli" Type="nvarchar" MaxLength="500" />
+          <Property Name="EranutMorfoTahbirit" Type="nvarchar" MaxLength="500" />
+          <Property Name="EranutTahbirit" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsZikaronmMiluliEnabled" Type="bit" />
+          <Property Name="Kidron" Type="nvarchar" MaxLength="500" />
+          <Property Name="Rey" Type="nvarchar" MaxLength="500" />
+          <Property Name="Rey1" Type="nvarchar" MaxLength="500" />
+          <Property Name="Rey2" Type="nvarchar" MaxLength="500" />
+          <Property Name="Rey3" Type="nvarchar" MaxLength="500" />
+          <Property Name="Rey4" Type="nvarchar" MaxLength="500" />
+          <Property Name="Rey5" Type="nvarchar" MaxLength="500" />
+          <Property Name="Rey6" Type="nvarchar" MaxLength="500" />
+          <Property Name="Rey7" Type="nvarchar" MaxLength="500" />
+          <Property Name="Rey8" Type="nvarchar" MaxLength="500" />
+          <Property Name="Rey9" Type="nvarchar" MaxLength="500" />
+          <Property Name="ZikaronAvoda" Type="nvarchar" MaxLength="500" />
+          <Property Name="TifkudimNuhuliyim" Type="nvarchar" MaxLength="500" />
+          <Property Name="ZikaronMiyadiShlifa" Type="nvarchar" MaxLength="500" />
+          <Property Name="ZikaronMoshheShlifa" Type="nvarchar" MaxLength="500" />
+          <Property Name="KidudVehasmala" Type="nvarchar" MaxLength="500" />
+          <Property Name="KimGame" Type="nvarchar" MaxLength="500" />
+          <Property Name="KeshevHazuti" Type="nvarchar" MaxLength="500" />
+          <Property Name="KetzevYahalom" Type="nvarchar" MaxLength="500" />
+          <Property Name="DiyukYahalom" Type="nvarchar" MaxLength="500" />
+          <Property Name="Ketzev592" Type="nvarchar" MaxLength="500" />
+          <Property Name="Diyuk592" Type="nvarchar" MaxLength="500" />
+          <Property Name="Sikum" Type="nvarchar(max)" />
+          <Property Name="Hamlazot" Type="nvarchar(max)" />
+          <Property Name="HatamotLedarkayHibahanut" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="IvhunimStoreContainer">
+          <EntitySet Name="Ivhunim" EntityType="Self.Ivhunim" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Ivhunim" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ivhunim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReadyToBeSent" Type="Boolean" />
+          <Property Name="FirstName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Institue" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Grade" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="School" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ParentName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ParentPhone" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ParentEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WhoSent" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Background" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OverallImpression" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsToniEnabled" Type="Boolean" />
+          <Property Name="ToniRightAnswers" Type="Int32" />
+          <Property Name="IsIptaEnabled" Type="Boolean" />
+          <Property Name="IptaRightAnswers" Type="Int32" />
+          <Property Name="IsGlanzEnabled" Type="Boolean" />
+          <Property Name="GlanzNigudiyut" Type="Int32" />
+          <Property Name="GlanzNirdafot" Type="Int32" />
+          <Property Name="GlanzMahutiyot" Type="Int32" />
+          <Property Name="GlanzHagdara" Type="Int32" />
+          <Property Name="GlanzMiyun" Type="Int32" />
+          <Property Name="GlanzSivug" Type="Int32" />
+          <Property Name="GlanzPitgamim" Type="Int32" />
+          <Property Name="GlanzAnalogya" Type="Int32" />
+          <Property Name="GlanzHasakatMaskanot" Type="Int32" />
+          <Property Name="GlanzSikum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YedaOrtography" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MilimBeheksherDiyuk" Type="Int32" />
+          <Property Name="MilimBodedotDiyuk" Type="Int32" />
+          <Property Name="MilotTefelDiyuk" Type="Int32" />
+          <Property Name="ItzurimVetnuotDiyuk" Type="Int32" />
+          <Property Name="MilimBeheksherKetzev" Type="Int32" />
+          <Property Name="MilimBodedotKetzev" Type="Int32" />
+          <Property Name="MilotTefelKetzev" Type="Int32" />
+          <Property Name="ItzurimVetnuotKetzev" Type="Int32" />
+          <Property Name="SikumTahaliheyKria" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsHavanatHanikraEnabled" Type="Boolean" />
+          <Property Name="SikumHavanatHanikra" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsHavanatHanishmaEnabled" Type="Boolean" />
+          <Property Name="SikumHavanatHanishma" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsKtivaEnabled" Type="Boolean" />
+          <Property Name="Ktav" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Ktiv" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TshuvotLesheelotBezikaLetext" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HabaaBektav" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsHabaBealpeEnabled" Type="Boolean" />
+          <Property Name="SikumHabaBealpe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsEranutMetaLeshonitEnabled" Type="Boolean" />
+          <Property Name="MudautFonologit" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Ran" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ShetefMiluli" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EranutMorfoTahbirit" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EranutTahbirit" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsZikaronmMiluliEnabled" Type="Boolean" />
+          <Property Name="Kidron" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Rey" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Rey1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Rey2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Rey3" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Rey4" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Rey5" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Rey6" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Rey7" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Rey8" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Rey9" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ZikaronAvoda" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TifkudimNuhuliyim" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ZikaronMiyadiShlifa" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ZikaronMoshheShlifa" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="KidudVehasmala" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="KimGame" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="KeshevHazuti" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="KetzevYahalom" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DiyukYahalom" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Ketzev592" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Diyuk592" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Sikum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Hamlazot" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HatamotLedarkayHibahanut" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="Ivhun" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ivhunims" EntityType="Self.Ivhunim" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IvhunimStoreContainer" CdmEntityContainer="Ivhun">
+          <EntitySetMapping Name="Ivhunims">
+            <EntityTypeMapping TypeName="Ivhunim.Ivhunim">
+              <MappingFragment StoreEntitySet="Ivhunim">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReadyToBeSent" ColumnName="ReadyToBeSent" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Institue" ColumnName="Institue" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="School" ColumnName="School" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ParentName" ColumnName="ParentName" />
+                <ScalarProperty Name="ParentPhone" ColumnName="ParentPhone" />
+                <ScalarProperty Name="ParentEmail" ColumnName="ParentEmail" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="WhoSent" ColumnName="WhoSent" />
+                <ScalarProperty Name="Background" ColumnName="Background" />
+                <ScalarProperty Name="OverallImpression" ColumnName="OverallImpression" />
+                <ScalarProperty Name="IsToniEnabled" ColumnName="IsToniEnabled" />
+                <ScalarProperty Name="ToniRightAnswers" ColumnName="ToniRightAnswers" />
+                <ScalarProperty Name="IsIptaEnabled" ColumnName="IsIptaEnabled" />
+                <ScalarProperty Name="IptaRightAnswers" ColumnName="IptaRightAnswers" />
+                <ScalarProperty Name="IsGlanzEnabled" ColumnName="IsGlanzEnabled" />
+                <ScalarProperty Name="GlanzNigudiyut" ColumnName="GlanzNigudiyut" />
+                <ScalarProperty Name="GlanzNirdafot" ColumnName="GlanzNirdafot" />
+                <ScalarProperty Name="GlanzMahutiyot" ColumnName="GlanzMahutiyot" />
+                <ScalarProperty Name="GlanzHagdara" ColumnName="GlanzHagdara" />
+                <ScalarProperty Name="GlanzMiyun" ColumnName="GlanzMiyun" />
+                <ScalarProperty Name="GlanzSivug" ColumnName="GlanzSivug" />
+                <ScalarProperty Name="GlanzPitgamim" ColumnName="GlanzPitgamim" />
+                <ScalarProperty Name="GlanzAnalogya" ColumnName="GlanzAnalogya" />
+                <ScalarProperty Name="GlanzHasakatMaskanot" ColumnName="GlanzHasakatMaskanot" />
+                <ScalarProperty Name="GlanzSikum" ColumnName="GlanzSikum" />
+                <ScalarProperty Name="YedaOrtography" ColumnName="YedaOrtography" />
+                <ScalarProperty Name="MilimBeheksherDiyuk" ColumnName="MilimBeheksherDiyuk" />
+                <ScalarProperty Name="MilimBodedotDiyuk" ColumnName="MilimBodedotDiyuk" />
+                <ScalarProperty Name="MilotTefelDiyuk" ColumnName="MilotTefelDiyuk" />
+                <ScalarProperty Name="ItzurimVetnuotDiyuk" ColumnName="ItzurimVetnuotDiyuk" />
+                <ScalarProperty Name="MilimBeheksherKetzev" ColumnName="MilimBeheksherKetzev" />
+                <ScalarProperty Name="MilimBodedotKetzev" ColumnName="MilimBodedotKetzev" />
+                <ScalarProperty Name="MilotTefelKetzev" ColumnName="MilotTefelKetzev" />
+                <ScalarProperty Name="ItzurimVetnuotKetzev" ColumnName="ItzurimVetnuotKetzev" />
+                <ScalarProperty Name="SikumTahaliheyKria" ColumnName="SikumTahaliheyKria" />
+                <ScalarProperty Name="IsHavanatHanikraEnabled" ColumnName="IsHavanatHanikraEnabled" />
+                <ScalarProperty Name="SikumHavanatHanikra" ColumnName="SikumHavanatHanikra" />
+                <ScalarProperty Name="IsHavanatHanishmaEnabled" ColumnName="IsHavanatHanishmaEnabled" />
+                <ScalarProperty Name="SikumHavanatHanishma" ColumnName="SikumHavanatHanishma" />
+                <ScalarProperty Name="IsKtivaEnabled" ColumnName="IsKtivaEnabled" />
+                <ScalarProperty Name="Ktav" ColumnName="Ktav" />
+                <ScalarProperty Name="Ktiv" ColumnName="Ktiv" />
+                <ScalarProperty Name="TshuvotLesheelotBezikaLetext" ColumnName="TshuvotLesheelotBezikaLetext" />
+                <ScalarProperty Name="HabaaBektav" ColumnName="HabaaBektav" />
+                <ScalarProperty Name="IsHabaBealpeEnabled" ColumnName="IsHabaBealpeEnabled" />
+                <ScalarProperty Name="SikumHabaBealpe" ColumnName="SikumHabaBealpe" />
+                <ScalarProperty Name="IsEranutMetaLeshonitEnabled" ColumnName="IsEranutMetaLeshonitEnabled" />
+                <ScalarProperty Name="MudautFonologit" ColumnName="MudautFonologit" />
+                <ScalarProperty Name="Ran" ColumnName="Ran" />
+                <ScalarProperty Name="ShetefMiluli" ColumnName="ShetefMiluli" />
+                <ScalarProperty Name="EranutMorfoTahbirit" ColumnName="EranutMorfoTahbirit" />
+                <ScalarProperty Name="EranutTahbirit" ColumnName="EranutTahbirit" />
+                <ScalarProperty Name="IsZikaronmMiluliEnabled" ColumnName="IsZikaronmMiluliEnabled" />
+                <ScalarProperty Name="Kidron" ColumnName="Kidron" />
+                <ScalarProperty Name="Rey" ColumnName="Rey" />
+                <ScalarProperty Name="Rey1" ColumnName="Rey1" />
+                <ScalarProperty Name="Rey2" ColumnName="Rey2" />
+                <ScalarProperty Name="Rey3" ColumnName="Rey3" />
+                <ScalarProperty Name="Rey4" ColumnName="Rey4" />
+                <ScalarProperty Name="Rey5" ColumnName="Rey5" />
+                <ScalarProperty Name="Rey6" ColumnName="Rey6" />
+                <ScalarProperty Name="Rey7" ColumnName="Rey7" />
+                <ScalarProperty Name="Rey8" ColumnName="Rey8" />
+                <ScalarProperty Name="Rey9" ColumnName="Rey9" />
+                <ScalarProperty Name="ZikaronAvoda" ColumnName="ZikaronAvoda" />
+                <ScalarProperty Name="TifkudimNuhuliyim" ColumnName="TifkudimNuhuliyim" />
+                <ScalarProperty Name="ZikaronMiyadiShlifa" ColumnName="ZikaronMiyadiShlifa" />
+                <ScalarProperty Name="ZikaronMoshheShlifa" ColumnName="ZikaronMoshheShlifa" />
+                <ScalarProperty Name="KidudVehasmala" ColumnName="KidudVehasmala" />
+                <ScalarProperty Name="KimGame" ColumnName="KimGame" />
+                <ScalarProperty Name="KeshevHazuti" ColumnName="KeshevHazuti" />
+                <ScalarProperty Name="KetzevYahalom" ColumnName="KetzevYahalom" />
+                <ScalarProperty Name="DiyukYahalom" ColumnName="DiyukYahalom" />
+                <ScalarProperty Name="Ketzev592" ColumnName="Ketzev592" />
+                <ScalarProperty Name="Diyuk592" ColumnName="Diyuk592" />
+                <ScalarProperty Name="Sikum" ColumnName="Sikum" />
+                <ScalarProperty Name="Hamlazot" ColumnName="Hamlazot" />
+                <ScalarProperty Name="HatamotLedarkayHibahanut" ColumnName="HatamotLedarkayHibahanut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -13,10 +13,10 @@ namespace a1
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class a120180723112025asas_dbEntities : DbContext
+    public partial class Ivhun : DbContext
     {
-        public a120180723112025asas_dbEntities()
-            : base("name=a120180723112025asas_dbEntities")
+        public Ivhun()
+            : base("name=Ivhun")
         {
         }
     
@@ -25,6 +25,6 @@ namespace a1
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Ivhunim> Ivhunims { get; set; }
     }
 }

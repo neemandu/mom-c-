@@ -19,9 +19,9 @@ namespace a1.Controllers
         [HttpGet]
         public IvhunimAndActions Get()
         {
-            using (a120180723112025asas_dbEntities entities = new a120180723112025asas_dbEntities())
+            using (Ivhun entities = new Ivhun())
             {
-                var ivhunim = entities.Users;
+                var ivhunim = entities.Ivhunims;
                 IEnumerable<RolesAction> roles = null;
                 using (a120180723112025asas_dbEntities2 roleActionEntity = new a120180723112025asas_dbEntities2())
                 {
@@ -55,6 +55,7 @@ namespace a1.Controllers
         {
             return Ok();
         }
+
         [HttpPut]
         [Route("duplicate/{id}")]
         //[Authorize(Roles = "Admin")]
@@ -62,17 +63,16 @@ namespace a1.Controllers
         {
             try
             {
-                using (a120180723112025asas_dbEntities entities = new a120180723112025asas_dbEntities())
+                using (Ivhun entities = new Ivhun())
                 {
-                    var ivhunToCopy = entities.Users.Where(user => user.Id == id).SingleOrDefault();
+                    var ivhunToCopy = entities.Ivhunims.Where(user => user.Id == id).SingleOrDefault();
                     if (ivhunToCopy == null)
                     {
                         return NotFound();
                     }
                     else
                     {
-                        var newIvhun = new User(ivhunToCopy);
-                        newIvhun.FirstName = newIvhun.FirstName + " - העתק";
+                        var newIvhun = new Ivhunim(ivhunToCopy);
 
                         return await this.Post(newIvhun);
                     }
@@ -89,9 +89,9 @@ namespace a1.Controllers
         //[Authorize(Roles = "Admin")]
         public async Task<IHttpActionResult> EmailClient(int id)
         {
-            using (a120180723112025asas_dbEntities entities = new a120180723112025asas_dbEntities())
+            using (Ivhun entities = new Ivhun())
             {
-                var ivhunim = entities.Users.Where(o => o.Id == id).FirstOrDefault();
+                var ivhunim = entities.Ivhunims.Where(o => o.Id == id).FirstOrDefault();
 
                 if (string.IsNullOrWhiteSpace(ivhunim.Email))
                 {
@@ -135,13 +135,13 @@ blabla :סיסמא
         [HttpPut]
         [Route("create")]
         [Authorize(Roles = "Admin")]
-        public async Task<IHttpActionResult> Post([FromBody]User newIvhun)
+        public async Task<IHttpActionResult> Post([FromBody]Ivhunim newIvhun)
         {
             try
             {
-                using (a120180723112025asas_dbEntities entities = new a120180723112025asas_dbEntities())
+                using (Ivhun entities = new Ivhun())
                 {
-                    entities.Users.Add(newIvhun);
+                    entities.Ivhunims.Add(newIvhun);
                     await entities.SaveChangesAsync();
                     return Ok(this.Get());
                 }
@@ -156,7 +156,7 @@ blabla :סיסמא
         [HttpPut]
         [Route("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IHttpActionResult> Put(int id, [FromBody]User newIvhun)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]Ivhunim newIvhun)
         {
             try
             {
@@ -175,16 +175,16 @@ blabla :סיסמא
         {
             try
             {
-                using (a120180723112025asas_dbEntities entities = new a120180723112025asas_dbEntities())
+                using (Ivhun entities = new Ivhun())
                 {
-                    var ivhunToDelete = entities.Users.Where(user => user.Id == id).SingleOrDefault();
+                    var ivhunToDelete = entities.Ivhunims.Where(user => user.Id == id).SingleOrDefault();
                     if (ivhunToDelete == null)
                     {
                         return NotFound();
                     }
                     else
                     {
-                        entities.Users.Remove(ivhunToDelete);
+                        entities.Ivhunims.Remove(ivhunToDelete);
                         await entities.SaveChangesAsync();
                         return Ok(this.Get());
                     }

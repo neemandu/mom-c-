@@ -235,11 +235,28 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IvhunimController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="GeneratorService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Ivhun.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ivhun.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ivhun.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ivhun.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ivhun.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ivhun.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Ivhunim.cs">
+      <DependentUpon>Ivhun.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -283,24 +300,6 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="TestsTypes\Toni.cs" />
-    <Compile Include="User.cs">
-      <DependentUpon>UserEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserEntityModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserEntityModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserEntityModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserEntityModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserEntityModel.edmx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -322,6 +321,16 @@
     <Content Include="favicon.ico" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Ivhun.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Ivhun.edmx</DependentUpon>
+      <LastGenOutput>Ivhun.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Ivhun.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Ivhun.edmx</DependentUpon>
+      <LastGenOutput>Ivhun.cs</LastGenOutput>
+    </Content>
     <Content Include="Login.html" />
     <Content Include="Models\RolesAction.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -402,6 +411,13 @@
     <Content Include="Content\fonts\roboto\Roboto-Thin.ttf" />
     <Content Include="Content\fonts\roboto\Roboto-Thin.woff" />
     <Content Include="Content\fonts\roboto\Roboto-Thin.woff2" />
+    <EntityDeploy Include="Ivhun.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Ivhun.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Ivhun.edmx.diagram">
+      <DependentUpon>Ivhun.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\a120180723110343 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\a120180723111529 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\a120180723112025 - Web Deploy.pubxml" />
@@ -534,16 +550,6 @@
     <Content Include="src\locale\bootstrap-table-vi-VN.js" />
     <Content Include="src\locale\bootstrap-table-zh-CN.js" />
     <Content Include="src\locale\bootstrap-table-zh-TW.js" />
-    <Content Include="UserEntityModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UserEntityModel.edmx</DependentUpon>
-      <LastGenOutput>UserEntityModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="UserEntityModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UserEntityModel.edmx</DependentUpon>
-      <LastGenOutput>UserEntityModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\Home\navigationbar.html" />
     <Content Include="Views\Shared\Delete_Confirmation.html" />
     <Content Include="Web.config" />
@@ -558,13 +564,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <EntityDeploy Include="UserEntityModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UserEntityModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="UserEntityModel.edmx.diagram">
-      <DependentUpon>UserEntityModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\Users\View.cshtml" />
     <Content Include="Views\New\Create.cshtml" />
     <Content Include="Views\New\Delete.cshtml" />
