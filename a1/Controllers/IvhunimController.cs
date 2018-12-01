@@ -160,7 +160,8 @@ blabla :סיסמא
         {
             try
             {
-                await Delete(id);
+                if (id > -1)
+                    await Delete(id);
                 return await Post(newIvhun);
             }
             catch (Exception ex)

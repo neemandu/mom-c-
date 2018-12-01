@@ -92,8 +92,9 @@
             });
         });
         $('#loaderImage').hide();
-        $('#btnLogin').click(function () {
+        $('#btnForgotPass').click(function () {
             $('#loaderImage').show();
+            $('#divError').hide();
             $.ajax({
                 // Post username, password & the grant type to /token
                 url: '/token',
@@ -115,6 +116,51 @@
                         },
                         success: function (res) {
                             localStorage.setItem("isAdmin", res);
+                        }
+                    });
+                    window.location.href = "/";
+                },
+                // Display errors if any in the Bootstrap alert <div>
+                error: function (jqXHR) {
+                    $('#loaderImage').hide();
+                    console.log(jqXHR);
+                    $('#divErrorText').text('שם המשתמש או הסיסמא אינם נכונים');
+                    $('#divError').show('fade');
+                }
+            });
+        });
+        $('#btnLogin').click(function () {
+            $('#loaderImage').show();
+            $('#divError').hide();
+            $.ajax({
+                // Post username, password & the grant type to /token
+                url: '/token',
+                method: 'POST',
+                contentType: 'application/json',
+                data: {
+                    username: $('#txtUsername').val(),
+                    password: $('#txtPassword').val(),
+                    grant_type: 'password'
+                },
+                success: function (response) {
+                    console.log("token success");
+                    localStorage.setItem("accessToken", response.access_token);
+                    $.ajax({
+                        url: '/api/users/isUserAdmin',
+                        method: 'Get',
+                        headers: {
+                            'Authorization': 'Bearer '
+                                + localStorage.getItem("accessToken")
+                        },
+                        success: function (res) {
+                            console.log("isUserAdmin success");
+                            localStorage.setItem("isAdmin", res);
+                            if (localStorage.getItem("isAdmin") == 'true') {
+                                $('#users').show();
+                            }
+                            else {
+                                $('#users').hide();
+                            }
                         }
                     });
                     window.location.href = "/";
