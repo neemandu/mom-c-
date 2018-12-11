@@ -65,16 +65,17 @@ namespace a1.Controllers
             {
                 using (Ivhun entities = new Ivhun())
                 {
-                    var ivhunToCopy = entities.Ivhunims.Where(user => user.Id == id).SingleOrDefault();
+                    var ivhunToCopy = entities.Ivhunims.AsNoTracking().Where(user => user.Id == id).SingleOrDefault();
                     if (ivhunToCopy == null)
                     {
                         return NotFound();
                     }
                     else
                     {
-                        var newIvhun = new Ivhunim(ivhunToCopy);
-
-                        return await this.Post(newIvhun);
+                        ivhunToCopy.FirstName = "העתק - " + ivhunToCopy.FirstName;
+                        entities.Ivhunims.Add(ivhunToCopy);
+                        await entities.SaveChangesAsync();
+                        return Ok(this.Get());
                     }
                 }
             }
@@ -89,47 +90,84 @@ namespace a1.Controllers
         //[Authorize(Roles = "Admin")]
         public async Task<IHttpActionResult> EmailClient(int id)
         {
-            using (Ivhun entities = new Ivhun())
+            try
             {
-                var ivhunim = entities.Ivhunims.Where(o => o.Id == id).FirstOrDefault();
+                AccountController accounts = new AccountController();
+                UsersController users = new UsersController();
 
-                if (string.IsNullOrWhiteSpace(ivhunim.Email))
+
+                using (Ivhun entities = new Ivhun())
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    var fromAddress = new MailAddress("neemanaya@gmail.com", "איה נאמן");
-                    var toAddress = new MailAddress(ivhunim.Email, ivhunim.FirstName + " " + ivhunim.LastName);
-                    const string fromPassword = "52345865";
-                    const string subject = "איה נאמן - אבחון";
-                    string body = $@"שלום,
+
+                    var ivhunim = entities.Ivhunims.Where(o => o.Id == id).FirstOrDefault();
+
+                    string body = "";
+                    bool isUserExists = users.IsUserExis(ivhunim.Email);
+                    if (isUserExists)
+                    {
+                        body = $@"שלום,
+.האבחון של ילד/תך מוכן
+:בכדי להוריד את האבחון, כנס/י ל
+ayaneeman.azurewebsites.net
+.'התחבר/י עם שם המשתמש והסיסמא שלך ולחצ/י על - 'האבחונים שלי
+לשאלות נוספות, ניתן להשיב לאימייל הזה או להתקשר אלי לטלפון: 0522204509";  
+                    }
+                    else
+                    {
+                        string guid = Guid.NewGuid().ToString();
+
+                        await accounts.Register(new RegisterBindingModel
+                        {
+                            Email = ivhunim.Email,
+                            Password = guid,
+                            ConfirmPassword = guid
+                        });
+
+                        body = $@"שלום,
 .האבחון של ילד/תך מוכן
 :בכדי להוריד את האבחון, כנס ל
 ayaneeman.azurewebsites.net
 {ivhunim.Email} :שם המשתמש
-blabla :סיסמא
+{guid}:סיסמא
 לשאלות נוספות, ניתן להשיב לאימייל הזה או להתקשר אלי לטלפון: 0522204509";
-                    var smtp = new SmtpClient
+                    }
+                    
+
+                    if (string.IsNullOrWhiteSpace(ivhunim.Email))
                     {
-                        Host = "smtp.gmail.com",
-                        Port = 587,
-                        EnableSsl = true,
-                        DeliveryMethod = SmtpDeliveryMethod.Network,
-                        UseDefaultCredentials = false,
-                        Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-                    };
-                    using (var message = new MailMessage(fromAddress, toAddress)
+                        return NotFound();
+                    }
+                    else
                     {
-                        Subject = subject,
-                        Body = body
-                    })
-                    {
-                        smtp.Send(message);
+                        var fromAddress = new MailAddress("neemanaya@gmail.com", "איה נאמן");
+                        var toAddress = new MailAddress(ivhunim.Email, ivhunim.FirstName + " " + ivhunim.LastName);
+                        const string fromPassword = "52345865";
+                        const string subject = "איה נאמן - אבחון";
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            EnableSsl = true,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                        };
+                        using (var message = new MailMessage(fromAddress, toAddress)
+                        {
+                            Subject = subject,
+                            Body = body
+                        })
+                        {
+                            smtp.Send(message);
+                        }
                     }
                 }
+                return Ok();
             }
-            return Ok();
+            catch(Exception ex)
+            {
+                return InternalServerError(new Exception("שגיאה - אנא נסה שנית"));
+            }
         }
 
         [HttpPut]

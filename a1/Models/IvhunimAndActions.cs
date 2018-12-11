@@ -5,6 +5,7 @@ using System.Web;
 
 namespace a1.Models
 {
+    [TypeLite.TsClass]
     public class IvhunimAndActions
     {
         public List<Ivhunim> Ivhunim { get; set; }

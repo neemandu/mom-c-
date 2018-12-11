@@ -21,5 +21,22 @@ namespace a1.Controllers
             bool isAdmin = User.IsInRole("Admin");
             return Ok(isAdmin);
         }
+
+        public bool IsUserExis(string email)
+        {
+            try
+            {
+                using (a120180723112025asas_dbEntities3 users = new a120180723112025asas_dbEntities3())
+                {
+                    if (users.AspNetUsers.Any(o => o.UserName == email))
+                        return true;
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

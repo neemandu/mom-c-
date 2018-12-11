@@ -774,10 +774,12 @@
             $('#submitIvhun').on('click', function () {
                 console.log("submit");
                 var id = $(this).data('id') === undefined ? -1 : $(this).data('id');
+                var dataivhun = new Ivhunim();
                 $.ajax({
                     url: '/api/ivhunim/' + id,
                     method: 'Put',
                     contentType: 'application/json',
+                    data: dataivhun,
                     headers: {
                         'Authorization': 'Bearer '
                             + localStorage.getItem("accessToken")

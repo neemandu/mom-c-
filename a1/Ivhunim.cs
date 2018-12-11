@@ -11,100 +11,9 @@ namespace a1
 {
     using System;
     using System.Collections.Generic;
-
+    [TypeLite.TsClass]
     public partial class Ivhunim
     {
-        public Ivhunim() { }
-        public Ivhunim(Ivhunim ivhun)
-        {
-            ReadyToBeSent = false;
-            FirstName = ivhun.FirstName + " - העתק" ;
-            LastName = ivhun.LastName;
-            Email = ivhun.Email;
-            Institue = ivhun.Institue;
-            BirthDate = ivhun.BirthDate;
-            Gender = ivhun.Gender;
-            Grade = ivhun.Grade;
-            School = ivhun.School;
-            Address = ivhun.Address;
-            ParentName = ivhun.ParentName;
-            ParentPhone = ivhun.ParentPhone;
-            ParentEmail = ivhun.ParentEmail;
-            Reason = ivhun.Reason;
-            WhoSent = ivhun.WhoSent;
-            Background = ivhun.Background;
-            OverallImpression = ivhun.OverallImpression;
-            IsToniEnabled = ivhun.IsToniEnabled;
-            ToniRightAnswers = ivhun.ToniRightAnswers;
-            IsIptaEnabled = ivhun.IsIptaEnabled;
-            IptaRightAnswers = ivhun.IptaRightAnswers;
-            IsGlanzEnabled = ivhun.IsGlanzEnabled;
-            GlanzNigudiyut = ivhun.GlanzNigudiyut;
-            GlanzNirdafot = ivhun.GlanzNirdafot;
-            GlanzMahutiyot = ivhun.GlanzMahutiyot;
-            GlanzHagdara = ivhun.GlanzHagdara;
-            GlanzMiyun = ivhun.GlanzMiyun;
-            GlanzSivug = ivhun.GlanzSivug;
-            GlanzPitgamim = ivhun.GlanzPitgamim;
-            GlanzAnalogya = ivhun.GlanzAnalogya;
-            GlanzHasakatMaskanot = ivhun.GlanzHasakatMaskanot;
-            GlanzSikum = ivhun.GlanzSikum;
-            YedaOrtography = ivhun.YedaOrtography;
-            MilimBeheksherDiyuk = ivhun.MilimBeheksherDiyuk;
-            MilimBodedotDiyuk = ivhun.MilimBodedotDiyuk;
-            MilotTefelDiyuk = ivhun.MilotTefelDiyuk;
-            ItzurimVetnuotDiyuk = ivhun.ItzurimVetnuotDiyuk;
-            MilimBeheksherKetzev = ivhun.MilimBeheksherKetzev;
-            MilimBodedotKetzev = ivhun.MilimBodedotKetzev;
-            MilotTefelKetzev = ivhun.MilotTefelKetzev;
-            ItzurimVetnuotKetzev = ivhun.ItzurimVetnuotKetzev;
-            SikumTahaliheyKria = ivhun.SikumTahaliheyKria;
-            IsHavanatHanikraEnabled = ivhun.IsHavanatHanikraEnabled;
-            SikumHavanatHanikra = ivhun.SikumHavanatHanikra;
-            IsHavanatHanishmaEnabled = ivhun.IsHavanatHanishmaEnabled;
-            SikumHavanatHanishma = ivhun.SikumHavanatHanishma;
-            IsKtivaEnabled = ivhun.IsKtivaEnabled;
-            Ktav = ivhun.Ktav;
-            Ktiv = ivhun.Ktiv;
-            TshuvotLesheelotBezikaLetext = ivhun.TshuvotLesheelotBezikaLetext;
-            HabaaBektav = ivhun.HabaaBektav;
-            IsHabaBealpeEnabled = ivhun.IsHabaBealpeEnabled;
-            SikumHabaBealpe = ivhun.SikumHabaBealpe;
-            IsEranutMetaLeshonitEnabled = ivhun.IsEranutMetaLeshonitEnabled;
-            MudautFonologit = ivhun.MudautFonologit;
-            Ran = ivhun.Ran;
-            ShetefMiluli = ivhun.ShetefMiluli;
-            EranutMorfoTahbirit = ivhun.EranutMorfoTahbirit;
-            EranutTahbirit = ivhun.EranutTahbirit;
-            IsZikaronmMiluliEnabled = ivhun.IsZikaronmMiluliEnabled;
-            Kidron = ivhun.Kidron;
-            Rey = ivhun.Rey;
-            Rey1 = ivhun.Rey1;
-            Rey2 = ivhun.Rey2;
-            Rey3 = ivhun.Rey3;
-            Rey4 = ivhun.Rey4;
-            Rey5 = ivhun.Rey5;
-            Rey6 = ivhun.Rey6;
-            Rey7 = ivhun.Rey7;
-            Rey8 = ivhun.Rey8;
-            Rey9 = ivhun.Rey9;
-            ZikaronAvoda = ivhun.ZikaronAvoda;
-            TifkudimNuhuliyim = ivhun.TifkudimNuhuliyim;
-            ZikaronMiyadiShlifa = ivhun.ZikaronMiyadiShlifa;
-            ZikaronMoshheShlifa = ivhun.ZikaronMoshheShlifa;
-            KidudVehasmala = ivhun.KidudVehasmala;
-            KimGame = ivhun.KimGame;
-            KeshevHazuti = ivhun.KeshevHazuti;
-            KetzevYahalom = ivhun.KetzevYahalom;
-            DiyukYahalom = ivhun.DiyukYahalom;
-            Ketzev592 = ivhun.Ketzev592;
-            Diyuk592 = ivhun.Diyuk592;
-            Sikum = ivhun.Sikum;
-            Hamlazot = ivhun.Hamlazot;
-            HatamotLedarkayHibahanut = ivhun.HatamotLedarkayHibahanut;
-        }
-                                       
-
         public int Id { get; set; }
         public Nullable<bool> ReadyToBeSent { get; set; }
         public string FirstName { get; set; }
@@ -191,5 +100,6 @@ namespace a1
         public string Sikum { get; set; }
         public string Hamlazot { get; set; }
         public string HatamotLedarkayHibahanut { get; set; }
+        public string Tz { get; set; }
     }
 }
