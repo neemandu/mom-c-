@@ -17,29 +17,36 @@ namespace a1.Controllers
     {
         // GET api/<controller>
         [HttpGet]
-        public IvhunimAndActions Get()
+        public async Task<IHttpActionResult> Get()
         {
-            using (Ivhun entities = new Ivhun())
+            try
             {
-                var ivhunim = entities.Ivhunims;
-                IEnumerable<RolesAction> roles = null;
-                using (a120180723112025asas_dbEntities2 roleActionEntity = new a120180723112025asas_dbEntities2())
+                using (Ivhun entities = new Ivhun())
                 {
-                    roles = roleActionEntity.RolesActions;
-                    if (IsUserAdmin())
+                    var ivhunim = entities.Ivhunims;
+                    IEnumerable<RolesAction> roles = null;
+                    using (a120180723112025asas_dbEntities2 roleActionEntity = new a120180723112025asas_dbEntities2())
                     {
-                        roles = roles.Where(role => role.RoleId == 1);
+                        roles = roleActionEntity.RolesActions;
+                        if (IsUserAdmin())
+                        {
+                            roles = roles.Where(role => role.RoleId == 1);
+                        }
+                        else
+                        {
+                            roles = roles.Where(role => role.RoleId == -1);
+                        }
+                        return Ok(new IvhunimAndActions
+                        {
+                            Ivhunim = ivhunim.ToList(),
+                            Actions = roles.ToList()
+                        });
                     }
-                    else
-                    {
-                        roles = roles.Where(role => role.RoleId == -1);
-                    }
-                    return new IvhunimAndActions
-                    {
-                        Ivhunim = ivhunim.ToList(),
-                        Actions = roles.ToList()
-                    };
                 }
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError();
             }
         }
 
@@ -75,7 +82,7 @@ namespace a1.Controllers
                         ivhunToCopy.FirstName = "העתק - " + ivhunToCopy.FirstName;
                         entities.Ivhunims.Add(ivhunToCopy);
                         await entities.SaveChangesAsync();
-                        return Ok(this.Get());
+                        return Ok(await this.Get());
                     }
                 }
             }
@@ -170,7 +177,7 @@ ayaneeman.azurewebsites.net
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("create")]
         [Authorize(Roles = "Admin")]
         public async Task<IHttpActionResult> Post([FromBody]Ivhunim newIvhun)
@@ -181,7 +188,7 @@ ayaneeman.azurewebsites.net
                 {
                     entities.Ivhunims.Add(newIvhun);
                     await entities.SaveChangesAsync();
-                    return Ok(this.Get());
+                    return Ok(await this.Get());
                 }
             }
             catch (Exception ex)
@@ -191,10 +198,10 @@ ayaneeman.azurewebsites.net
         }
 
         // PUT api/<controller>/5
-        [HttpPut]
+        [HttpPost]
         [Route("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IHttpActionResult> Put(int id, [FromBody]Ivhunim newIvhun)
+        public async Task<IHttpActionResult> Upsert(int id, [FromBody]Ivhunim newIvhun)
         {
             try
             {
@@ -225,7 +232,7 @@ ayaneeman.azurewebsites.net
                     {
                         entities.Ivhunims.Remove(ivhunToDelete);
                         await entities.SaveChangesAsync();
-                        return Ok(this.Get());
+                        return Ok(await this.Get());
                     }
 
                 }

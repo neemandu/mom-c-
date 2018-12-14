@@ -72,7 +72,7 @@
                         <label for="sel1">?האם האבחון מוכן לשליחה</label>
                         <br />
                         <label class="switch">
-                            <input type="checkbox">
+                            <input id="ready_to_be_sent" type="checkbox">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -562,7 +562,95 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
-
+            function cleanAddIvhun() {
+                $(this).data('id') = -1;
+                $('#ready_to_be_sent').val('');
+                $('#first_name').val('');
+                $('#last_name').val('');
+                $('#ready').val('');
+                $("#institue option:selected").text();
+                $('#birth_date').val('');
+                $('#first_name').val('');
+                $('#grade').val('');
+                $('#school').val('');
+                $('#address').val('');
+                $('#parent').val('');
+                $('#parent_phone').val('');
+                $('#parent_email').val('');
+                $('#reason').val('');
+                $('#who_sent').val('');
+                $('#background').val('');
+                $('#overall_impression').val('');
+                $('#tonicheck').prop('checked');
+                $('#toni_right_answers').val('');
+                $('#iptacheck').prop('checked');
+                $('#ipta_right_answers').val('');
+                $('#glanzcheck').prop('checked');
+                $('#glanz_nigudiyut').val('');
+                $('#glanz_nirdafot').val('');
+                $('#glanz_mahutiyut').val('');
+                $('#glanz_hagdara').val('');
+                $('#glanz_miyun').val('');
+                $('#glanz_sivug').val('');
+                $('#glanz_pitgamim').val('');
+                $('#glanz_analogia').val('');
+                $('#glanz_hasakat_maskanot').val('');
+                $('#glanz_sikum').val('');
+                $('#Yeda_ortografi').val('');
+                $('#milim_beheksher_diyuk').val('');
+                $('#milim_bodedot_diyuk').val('');
+                $('#milot_tefel_diyuk').val('');
+                $('#itzurim_vetnuot_diyuk').val('');
+                $('#milim_beheksher_ketzev').val('');
+                $('#milim_bodedot_ketzev').val('');
+                $('#milot_tefel_ketzev').val('');
+                $('#itzurim_vetnuot_ketzev').val('');
+                $('#sikum_tahalihei_kria').val('');
+                $('#nikramacheck').prop('checked');
+                $('#sikum_havanat_hanikra').val('');
+                $('#nishmacheck').prop('checked');
+                $('#sikum_havanat_hanishma').val('');
+                $('#ktivacheck').prop('checked');
+                $('#ktav').val('');
+                $('#ktiv').val('');
+                $('#tshuvot_lesheelot_bezika_letext').val('');
+                $('#habaa_bektav').val('');
+                $('#habaabealpecheck').prop('checked');
+                $('#sikum_habaa_bealpe').val('');
+                $('#eranut_meta_leshonit_check').prop('checked');
+                $('#mudaut_phonologit').val('');
+                $('#ran').val('');
+                $('#shetef_miluli').val('');
+                $('#eranut_morfo_tahbirit').val('');
+                $('#eranut_tahbirit').val('');
+                $('#zikaronmilulicheck').prop('checked');
+                $('#kidron').val('');
+                $('#rey').val('');
+                $('#rey_1').val('');
+                $('#rey_2').val('');
+                $('#rey_3').val('');
+                $('#rey_4').val('');
+                $('#rey_5').val('');
+                $('#rey_6').val('');
+                $('#rey_7').val('');
+                $('#rey_8').val('');
+                $('#rey_9').val('');
+                $('#zikaron_avoda').val('');
+                $('#tifkudim_nuhuliyim').val('');
+                $('#zikaron_miyadi_shlifa').val('');
+                $('#zikaron_moshhe_shlifa').val('');
+                $('#kidud_vehasmala').val('');
+                $('#kim_game').val('');
+                $('#keshev_hazuti').val('');
+                $('#ketzev_yahalom').val('');
+                $('#diyuk_yahalom').val('');
+                $('#ketzev_592').val('');
+                $('#diyuk_592').val('');
+                $('#sikum').val('');
+                $('#hamlazot').val('');
+                $('#hatamot_ledarkay_hibahanut').val('');
+                $('#id').val('')
+            };
             function loadData(data) {
                 var icons = '<td>'
                 $.each(data.Actions, function (index, value) {
@@ -773,19 +861,109 @@
             });
             $('#submitIvhun').on('click', function () {
                 console.log("submit");
-                var id = $(this).data('id') === undefined ? -1 : $(this).data('id');
-                var dataivhun = new Ivhunim();
+                var ivhunId = $(this).data('id') === undefined ? -1 : $(this).data('id');
+                var ivhun = {
+                    Id: ivhunId,
+                    ReadyToBeSent: $('#ready_to_be_sent').val(),
+                    FirstName: $('#first_name').val(),
+                    LastName: $('#last_name').val(),
+                    Email: $('#ready').val(),
+                    Institue: $("#institue option:selected").text(),
+                    BirthDate: $('#birth_date').val(),
+                    Gender: $('#first_name').val(),
+                    Grade: $('#grade').val(),
+                    School: $('#school').val(),
+                    Address: $('#address').val(),
+                    ParentName: $('#parent').val(),
+                    ParentPhone: $('#parent_phone').val(),
+                    ParentEmail: $('#parent_email').val(),
+                    Reason: $('#reason').val(),
+                    WhoSent: $('#who_sent').val(),
+                    Background: $('#background').val(),
+                    OverallImpression: $('#overall_impression').val(),
+                    IsToniEnabled: $('#tonicheck').prop('checked'),
+                    ToniRightAnswers: $('#toni_right_answers').val(),
+                    IsIptaEnabled: $('#iptacheck').prop('checked'),
+                    IptaRightAnswers: $('#ipta_right_answers').val(),
+                    IsGlanzEnabled: $('#glanzcheck').prop('checked'),
+                    GlanzNigudiyut: $('#glanz_nigudiyut').val(),
+                    GlanzNirdafot: $('#glanz_nirdafot').val(),
+                    GlanzMahutiyot: $('#glanz_mahutiyut').val(),
+                    GlanzHagdara: $('#glanz_hagdara').val(),
+                    GlanzMiyun: $('#glanz_miyun').val(),
+                    GlanzSivug: $('#glanz_sivug').val(),
+                    GlanzPitgamim: $('#glanz_pitgamim').val(),
+                    GlanzAnalogya: $('#glanz_analogia').val(),
+                    GlanzHasakatMaskanot: $('#glanz_hasakat_maskanot').val(),
+                    GlanzSikum: $('#glanz_sikum').val(),
+                    YedaOrtography: $('#Yeda_ortografi').val(),
+                    MilimBeheksherDiyuk: $('#milim_beheksher_diyuk').val(),
+                    MilimBodedotDiyuk: $('#milim_bodedot_diyuk').val(),
+                    MilotTefelDiyuk: $('#milot_tefel_diyuk').val(),
+                    ItzurimVetnuotDiyuk: $('#itzurim_vetnuot_diyuk').val(),
+                    MilimBeheksherKetzev: $('#milim_beheksher_ketzev').val(),
+                    MilimBodedotKetzev: $('#milim_bodedot_ketzev').val(),
+                    MilotTefelKetzev: $('#milot_tefel_ketzev').val(),
+                    ItzurimVetnuotKetzev: $('#itzurim_vetnuot_ketzev').val(),
+                    SikumTahaliheyKria: $('#sikum_tahalihei_kria').val(),
+                    IsHavanatHanikraEnabled: $('#nikramacheck').prop('checked'),
+                    SikumHavanatHanikra: $('#sikum_havanat_hanikra').val(),
+                    IsHavanatHanishmaEnabled: $('#nishmacheck').prop('checked'),
+                    SikumHavanatHanishma: $('#sikum_havanat_hanishma').val(),
+                    IsKtivaEnabled: $('#ktivacheck').prop('checked'),
+                    Ktav: $('#ktav').val(),
+                    Ktiv: $('#ktiv').val(),
+                    TshuvotLesheelotBezikaLetext: $('#tshuvot_lesheelot_bezika_letext').val(),
+                    HabaaBektav: $('#habaa_bektav').val(),
+                    IsHabaBealpeEnabled: $('#habaabealpecheck').prop('checked'),
+                    SikumHabaBealpe: $('#sikum_habaa_bealpe').val(),
+                    IsEranutMetaLeshonitEnabled: $('#eranut_meta_leshonit_check').prop('checked'),
+                    MudautFonologit: $('#mudaut_phonologit').val(),
+                    Ran: $('#ran').val(),
+                    ShetefMiluli: $('#shetef_miluli').val(),
+                    EranutMorfoTahbirit: $('#eranut_morfo_tahbirit').val(),
+                    EranutTahbirit: $('#eranut_tahbirit').val(),
+                    IsZikaronmMiluliEnabled: $('#zikaronmilulicheck').prop('checked'),
+                    Kidron: $('#kidron').val(),
+                    Rey: $('#rey').val(),
+                    Rey1: $('#rey_1').val(),
+                    Rey2: $('#rey_2').val(),
+                    Rey3: $('#rey_3').val(),
+                    Rey4: $('#rey_4').val(),
+                    Rey5: $('#rey_5').val(),
+                    Rey6: $('#rey_6').val(),
+                    Rey7: $('#rey_7').val(),
+                    Rey8: $('#rey_8').val(),
+                    Rey9: $('#rey_9').val(),
+                    ZikaronAvoda: $('#zikaron_avoda').val(),
+                    TifkudimNuhuliyim: $('#tifkudim_nuhuliyim').val(),
+                    ZikaronMiyadiShlifa: $('#zikaron_miyadi_shlifa').val(),
+                    ZikaronMoshheShlifa: $('#zikaron_moshhe_shlifa').val(),
+                    KidudVehasmala: $('#kidud_vehasmala').val(),
+                    KimGame: $('#kim_game').val(),
+                    KeshevHazuti: $('#keshev_hazuti').val(),
+                    KetzevYahalom: $('#ketzev_yahalom').val(),
+                    DiyukYahalom: $('#diyuk_yahalom').val(),
+                    Ketzev592: $('#ketzev_592').val(),
+                    Diyuk592: $('#diyuk_592').val(),
+                    Sikum: $('#sikum').val(),
+                    Hamlazot: $('#hamlazot').val(),
+                    HatamotLedarkayHibahanut: $('#hatamot_ledarkay_hibahanut').val(),
+                    Tz: $('#id').val()
+                }
                 $.ajax({
-                    url: '/api/ivhunim/' + id,
-                    method: 'Put',
+                    url: '/api/ivhunim/' + ivhunId,
+                    method: 'Post',
+                    dataType: 'json',
                     contentType: 'application/json',
-                    data: dataivhun,
+                    data: JSON.stringify(ivhun),
                     headers: {
                         'Authorization': 'Bearer '
                             + localStorage.getItem("accessToken")
                     },
                     success: function (data) {
                         $("#modalContactForm .close").click()
+                        cleanAddIvhun();
                         loadData(data);
                     },
                     error: function (jQXHR) {
