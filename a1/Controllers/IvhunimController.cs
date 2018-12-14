@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Net;
 using System.Net.Mail;
+using a1.Repositories;
 
 namespace a1.Controllers
 {
@@ -15,34 +16,21 @@ namespace a1.Controllers
     [RoutePrefix("api/ivhunim")]
     public class IvhunimController : ApiController
     {
+        private IIvhunimRepository _ivhunRpo;
+
+        public IvhunimController()
+        {
+            _ivhunRpo = new IvhunimRepository();
+        }
         // GET api/<controller>
         [HttpGet]
         public async Task<IHttpActionResult> Get()
         {
             try
             {
-                using (Ivhun entities = new Ivhun())
-                {
-                    var ivhunim = entities.Ivhunims;
-                    IEnumerable<RolesAction> roles = null;
-                    using (a120180723112025asas_dbEntities2 roleActionEntity = new a120180723112025asas_dbEntities2())
-                    {
-                        roles = roleActionEntity.RolesActions;
-                        if (IsUserAdmin())
-                        {
-                            roles = roles.Where(role => role.RoleId == 1);
-                        }
-                        else
-                        {
-                            roles = roles.Where(role => role.RoleId == -1);
-                        }
-                        return Ok(new IvhunimAndActions
-                        {
-                            Ivhunim = ivhunim.ToList(),
-                            Actions = roles.ToList()
-                        });
-                    }
-                }
+                bool isUserAdmin = IsUserAdmin();
+                var result = await _ivhunRpo.GetAll(isUserAdmin);
+                return Ok(result);
             }
             catch(Exception ex)
             {
@@ -70,25 +58,12 @@ namespace a1.Controllers
         {
             try
             {
-                using (Ivhun entities = new Ivhun())
-                {
-                    var ivhunToCopy = entities.Ivhunims.AsNoTracking().Where(user => user.Id == id).SingleOrDefault();
-                    if (ivhunToCopy == null)
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        ivhunToCopy.FirstName = "העתק - " + ivhunToCopy.FirstName;
-                        entities.Ivhunims.Add(ivhunToCopy);
-                        await entities.SaveChangesAsync();
-                        return Ok(await this.Get());
-                    }
-                }
+                await _ivhunRpo.Duplicate(id);
+                return Ok(await _ivhunRpo.GetAll(IsUserAdmin()));
             }
             catch (Exception ex)
             {
-                return BadRequest();
+                return InternalServerError();
             }
         }
 
@@ -177,26 +152,6 @@ ayaneeman.azurewebsites.net
             }
         }
 
-        [HttpPost]
-        [Route("create")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IHttpActionResult> Post([FromBody]Ivhunim newIvhun)
-        {
-            try
-            {
-                using (Ivhun entities = new Ivhun())
-                {
-                    entities.Ivhunims.Add(newIvhun);
-                    await entities.SaveChangesAsync();
-                    return Ok(await this.Get());
-                }
-            }
-            catch (Exception ex)
-            {
-                return BadRequest();
-            }
-        }
-
         // PUT api/<controller>/5
         [HttpPost]
         [Route("{id}")]
@@ -206,12 +161,13 @@ ayaneeman.azurewebsites.net
             try
             {
                 if (id > -1)
-                    await Delete(id);
-                return await Post(newIvhun);
+                    await _ivhunRpo.Delete(id);
+                await _ivhunRpo.Post(newIvhun);
+                return Ok(await _ivhunRpo.GetAll(IsUserAdmin()));
             }
             catch (Exception ex)
             {
-                return BadRequest();
+                return InternalServerError();
             }
         }
 
@@ -221,25 +177,12 @@ ayaneeman.azurewebsites.net
         {
             try
             {
-                using (Ivhun entities = new Ivhun())
-                {
-                    var ivhunToDelete = entities.Ivhunims.Where(user => user.Id == id).SingleOrDefault();
-                    if (ivhunToDelete == null)
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        entities.Ivhunims.Remove(ivhunToDelete);
-                        await entities.SaveChangesAsync();
-                        return Ok(await this.Get());
-                    }
-
-                }
+                await _ivhunRpo.Delete(id);
+                return Ok(await _ivhunRpo.GetAll(IsUserAdmin()));                
             }
             catch (Exception ex)
             {
-                return BadRequest();
+                return InternalServerError();
             }
         }
     }
