@@ -86,5 +86,22 @@ namespace a1.Repositories
                 }
             }
         }
+
+        public async Task Upsert(Ivhunim ivhun)
+        {
+
+            try
+            {
+                using (Ivhun entities = new Ivhun())
+                {
+                    entities.Entry(ivhun).State = System.Data.Entity.EntityState.Modified;
+                    await entities.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -156,13 +156,19 @@ ayaneeman.azurewebsites.net
         [HttpPost]
         [Route("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IHttpActionResult> Upsert(int id, [FromBody]Ivhunim newIvhun)
+        public async Task<IHttpActionResult> Upsert(int id, [FromBody]Ivhunim ivhun)
         {
             try
             {
                 if (id > -1)
-                    await _ivhunRpo.Delete(id);
-                await _ivhunRpo.Post(newIvhun);
+                {
+                    ivhun.Id = id;
+                    await _ivhunRpo.Upsert(ivhun);
+                }
+                else
+                {
+                    await _ivhunRpo.Post(ivhun);
+                }
                 return Ok(await _ivhunRpo.GetAll(IsUserAdmin()));
             }
             catch (Exception ex)

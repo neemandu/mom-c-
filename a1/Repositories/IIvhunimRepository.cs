@@ -12,6 +12,7 @@ namespace a1.Repositories
         Task Delete(int id);
         Task Duplicate(int id);
         Task Post(Ivhunim ivhun);
+        Task Upsert(Ivhunim ivhun);
         Task<IvhunimAndActions> GetAll(bool isUserAdmin);
     }
 }

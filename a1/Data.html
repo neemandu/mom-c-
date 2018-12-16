@@ -1,15 +1,18 @@
-﻿<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="Scripts/bootstrap.min.js"></script>
+﻿
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="Content/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="Content/css/mdb.css">
+<link href="Content/css/bootstrap.min.css" rel="stylesheet" />
+
 
 <!DOCTYPE html>
 <html>
 <head>
     <title></title>
     <meta charset="utf-8" />
-    <link href="Content/css/bootstrap.min.css" rel="stylesheet" />
+    
 </head>
 <body style="padding-top:0">
     <div id="navbar"></div>
@@ -559,7 +562,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" style="width:200px;font-size:large;color:black">לא</button>
-                    <button type="button" class="btn btn-danger" id="confirmEd" style="width:200px;font-size:large">כן</button>
+                    <button type="button" class="btn btn-danger" id="confirmEd" style="width:200px;font-size:large" data-toggle="modal" data-target="#modalContactForm">כן</button>
                 </div>
             </div>
         </div>
@@ -592,15 +595,16 @@
             <h4>העדכון נכשל, נסה שנית</h4>
         </div>
     </div>
+    
+    <script type="text/javascript" src="Scripts/mdb.min.js"></script>
     <script type="text/javascript">
         var ivhunim = {};
         var globalId = -1;
         $(document).ready(function () {
-            $('#addIvhunBtn').on('click', function () {
-                console.log('click');
-            });
             $('#addIvhun').on('click', function () {
-                console.log('click');
+                globalId = -1;
+                cleanAddIvhun();
+                $("#modalContactForm").scrollTop(0);
             });
 
             $('#myInput').on('keyup', function () {
@@ -636,7 +640,7 @@
                 $('#first_name').val('');
                 $('#last_name').val('');
                 $('#ready').val('');
-                $("#institue option:selected").text();
+                $("#institue option:selected").text('איה נאמן');
                 $('#birth_date').val('');
                 $('#first_name').val('');
                 $('#grade').val('');
@@ -649,11 +653,11 @@
                 $('#who_sent').val('');
                 $('#background').val('');
                 $('#overall_impression').val('');
-                $('#tonicheck').prop('checked');
+                $('#tonicheck').prop('checked', false);
                 $('#toni_right_answers').val('');
-                $('#iptacheck').prop('checked');
+                $('#iptacheck').prop('checked', false);
                 $('#ipta_right_answers').val('');
-                $('#glanzcheck').prop('checked');
+                $('#glanzcheck').prop('checked', false);
                 $('#glanz_nigudiyut').val('');
                 $('#glanz_nirdafot').val('');
                 $('#glanz_mahutiyut').val('');
@@ -674,24 +678,24 @@
                 $('#milot_tefel_ketzev').text('');
                 $('#itzurim_vetnuot_ketzev').text('');
                 $('#sikum_tahalihei_kria').val('');
-                $('#nikramacheck').prop('checked');
+                $('#nikramacheck').prop('checked', false);
                 $('#sikum_havanat_hanikra').val('');
-                $('#nishmacheck').prop('checked');
+                $('#nishmacheck').prop('checked', false);
                 $('#sikum_havanat_hanishma').val('');
-                $('#ktivacheck').prop('checked');
+                $('#ktivacheck').prop('checked', false);
                 $('#ktav').val('');
                 $('#ktiv').val('');
                 $('#tshuvot_lesheelot_bezika_letext').val('');
                 $('#habaa_bektav').val('');
-                $('#habaabealpecheck').prop('checked');
+                $('#habaabealpecheck').prop('checked', false);
                 $('#sikum_habaa_bealpe').val('');
-                $('#eranut_meta_leshonit_check').prop('checked');
+                $('#eranut_meta_leshonit_check').prop('checked', false);
                 $('#mudaut_phonologit').val('');
                 $('#ran').val('');
                 $('#shetef_miluli').val('');
                 $('#eranut_morfo_tahbirit').val('');
                 $('#eranut_tahbirit').val('');
-                $('#zikaronmilulicheck').prop('checked');
+                $('#zikaronmilulicheck').prop('checked', false);
                 $('#kidron').val('');
                 $('#rey').val('');
                 $('#rey_1').val('');
@@ -750,6 +754,7 @@
                 $('#tblBody').empty();
                 ivhunim = {};
                 $.each(data.Ivhunim, function (index, value) {
+                    console.log(value);
                     ivhunim[value.Id] = value;
                     var noErrorSign = value.ReadyToBeSent ? '<td align="center" style="font-size:large;border:none;color:green"><i class="glyphicon glyphicon-ok"></i></td>'
                         : '<td align="center" style="font-size:large;border:none;color:red"><i class="glyphicon glyphicon-remove"></i></td>';
@@ -758,8 +763,8 @@
                         + noErrorSign
                         + '<td align="center" style="font-size:large">' + value.FirstName + '</td > '
                         + '<td align="center" style="font-size:large">' + value.LastName + '</td>'
-                        + '<td align="center" style="font-size:large">' + value.Email + '</td>'
-                        + '<td align="center" style="font-size:large">' + value.Institute + '</td></tr>');
+                        + '<td align="center" style="font-size:large">' + value.ParentEmail + '</td>'
+                        + '<td align="center" style="font-size:large">' + value.Institue + '</td></tr>');
                     $('#tblBody').append(row);
                 });
             }
@@ -933,6 +938,7 @@
             $('#submitIvhun').on('click', function () {
                 console.log("submit");
                 console.log(ivhunim);
+                console.log(globalId);
                 var ivhunId = globalId;
                 var ivhun = {
                     Id: ivhunId,
@@ -1093,7 +1099,6 @@
             });
 
             $('#confirmEdit').find('.modal-footer #confirmEd').on('click', function () {
-                console.log("here");
                 $("#confirmEdit .close").click();
                 var id = $(this).data('id');
                 globalId = id;
@@ -1492,7 +1497,6 @@
                 $('label[for="hamlazot"]').addClass("active");
                 $('label[for="hatamot_ledarkay_hibahanut"]').addClass("active");
                 $('label[for="id"]').addClass("active");
-                $("#addIvhunBtn").click();
             });
 
             $('#confirmDuplicate').find('.modal-footer #confirmDup').on('click', function () {
@@ -1617,11 +1621,6 @@
             });
         });
     </script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="Scripts/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="Scripts/mdb.min.js"></script>
+
 </body>
 </html>
