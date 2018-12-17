@@ -6,9 +6,9 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Net;
 using System.Net.Mail;
 using a1.Repositories;
+using Models;
 
 namespace a1.Controllers
 {
@@ -17,31 +17,35 @@ namespace a1.Controllers
     public class IvhunimController : ApiController
     {
         private IIvhunimRepository _ivhunRpo;
-
-        public IvhunimController()
+        private IIvhunimService _ivhunimSrv;
+        
+        public IvhunimController(IIvhunimRepository ivhunRpo,
+                                 IIvhunimService ivhunimSrv)
         {
-            _ivhunRpo = new IvhunimRepository();
+            _ivhunRpo = ivhunRpo;
+            _ivhunimSrv = ivhunimSrv;
+
         }
         // GET api/<controller>
         [HttpGet]
-        public async Task<IHttpActionResult> Get()
+        public IHttpActionResult Get()
         {
             try
             {
                 bool isUserAdmin = IsUserAdmin();
-                var result = await _ivhunRpo.GetAll(isUserAdmin);
+                var result = _ivhunRpo.GetAll(isUserAdmin);
                 return Ok(result);
             }
             catch(Exception ex)
             {
-                return InternalServerError();
+                return InternalServerError(ex);
             }
         }
 
         private bool IsUserAdmin()
         {
             bool isAdmin = User.IsInRole("Admin");
-            return true;//isAdmin;
+            return isAdmin;
         }
 
         [HttpGet]
@@ -59,11 +63,11 @@ namespace a1.Controllers
             try
             {
                 await _ivhunRpo.Duplicate(id);
-                return Ok(await _ivhunRpo.GetAll(IsUserAdmin()));
+                return Ok(_ivhunRpo.GetAll(IsUserAdmin()));
             }
             catch (Exception ex)
             {
-                return InternalServerError();
+                return InternalServerError(ex);
             }
         }
 
@@ -74,24 +78,31 @@ namespace a1.Controllers
         {
             try
             {
-                AccountController accounts = new AccountController();
+
+                System.Web.Routing.RouteData route = new System.Web.Routing.RouteData();
+                route.Values.Add("action", "accounts"); // ActionName, but it not required
+                var factory = System.Web.Mvc.DependencyResolver.Current.GetService(System.Web.Mvc.IControllerFactory) ?? new System.Web.Mvc.DefaultControllerFactory();
+                AccountController accounts = factory.CreateController(new System.Web.Routing.RequestContext(), "accounts") as AccountController;
+
+                
+                
                 UsersController users = new UsersController();
 
 
-                using (Ivhun entities = new Ivhun())
+                using (IvhunimEntities entities = new IvhunimEntities())
                 {
 
                     var ivhunim = entities.Ivhunims.Where(o => o.Id == id).FirstOrDefault();
 
                     string body = "";
-                    bool isUserExists = users.IsUserExis(ivhunim.Email);
+                    bool isUserExists = users.IsUserExis(ivhunim.ParentEmail);
                     if (isUserExists)
                     {
                         body = $@"שלום,
-.האבחון של ילד/תך מוכן
-:בכדי להוריד את האבחון, כנס/י ל
+האבחון של ילד/תך מוכן.
+בכדי להוריד את האבחון, כנס/י ל: 
 ayaneeman.azurewebsites.net
-.'התחבר/י עם שם המשתמש והסיסמא שלך ולחצ/י על - 'האבחונים שלי
+'התחבר/י עם שם המשתמש והסיסמא שלך ולחצ/י על - 'האבחונים שלי.
 לשאלות נוספות, ניתן להשיב לאימייל הזה או להתקשר אלי לטלפון: 0522204509";  
                     }
                     else
@@ -100,29 +111,30 @@ ayaneeman.azurewebsites.net
 
                         await accounts.Register(new RegisterBindingModel
                         {
-                            Email = ivhunim.Email,
+                            Email = ivhunim.ParentEmail,
                             Password = guid,
                             ConfirmPassword = guid
+
                         });
 
                         body = $@"שלום,
-.האבחון של ילד/תך מוכן
-:בכדי להוריד את האבחון, כנס ל
+האבחון של ילד/תך מוכן.
+בכדי להוריד את האבחון, כנס/י ל: 
 ayaneeman.azurewebsites.net
-{ivhunim.Email} :שם המשתמש
-{guid}:סיסמא
+שם המשתמש: {ivhunim.ParentEmail}
+סיסמא: {guid}
 לשאלות נוספות, ניתן להשיב לאימייל הזה או להתקשר אלי לטלפון: 0522204509";
                     }
                     
 
-                    if (string.IsNullOrWhiteSpace(ivhunim.Email))
+                    if (string.IsNullOrWhiteSpace(ivhunim.ParentEmail))
                     {
                         return NotFound();
                     }
                     else
                     {
                         var fromAddress = new MailAddress("neemanaya@gmail.com", "איה נאמן");
-                        var toAddress = new MailAddress(ivhunim.Email, ivhunim.FirstName + " " + ivhunim.LastName);
+                        var toAddress = new MailAddress(ivhunim.ParentEmail, ivhunim.FirstName + " " + ivhunim.LastName);
                         const string fromPassword = "52345865";
                         const string subject = "איה נאמן - אבחון";
                         var smtp = new SmtpClient
@@ -137,7 +149,8 @@ ayaneeman.azurewebsites.net
                         using (var message = new MailMessage(fromAddress, toAddress)
                         {
                             Subject = subject,
-                            Body = body
+                            Body = body,
+                            IsBodyHtml = false                            
                         })
                         {
                             smtp.Send(message);
@@ -148,7 +161,7 @@ ayaneeman.azurewebsites.net
             }
             catch(Exception ex)
             {
-                return InternalServerError(new Exception("שגיאה - אנא נסה שנית"));
+                return InternalServerError(ex);
             }
         }
 
@@ -169,11 +182,11 @@ ayaneeman.azurewebsites.net
                 {
                     await _ivhunRpo.Post(ivhun);
                 }
-                return Ok(await _ivhunRpo.GetAll(IsUserAdmin()));
+                return Ok(_ivhunRpo.GetAll(IsUserAdmin()));
             }
             catch (Exception ex)
             {
-                return InternalServerError();
+                return InternalServerError(ex);
             }
         }
 
@@ -184,11 +197,11 @@ ayaneeman.azurewebsites.net
             try
             {
                 await _ivhunRpo.Delete(id);
-                return Ok(await _ivhunRpo.GetAll(IsUserAdmin()));                
+                return Ok(_ivhunRpo.GetAll(IsUserAdmin()));                
             }
             catch (Exception ex)
             {
-                return InternalServerError();
+                return InternalServerError(ex);
             }
         }
     }

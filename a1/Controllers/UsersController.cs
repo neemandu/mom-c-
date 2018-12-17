@@ -6,8 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Net;
-using System.Net.Mail;
+using Models;
 
 namespace a1.Controllers
 {
@@ -26,16 +25,16 @@ namespace a1.Controllers
         {
             try
             {
-                using (a120180723112025asas_dbEntities3 users = new a120180723112025asas_dbEntities3())
+                using (IvhunimEntities entities = new IvhunimEntities())
                 {
-                    if (users.AspNetUsers.Any(o => o.UserName == email))
+                    if (entities.AspNetUsers.Any(o => o.UserName == email))
                         return true;
                     return false;
                 }
             }
             catch(Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
     }

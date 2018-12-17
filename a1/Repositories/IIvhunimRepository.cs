@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using Models;
 
 namespace a1.Repositories
 {
@@ -13,6 +14,6 @@ namespace a1.Repositories
         Task Duplicate(int id);
         Task Post(Ivhunim ivhun);
         Task Upsert(Ivhunim ivhun);
-        Task<IvhunimAndActions> GetAll(bool isUserAdmin);
+        IvhunimAndActions GetAll(bool isUserAdmin);
     }
 }

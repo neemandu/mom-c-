@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace a1.Models
+namespace Models
 {
-    [TypeLite.TsClass]
     public class IvhunimAndActions
     {
         public List<Ivhunim> Ivhunim { get; set; }
-        public List<RolesAction> Actions { get; set; }
+        public List<RolesActions> Actions { get; set; }
     }
 }

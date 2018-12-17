@@ -1,4 +1,5 @@
 ﻿using a1.Models;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace a1.Repositories
     {
         public async Task Delete(int id)
         {
-            using (Ivhun entities = new Ivhun())
+            using (IvhunimEntities entities = new IvhunimEntities())
             {
                 var ivhunToDelete = entities.Ivhunims.Where(user => user.Id == id).SingleOrDefault();
                 if (ivhunToDelete != null)
@@ -27,7 +28,7 @@ namespace a1.Repositories
         {
             try
             {
-                using (Ivhun entities = new Ivhun())
+                using (IvhunimEntities entities = new IvhunimEntities())
                 {
                     var ivhunToCopy = entities.Ivhunims.AsNoTracking().Where(user => user.Id == id).SingleOrDefault();
                     if (ivhunToCopy != null)
@@ -48,7 +49,7 @@ namespace a1.Repositories
         {
             try
             {
-                using (Ivhun entities = new Ivhun())
+                using (IvhunimEntities entities = new IvhunimEntities())
                 {
                     entities.Ivhunims.Add(ivhun);
                     await entities.SaveChangesAsync();
@@ -60,30 +61,27 @@ namespace a1.Repositories
             }
         }
 
-        public async Task<IvhunimAndActions> GetAll(bool isUserAdmin)
+        public IvhunimAndActions GetAll(bool isUserAdmin)
         {
-            using (Ivhun entities = new Ivhun())
+            using (IvhunimEntities entities = new IvhunimEntities())
             {
                 var ivhunim = entities.Ivhunims;
-                IEnumerable<RolesAction> roles = null;
-                using (a120180723112025asas_dbEntities2 roleActionEntity = new a120180723112025asas_dbEntities2())
+                IEnumerable<RolesActions> roles = null;
+                roles = entities.RolesActionss;
+                if (isUserAdmin)
                 {
-                    roles = roleActionEntity.RolesActions;
-                    if (isUserAdmin)
-                    {
-                        roles = roles.Where(role => role.RoleId == 1);
-                    }
-                    else
-                    {
-                        roles = roles.Where(role => role.RoleId == -1);
-                    }
-                    var result = new IvhunimAndActions
-                    {
-                        Ivhunim = ivhunim.ToList(),
-                        Actions = roles.ToList()
-                    };
-                    return result;
+                    roles = roles.Where(role => role.RoleId == 1);
                 }
+                else
+                {
+                    roles = roles.Where(role => role.RoleId == -1);
+                }
+                var result = new IvhunimAndActions
+                {
+                    Ivhunim = ivhunim.ToList(),
+                    Actions = roles.ToList()
+                };
+                return result;
             }
         }
 
@@ -92,7 +90,7 @@ namespace a1.Repositories
 
             try
             {
-                using (Ivhun entities = new Ivhun())
+                using (IvhunimEntities entities = new IvhunimEntities())
                 {
                     entities.Entry(ivhun).State = System.Data.Entity.EntityState.Modified;
                     await entities.SaveChangesAsync();

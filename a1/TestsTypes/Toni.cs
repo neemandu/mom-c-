@@ -5,7 +5,7 @@ using System.Web;
 
 namespace a1.TestsTypes
 {
-    public class Toni
+    public class Toni : IToni
     {
         private int[,] scoring;
         public Toni()

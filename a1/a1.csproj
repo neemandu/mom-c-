@@ -48,11 +48,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.13\lib\net46\CommonServiceLocator.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.4.1\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
@@ -120,6 +126,27 @@
     </Reference>
     <Reference Include="TypeLite.Net4, Version=1.8.2.0, Culture=neutral, PublicKeyToken=8cd4b9c9ac23d744, processorArchitecture=MSIL">
       <HintPath>..\packages\TypeLite.1.8.4\lib\net4\TypeLite.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Configuration, Version=5.2.5.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.8.13.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception, Version=5.5.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Interception.Configuration, Version=5.1.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RegistrationByConvention, Version=2.1.9.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ServiceLocation, Version=2.1.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -239,24 +266,6 @@
     <Compile Include="AspNetRole.cs">
       <DependentUpon>RoleEntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AspNetUser.cs">
-      <DependentUpon>AspUser.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspUser.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AspUser.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspUser.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AspUser.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AspUser.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AspUser.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IvhunimController.cs" />
@@ -267,46 +276,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Ivhun.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Ivhun.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Ivhun.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Ivhun.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Ivhun.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Ivhun.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Ivhunim.cs">
-      <DependentUpon>Ivhun.tt</DependentUpon>
-    </Compile>
+    <Compile Include="IIvhunimService.cs" />
+    <Compile Include="IvhunFinalResult.cs" />
+    <Compile Include="IvhunimService.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\IvhunimAndActions.cs" />
-    <Compile Include="Models\RolesAction.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RolesAction.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RolesAction.cs">
-      <DependentUpon>RolesAction.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RolesAction.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RolesAction.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RolesAction1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RolesAction.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Repositories\IIvhunimRepository.cs" />
@@ -329,19 +304,10 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="TestsTypes\Toni.cs" />
+    <Compile Include="UnityResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="AspUser.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AspUser.edmx</DependentUpon>
-      <LastGenOutput>AspUser.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="AspUser.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AspUser.edmx</DependentUpon>
-      <LastGenOutput>AspUser.cs</LastGenOutput>
-    </Content>
     <Content Include="ChangePassword.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -360,27 +326,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Ivhun.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Ivhun.edmx</DependentUpon>
-      <LastGenOutput>Ivhun.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Ivhun.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Ivhun.edmx</DependentUpon>
-      <LastGenOutput>Ivhun.cs</LastGenOutput>
-    </Content>
     <Content Include="Login.html" />
-    <Content Include="Models\RolesAction.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RolesAction.edmx</DependentUpon>
-      <LastGenOutput>RolesAction.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\RolesAction.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RolesAction.edmx</DependentUpon>
-      <LastGenOutput>RolesAction1.cs</LastGenOutput>
-    </Content>
     <Content Include="navigationbar.html" />
     <Content Include="Register.html" />
     <Content Include="ResetPassword.html" />
@@ -418,13 +364,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\RolesAction.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RolesAction.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\RolesAction.edmx.diagram">
-      <DependentUpon>RolesAction.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\scss\mdb.scss" />
     <Content Include="Content\scss\style.scss" />
     <Content Include="Content\scss\_custom-skin.scss" />
@@ -450,20 +389,6 @@
     <Content Include="Content\fonts\roboto\Roboto-Thin.ttf" />
     <Content Include="Content\fonts\roboto\Roboto-Thin.woff" />
     <Content Include="Content\fonts\roboto\Roboto-Thin.woff2" />
-    <EntityDeploy Include="Ivhun.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Ivhun.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Ivhun.edmx.diagram">
-      <DependentUpon>Ivhun.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="AspUser.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AspUser.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="AspUser.edmx.diagram">
-      <DependentUpon>AspUser.edmx</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\a120180723110343 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\a120180723111529 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\a120180723112025 - Web Deploy.pubxml" />
@@ -715,6 +640,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TypeLite.Net4.tt</DependentUpon>
     </TypeScriptCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj">
+      <Project>{FF717AA6-A6EC-415A-83D5-F438658C87B5}</Project>
+      <Name>Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{b3cd6743-8237-4b38-8e9e-b7ec8e12d21d}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
