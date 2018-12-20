@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Web.Http;
 using a1.Repositories;
 using a1.TestsTypes;
+using Contracts;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Unity;
@@ -18,6 +19,7 @@ namespace a1
             var container = new UnityContainer();
             container.RegisterType<IToni, Toni>();
             container.RegisterType<IIvhunimRepository, IvhunimRepository>();
+            container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<IIvhunimService, IvhunimService>();
             config.DependencyResolver = new UnityResolver(container);
             // Web API configuration and services

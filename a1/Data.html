@@ -723,6 +723,12 @@
                 $('#hatamot_ledarkay_hibahanut').val('');
                 $('#id').val('')
             };
+
+            function createPassword() {
+                var randomstring = Math.random().toString(36).slice(-8);
+                return randomstring;
+            }
+
             function loadData(data) {
                 var icons = '<td>'
                 $.each(data.Actions, function (index, value) {
@@ -1553,17 +1559,43 @@
 
             $('#confirmSendEmail').find('.modal-footer #confirmEmail').on('click', function () {
                 $.ajax({
-                    url: '/api/ivhunim/email/' + $(this).data('id'),
-                    method: 'Put',
+                    url: '/api/users/isUserExists/' + $(this).data('id'),
+                    method: 'GET',
                     contentType: 'application/json',
                     headers: {
                         'Authorization': 'Bearer '
                             + localStorage.getItem("accessToken")
                     },
                     success: function (data) {
-                        $("#confirmSendEmail .close").click()
-                        //$('#confirmDelete').modal('toggle');
-                        loadData(data);
+                        var pass = '';
+                        if (data == false) {
+                            pass = createPassword();
+                            $.ajax({
+                                url: '/api/account/register',
+                                method: 'POST',
+                                data: {
+                                    email: ivhunim[$(this).data('id')].ivhun.ParentEmail,
+                                    password: pass,
+                                    confirmPassword: pass
+                                },
+                                success: function () {
+                                },
+                                error: function (jqXHR) {
+                                }
+                            })
+                        }
+                        $.ajax({
+                            url: '/api/ivhunim/email/' + $(this).data('id') + "/" + pass,
+                            method: 'Put',
+                            contentType: 'application/json',
+                            headers: {
+                                'Authorization': 'Bearer '
+                                    + localStorage.getItem("accessToken")
+                            },
+                            success: function () {
+                                $("#confirmSendEmail .close").click()
+                            }
+                        })
                     },
                     error: function (jQXHR) {
                         // If status code is 401, access token expired, so

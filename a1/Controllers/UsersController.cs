@@ -7,12 +7,20 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Models;
+using Contracts;
 
 namespace a1.Controllers
 {
     [RoutePrefix("api/users")]
     public class UsersController : ApiController
     {
+        private IUserRepository _usrRepo;
+
+        public UsersController(IUserRepository usrRepo)
+        {
+            _usrRepo = usrRepo;
+        }
+
         [HttpGet]
         [Route("IsUserAdmin")]
         public IHttpActionResult IsUserAdmin()
@@ -21,20 +29,17 @@ namespace a1.Controllers
             return Ok(isAdmin);
         }
 
-        public bool IsUserExis(string email)
+        [HttpGet]
+        [Route("isUserExists/{id}")]
+        public IHttpActionResult IsUserExist(int id)
         {
             try
             {
-                using (IvhunimEntities entities = new IvhunimEntities())
-                {
-                    if (entities.AspNetUsers.Any(o => o.UserName == email))
-                        return true;
-                    return false;
-                }
+                return Ok(_usrRepo.IsUserExis(id));
             }
             catch(Exception ex)
             {
-                throw ex;
+                return InternalServerError(ex);
             }
         }
     }

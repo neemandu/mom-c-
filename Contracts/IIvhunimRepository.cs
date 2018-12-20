@@ -1,10 +1,5 @@
-﻿using a1.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Models;
 using System.Threading.Tasks;
-using System.Web;
-using Models;
 
 namespace a1.Repositories
 {

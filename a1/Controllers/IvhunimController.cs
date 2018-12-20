@@ -72,22 +72,12 @@ namespace a1.Controllers
         }
 
         [HttpPut]
-        [Route("email/{id}")]
+        [Route("email/{id}/{password}")]
         //[Authorize(Roles = "Admin")]
-        public async Task<IHttpActionResult> EmailClient(int id)
+        public IHttpActionResult EmailClient([FromUri] int id, [FromUri] string password)
         {
             try
             {
-
-                System.Web.Routing.RouteData route = new System.Web.Routing.RouteData();
-                route.Values.Add("action", "accounts"); // ActionName, but it not required
-                var factory = System.Web.Mvc.DependencyResolver.Current.GetService(System.Web.Mvc.IControllerFactory) ?? new System.Web.Mvc.DefaultControllerFactory();
-                AccountController accounts = factory.CreateController(new System.Web.Routing.RequestContext(), "accounts") as AccountController;
-
-                
-                
-                UsersController users = new UsersController();
-
 
                 using (IvhunimEntities entities = new IvhunimEntities())
                 {
@@ -95,8 +85,7 @@ namespace a1.Controllers
                     var ivhunim = entities.Ivhunims.Where(o => o.Id == id).FirstOrDefault();
 
                     string body = "";
-                    bool isUserExists = users.IsUserExis(ivhunim.ParentEmail);
-                    if (isUserExists)
+                   if (string.IsNullOrWhiteSpace(password))
                     {
                         body = $@"שלום,
 האבחון של ילד/תך מוכן.
@@ -107,22 +96,12 @@ ayaneeman.azurewebsites.net
                     }
                     else
                     {
-                        string guid = Guid.NewGuid().ToString();
-
-                        await accounts.Register(new RegisterBindingModel
-                        {
-                            Email = ivhunim.ParentEmail,
-                            Password = guid,
-                            ConfirmPassword = guid
-
-                        });
-
                         body = $@"שלום,
 האבחון של ילד/תך מוכן.
 בכדי להוריד את האבחון, כנס/י ל: 
 ayaneeman.azurewebsites.net
 שם המשתמש: {ivhunim.ParentEmail}
-סיסמא: {guid}
+סיסמא: {password}
 לשאלות נוספות, ניתן להשיב לאימייל הזה או להתקשר אלי לטלפון: 0522204509";
                     }
                     
