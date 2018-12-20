@@ -123,7 +123,6 @@
                 // Display errors if any in the Bootstrap alert <div>
                 error: function (jqXHR) {
                     $('#loaderImage').hide();
-                    console.log(jqXHR);
                     $('#divErrorText').text('שם המשתמש או הסיסמא אינם נכונים');
                     $('#divError').show('fade');
                 }
@@ -143,7 +142,6 @@
                     grant_type: 'password'
                 },
                 success: function (response) {
-                    console.log("token success");
                     localStorage.setItem("accessToken", response.access_token);
                     $.ajax({
                         url: '/api/users/isUserAdmin',
@@ -153,7 +151,6 @@
                                 + localStorage.getItem("accessToken")
                         },
                         success: function (res) {
-                            console.log("isUserAdmin success");
                             localStorage.setItem("isAdmin", res);
                             if (localStorage.getItem("isAdmin") == 'true') {
                                 $('#users').show();
@@ -168,7 +165,6 @@
                 // Display errors if any in the Bootstrap alert <div>
                 error: function (jqXHR) {
                     $('#loaderImage').hide();
-                    console.log(jqXHR);
                     $('#divErrorText').text('שם המשתמש או הסיסמא אינם נכונים');
                     $('#divError').show('fade');
                 }

@@ -1,6 +1,7 @@
 ﻿
 <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="Content/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="Content/css/mdb.css">
@@ -12,7 +13,7 @@
 <head>
     <title></title>
     <meta charset="utf-8" />
-    
+
 </head>
 <body style="padding-top:0">
     <div id="navbar"></div>
@@ -20,7 +21,9 @@
         <h2 style="text-align:right">האבחונים שלי&nbsp&nbsp</h2>
         <input type="text" style="background-color:antiquewhite; text-align:right;font-size:large" id="myInput" placeholder="...חיפוש">
         <div id="addIvhun"></div>
-        <img style="display:block;text-align:center;margin:0 auto;" src="/Content/gifs/Ellipsis-1.8s-190px.gif" alt="Loading" />
+        <div class="alert alert-success" id="success-alert" style="margin-left:40%;margin-right:40%;width:300px;align-content:center;font-size:large;text-align:center;display:none">הפעולה בוצעה בהצלחה</div>
+        <div class="alert alert-warning" id="failure-alert" style="margin-left:40%;margin-right:40%;width:300px;align-content:center;font-size:large;text-align:center;display:none">הפעולה נכשלה, אנא נסיה שנית</div>
+        <img style="display:block;text-align:center;margin-left:40%;margin-right:40%" src="/Content/gifs/Ellipsis-1.8s-190px.gif" alt="Loading" />
         <br />
         <br />
         <br />
@@ -595,7 +598,7 @@
             <h4>העדכון נכשל, נסה שנית</h4>
         </div>
     </div>
-    
+
     <script type="text/javascript" src="Scripts/mdb.min.js"></script>
     <script type="text/javascript">
         var ivhunim = {};
@@ -725,8 +728,21 @@
             };
 
             function createPassword() {
-                var randomstring = Math.random().toString(36).slice(-8);
-                return randomstring;
+                var randomString = "";
+
+                var possibleUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                var possibleLower = "abcdefghijklmnopqrstuvwxyz";
+                var possibleNumber = "0123456789";
+                var possibleSigns = "&^%$()";
+
+                while (randomString.length < 8) {
+                    randomString += possibleUpper.charAt(Math.floor(Math.random() * possibleUpper.length));
+                    randomString += possibleLower.charAt(Math.floor(Math.random() * possibleLower.length));
+                    randomString += possibleNumber.charAt(Math.floor(Math.random() * possibleNumber.length));
+                    randomString += possibleSigns.charAt(Math.floor(Math.random() * possibleSigns.length));
+                }
+
+                return randomString;
             }
 
             function loadData(data) {
@@ -760,7 +776,6 @@
                 $('#tblBody').empty();
                 ivhunim = {};
                 $.each(data.Ivhunim, function (index, value) {
-                    console.log(value);
                     ivhunim[value.Id] = value;
                     var noErrorSign = value.ReadyToBeSent ? '<td align="center" style="font-size:large;border:none;color:green"><i class="glyphicon glyphicon-ok"></i></td>'
                         : '<td align="center" style="font-size:large;border:none;color:red"><i class="glyphicon glyphicon-remove"></i></td>';
@@ -780,7 +795,6 @@
             }
 
             if (localStorage.getItem('isAdmin') == null || localStorage.getItem('isAdmin') == 'undefined') {
-                console.log("sss");
                 $.ajax({
                     url: '/api/users/isUserAdmin',
                     method: 'Get',
@@ -789,7 +803,6 @@
                             + localStorage.getItem("accessToken")
                     },
                     success: function (res) {
-                        console.log(res);
                         localStorage.setItem("isAdmin", res)
                         if (localStorage.getItem("isAdmin") == 'true') {
 
@@ -942,9 +955,6 @@
                 }
             });
             $('#submitIvhun').on('click', function () {
-                console.log("submit");
-                console.log(ivhunim);
-                console.log(globalId);
                 var ivhunId = globalId;
                 var ivhun = {
                     Id: ivhunId,
@@ -1506,6 +1516,8 @@
             });
 
             $('#confirmDuplicate').find('.modal-footer #confirmDup').on('click', function () {
+                $("#confirmDuplicate .close").click();
+                $('img').show();
                 $.ajax({
                     url: '/api/ivhunim/duplicate/' + $(this).data('id'),
                     method: 'Put',
@@ -1515,22 +1527,22 @@
                             + localStorage.getItem("accessToken")
                     },
                     success: function (data) {
-                        $("#confirmDuplicate .close").click()
-                        //$('#confirmDelete').modal('toggle');
+                        $('img').hide();
+                        $("#success-alert").show();
+                        setTimeout(function () { $("#success-alert").hide(); }, 5000);
                         loadData(data);
                     },
                     error: function (jQXHR) {
-                        if (jQXHR.status == "401") {
-                            $('#errorModal').modal('show');
-                        }
-                        else {
-                            $('#failure').modal('show');
-                        }
+                        $('img').hide();
+                        $("#failure-alert").show();
+                        setTimeout(function () { $("#failure-alert").hide(); }, 5000);
                     }
                 });
             });
 
             $('#confirmDelete').find('.modal-footer #confirm').on('click', function () {
+                $("#confirmDelete .close").click();
+                $('img').show();
                 $.ajax({
                     url: '/api/ivhunim/' + $(this).data('id'),
                     method: 'Delete',
@@ -1540,26 +1552,29 @@
                             + localStorage.getItem("accessToken")
                     },
                     success: function (data) {
-                        $("#confirmDelete .close").click()
+                        $('img').hide();
+                        $("#success-alert").show();
+                        setTimeout(function () { $("#success-alert").hide(); }, 5000);
                         //$('#confirmDelete').modal('toggle');
                         loadData(data);
                     },
                     error: function (jQXHR) {
                         // If status code is 401, access token expired, so
                         // redirect the user to the login page
-                        if (jQXHR.status == "401") {
-                            $('#errorModal .open').click();
-                        }
-                        else {
-                            $('#failure .open').click();
-                        }
+                        $('img').hide();
+                        $("#failure-alert").show();
+                        setTimeout(function () { $("#failure-alert").hide(); }, 5000);
                     }
                 });
             });
 
             $('#confirmSendEmail').find('.modal-footer #confirmEmail').on('click', function () {
+                var ivhunId = $(this).data('id');
+                var error = false;
+                $("#confirmSendEmail .close").click();
+                $('img').show();
                 $.ajax({
-                    url: '/api/users/isUserExists/' + $(this).data('id'),
+                    url: '/api/users/isUserExists/' + ivhunId,
                     method: 'GET',
                     contentType: 'application/json',
                     headers: {
@@ -1574,38 +1589,73 @@
                                 url: '/api/account/register',
                                 method: 'POST',
                                 data: {
-                                    email: ivhunim[$(this).data('id')].ivhun.ParentEmail,
+                                    email: ivhunim[ivhunId].ParentEmail,
                                     password: pass,
                                     confirmPassword: pass
                                 },
                                 success: function () {
+                                    $.ajax({
+                                        url: '/api/ivhunim/email/' + ivhunId,
+                                        method: 'Put',
+                                        data: {
+                                            email: ivhunim[ivhunId].ParentEmail,
+                                            password: pass,
+                                            confirmPassword: pass
+                                        },
+                                        headers: {
+                                            'Authorization': 'Bearer '
+                                                + localStorage.getItem("accessToken")
+                                        },
+                                        success: function () {
+                                            $('img').hide();
+                                            $("#success-alert").show();
+                                            setTimeout(function () { $("#success-alert").hide(); }, 5000);
+                                        },
+                                        error: function () {
+                                            $('img').hide();
+                                            $("#failure-alert").show();
+                                            setTimeout(function () { $("#failure-alert").hide(); }, 5000);
+                                        }
+                                    });
                                 },
                                 error: function (jqXHR) {
+                                    $('img').hide();
+                                    error = true;
+                                    $("#failure-alert").show();
+                                    setTimeout(function () { $("#failure-alert").hide(); }, 5000);
                                 }
                             })
                         }
-                        $.ajax({
-                            url: '/api/ivhunim/email/' + $(this).data('id') + "/" + pass,
-                            method: 'Put',
-                            contentType: 'application/json',
-                            headers: {
-                                'Authorization': 'Bearer '
-                                    + localStorage.getItem("accessToken")
-                            },
-                            success: function () {
-                                $("#confirmSendEmail .close").click()
-                            }
-                        })
+                        else {
+                            $.ajax({
+                                url: '/api/ivhunim/email/' + ivhunId,
+                                method: 'Put',
+                                data: {
+                                    email: ivhunim[ivhunId].ParentEmail,
+                                    password: pass,
+                                    confirmPassword: pass
+                                },
+                                headers: {
+                                    'Authorization': 'Bearer '
+                                        + localStorage.getItem("accessToken")
+                                },
+                                success: function () {
+                                    $('img').hide();
+                                    $("#success-alert").show();
+                                    setTimeout(function () { $("#success-alert").hide(); }, 5000);
+                                },
+                                error: function () {
+                                    $('img').hide();
+                                    $("#failure-alert").show();
+                                    setTimeout(function () { $("#failure-alert").hide(); }, 5000);
+                                }
+                            });
+                        }
                     },
                     error: function (jQXHR) {
-                        // If status code is 401, access token expired, so
-                        // redirect the user to the login page
-                        if (jQXHR.status == "401") {
-                            $('#errorModal .open').click();
-                        }
-                        else {
-                            $('#failure .open').click();
-                        }
+                        $('img').hide();
+                        $("#failure-alert").show();
+                        setTimeout(function () { $("#failure-alert").hide(); }, 5000);
                     }
                 });
             });
@@ -1623,6 +1673,8 @@
 
 
             $('#confirmCopy').find('.modal-footer #confirmCopy').on('click', function () {
+                $("#confirmCopy .close").click();
+                $('img').show();
                 $.ajax({
                     url: '/api/ivhunim/' + $(this).data('id'),
                     method: 'Post',
@@ -1632,18 +1684,17 @@
                             + localStorage.getItem("accessToken")
                     },
                     success: function (data) {
-                        $('#confirmCopy').modal('hide');
+                        $('img').hide();
+                        $("#success-alert").show();
+                        setTimeout(function () { $("#success-alert").hide(); }, 5000);
                         loadData(data);
                     },
                     error: function (jQXHR) {
                         // If status code is 401, access token expired, so
                         // redirect the user to the login page
-                        if (jQXHR.status == "401") {
-                            $('#errorModal').modal('show');
-                        }
-                        else {
-                            $('#failure').modal('show');
-                        }
+                        $('img').hide();
+                        $("#failure-alert").show();
+                        setTimeout(function () { $("#failure-alert").hide(); }, 5000);
                     }
                 });
             });
@@ -1651,8 +1702,11 @@
             $.get("navigationbar.html", function (data) {
                 $("#navbar").replaceWith(data);
             });
+
+
         });
     </script>
-
+    <script src="src/alert.js"></script>
 </body>
 </html>
+

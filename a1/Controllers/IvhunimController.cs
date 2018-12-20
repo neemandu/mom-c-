@@ -72,9 +72,9 @@ namespace a1.Controllers
         }
 
         [HttpPut]
-        [Route("email/{id}/{password}")]
+        [Route("email/{id}")]
         //[Authorize(Roles = "Admin")]
-        public IHttpActionResult EmailClient([FromUri] int id, [FromUri] string password)
+        public IHttpActionResult EmailClient([FromUri] int id, [FromBody] RegisterBindingModel registrationModel)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace a1.Controllers
                     var ivhunim = entities.Ivhunims.Where(o => o.Id == id).FirstOrDefault();
 
                     string body = "";
-                   if (string.IsNullOrWhiteSpace(password))
+                   if (string.IsNullOrWhiteSpace(registrationModel.Password))
                     {
                         body = $@"שלום,
 האבחון של ילד/תך מוכן.
@@ -101,7 +101,7 @@ ayaneeman.azurewebsites.net
 בכדי להוריד את האבחון, כנס/י ל: 
 ayaneeman.azurewebsites.net
 שם המשתמש: {ivhunim.ParentEmail}
-סיסמא: {password}
+סיסמא: {registrationModel.Password}
 לשאלות נוספות, ניתן להשיב לאימייל הזה או להתקשר אלי לטלפון: 0522204509";
                     }
                     

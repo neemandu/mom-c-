@@ -430,6 +430,7 @@
     <Content Include="Scripts\velocity.min.js" />
     <Content Include="Scripts\waves.js" />
     <Content Include="Scripts\wow.js" />
+    <Content Include="src\alert.js" />
     <Content Include="src\bootstrap-table.css" />
     <Content Include="src\bootstrap-table.js" />
     <Content Include="src\extensions\accent-neutralise\bootstrap-table-accent-neutralise.js" />
