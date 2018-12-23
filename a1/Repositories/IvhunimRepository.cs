@@ -61,24 +61,42 @@ namespace a1.Repositories
             }
         }
 
-        public IvhunimAndActions GetAll(bool isUserAdmin)
+        public IvhunimAndActions GetAll(bool isUserAdmin, bool isUserNextStepAdmin, bool isUserTypist, string email)
         {
             using (IvhunimEntities entities = new IvhunimEntities())
             {
-                var ivhunim = entities.Ivhunims;
+                var ivhunim = new List<Ivhunim>();
                 IEnumerable<RolesActions> roles = null;
                 roles = entities.RolesActionss;
                 if (isUserAdmin)
                 {
                     roles = roles.Where(role => role.RoleId == 1);
+                    ivhunim = entities.Ivhunims.ToList();
+                }
+                else if (isUserNextStepAdmin)
+                {
+                    roles = roles.Where(role => role.RoleId == 3);
+                    foreach(var ivhun in entities.Ivhunims.Where(ivhun => ivhun.Institue == "הצעד הבא"))
+                    {
+                        ivhunim.Add(ivhun);
+                    }
+                }
+                else if (isUserTypist)
+                {
+                    roles = roles.Where(role => role.RoleId == 4);
+                    ivhunim = entities.Ivhunims.ToList();
                 }
                 else
                 {
                     roles = roles.Where(role => role.RoleId == -1);
+                    foreach (var ivhun in entities.Ivhunims.Where(ivhun => ivhun.ParentEmail == email && ivhun.ReadyToBeSent == true))
+                    {
+                        ivhunim.Add(ivhun);
+                    }
                 }
                 var result = new IvhunimAndActions
                 {
-                    Ivhunim = ivhunim.ToList(),
+                    Ivhunim = ivhunim,
                     Actions = roles.ToList()
                 };
                 return result;

@@ -32,8 +32,8 @@ namespace a1.Controllers
         {
             try
             {
-                bool isUserAdmin = IsUserAdmin();
-                var result = _ivhunRpo.GetAll(isUserAdmin);
+                string email = User.Identity.Name;
+                var result = _ivhunRpo.GetAll(User.IsInRole("Admin"), User.IsInRole("NextStepAdmin"), User.IsInRole("Typist"), email);
                 return Ok(result);
             }
             catch(Exception ex)
@@ -44,8 +44,7 @@ namespace a1.Controllers
 
         private bool IsUserAdmin()
         {
-            bool isAdmin = User.IsInRole("Admin");
-            return isAdmin;
+            return User.IsInRole("Admin");
         }
 
         [HttpGet]
@@ -57,13 +56,14 @@ namespace a1.Controllers
 
         [HttpPut]
         [Route("duplicate/{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Typist,NextStepAdmin")]
         public async Task<IHttpActionResult> Duplicate(int id)
         {
             try
             {
                 await _ivhunRpo.Duplicate(id);
-                return Ok(_ivhunRpo.GetAll(IsUserAdmin()));
+                string email = User.Identity.Name;
+                return Ok(_ivhunRpo.GetAll(User.IsInRole("Admin"), User.IsInRole("NextStepAdmin"), User.IsInRole("Typist"), email));
             }
             catch (Exception ex)
             {
@@ -73,7 +73,7 @@ namespace a1.Controllers
 
         [HttpPut]
         [Route("email/{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,NextStepAdmin")]
         public IHttpActionResult EmailClient([FromUri] int id, [FromBody] RegisterBindingModel registrationModel)
         {
             try
@@ -92,7 +92,10 @@ namespace a1.Controllers
 בכדי להוריד את האבחון, כנס/י ל: 
 ayaneeman.azurewebsites.net
 'התחבר/י עם שם המשתמש והסיסמא שלך ולחצ/י על - 'האבחונים שלי.
-לשאלות נוספות, ניתן להשיב לאימייל הזה או להתקשר אלי לטלפון: 0522204509";  
+לשאלות נוספות, ניתן להשיב לאימייל הזה או להתקשר אלי לטלפון: 0522204509
+
+תודה,
+איה.";  
                     }
                     else
                     {
@@ -102,7 +105,10 @@ ayaneeman.azurewebsites.net
 ayaneeman.azurewebsites.net
 שם המשתמש: {ivhunim.ParentEmail}
 סיסמא: {registrationModel.Password}
-לשאלות נוספות, ניתן להשיב לאימייל הזה או להתקשר אלי לטלפון: 0522204509";
+לשאלות נוספות, ניתן להשיב לאימייל הזה או להתקשר אלי לטלפון: 0522204509
+
+תודה,
+איה.";
                     }
                     
 
@@ -147,11 +153,13 @@ ayaneeman.azurewebsites.net
         // PUT api/<controller>/5
         [HttpPost]
         [Route("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Typist,NextStepAdmin")]
         public async Task<IHttpActionResult> Upsert(int id, [FromBody]Ivhunim ivhun)
         {
             try
             {
+
+                string email = User.Identity.Name;
                 if (id > -1)
                 {
                     ivhun.Id = id;
@@ -161,7 +169,7 @@ ayaneeman.azurewebsites.net
                 {
                     await _ivhunRpo.Post(ivhun);
                 }
-                return Ok(_ivhunRpo.GetAll(IsUserAdmin()));
+                return Ok(_ivhunRpo.GetAll(User.IsInRole("Admin"), User.IsInRole("NextStepAdmin"), User.IsInRole("Typist"), email));
             }
             catch (Exception ex)
             {
@@ -171,12 +179,14 @@ ayaneeman.azurewebsites.net
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "Admin,NextStepAdmin")]
         public async Task<IHttpActionResult> Delete(int id)
         {
             try
             {
                 await _ivhunRpo.Delete(id);
-                return Ok(_ivhunRpo.GetAll(IsUserAdmin()));                
+                string email = User.Identity.Name;
+                return Ok(_ivhunRpo.GetAll(User.IsInRole("Admin"), User.IsInRole("NextStepAdmin"), User.IsInRole("Typist"), email));                
             }
             catch (Exception ex)
             {

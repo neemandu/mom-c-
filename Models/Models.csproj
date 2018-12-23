@@ -52,10 +52,12 @@
   <ItemGroup>
     <Compile Include="AspNetUser.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Institue.cs" />
     <Compile Include="Ivhunim.cs" />
     <Compile Include="IvhunimAndActions.cs" />
     <Compile Include="IvhunimEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RolesInstitues.cs" />
     <Compile Include="RolesActions.cs" />
   </ItemGroup>
   <ItemGroup>
