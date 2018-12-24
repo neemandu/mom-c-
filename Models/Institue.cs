@@ -1,4 +1,4 @@
-namespace Models
+﻿namespace Models
 {
     using System;
     using System.Collections.Generic;
@@ -13,5 +13,11 @@ namespace Models
 
         [StringLength(50)]
         public string Name { get; set; }
+    }
+
+    public static class InstituesNames
+    {
+        public static readonly string AYA_NEEMAN = "איה נאמן";
+        public static readonly string NEXT_STEP = "הצעד הבא";
     }
 }

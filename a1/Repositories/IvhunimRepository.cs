@@ -66,25 +66,38 @@ namespace a1.Repositories
             using (IvhunimEntities entities = new IvhunimEntities())
             {
                 var ivhunim = new List<Ivhunim>();
+                var columns = new List<RolesMainTableColumns>();
                 IEnumerable<RolesActions> roles = null;
                 roles = entities.RolesActionss;
                 if (isUserAdmin)
                 {
                     roles = roles.Where(role => role.RoleId == 1);
                     ivhunim = entities.Ivhunims.ToList();
+                    foreach (var column in entities.RolesMainTableColumns.Where(role => role.RoleId == 1).OrderByDescending(o => o.OrderNumber))
+                    {
+                        columns.Add(column);
+                    }
                 }
                 else if (isUserNextStepAdmin)
                 {
                     roles = roles.Where(role => role.RoleId == 3);
-                    foreach(var ivhun in entities.Ivhunims.Where(ivhun => ivhun.Institue == "הצעד הבא"))
+                    foreach(var ivhun in entities.Ivhunims.Where(ivhun => ivhun.Institue == InstituesNames.NEXT_STEP))
                     {
                         ivhunim.Add(ivhun);
+                    }
+                    foreach(var column in entities.RolesMainTableColumns.Where(role => role.RoleId == 3).OrderByDescending(o => o.OrderNumber))
+                    {
+                        columns.Add(column);
                     }
                 }
                 else if (isUserTypist)
                 {
                     roles = roles.Where(role => role.RoleId == 4);
                     ivhunim = entities.Ivhunims.ToList();
+                    foreach (var column in entities.RolesMainTableColumns.Where(role => role.RoleId == 4).OrderByDescending(o => o.OrderNumber))
+                    {
+                        columns.Add(column);
+                    }
                 }
                 else
                 {
@@ -93,11 +106,16 @@ namespace a1.Repositories
                     {
                         ivhunim.Add(ivhun);
                     }
+                    foreach (var column in entities.RolesMainTableColumns.Where(role => role.RoleId == -1).OrderByDescending(o => o.OrderNumber))
+                    {
+                        columns.Add(column);
+                    }
                 }
                 var result = new IvhunimAndActions
                 {
                     Ivhunim = ivhunim,
-                    Actions = roles.ToList()
+                    Actions = roles.ToList(),
+                    Columns = columns.Select(o => o.ColumnName).ToList()
                 };
                 return result;
             }

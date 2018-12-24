@@ -16,6 +16,7 @@ namespace Models
         public virtual DbSet<Ivhunim> Ivhunims { get; set; }
         public virtual DbSet<RolesActions> RolesActionss { get; set; }
         public virtual DbSet<RolesInstitues> RolesInstitues { get; set; }
+        public virtual DbSet<RolesMainTableColumns> RolesMainTableColumns { get; set; }
         public virtual DbSet<Institue> Institues { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

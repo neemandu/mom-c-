@@ -22,21 +22,23 @@
         <input type="text" style="background-color:antiquewhite; text-align:right;font-size:large" id="myInput" placeholder="...חיפוש">
         <div id="addIvhun"></div>
         <div class="alert alert-success" id="success-alert" style="margin-left:40%;margin-right:40%;width:300px;align-content:center;font-size:large;text-align:center;display:none">הפעולה בוצעה בהצלחה</div>
-        <div class="alert alert-warning" id="failure-alert" style="margin-left:40%;margin-right:40%;width:300px;align-content:center;font-size:large;text-align:center;display:none">הפעולה נכשלה, אנא נסיה שנית</div>
+        <div class="alert alert-danger" id="failure-alert" style="margin-left:40%;margin-right:40%;width:300px;align-content:center;font-size:large;text-align:center;display:none">הפעולה נכשלה, אנא נסיה שנית</div>
+        <div class="alert alert-info" id="ivhun_not_ready-alert" style="margin-left:40%;margin-right:40%;width:300px;align-content:center;font-size:large;text-align:center;display:none">לא ניתן לשלוח מייל לאבחון שלא מוכן לשליחה</div>
         <img style="display:block;text-align:center;margin-left:40%;margin-right:40%" src="/Content/gifs/Ellipsis-1.8s-190px.gif" alt="Loading" />
         <br />
         <br />
         <br />
         <div class="container">
             <table id="myTable">
+                <thead id="tblHead"></thead>
                 <thead id="tblHead">
                     <tr>
-                        <th style="text-align:center;font-size:large">פעולות</th>
-                        <th style="text-align:center;font-size:large">?מוכן לשליחה</th>
-                        <th style="text-align:center;font-size:large">שם פרטי</th>
-                        <th style="text-align:center;font-size:large">שם משפחה</th>
-                        <th style="text-align:center;font-size:large">אימייל</th>
-                        <th style="text-align:center;font-size:large">המכון המאבחן</th>
+                        <th id="actionsCol" style="text-align:center;font-size:large;display:none">פעולות</th>
+                        <th id="readyToSentCol" style="text-align:center;font-size:large;display:none">?מוכן לשליחה</th>
+                        <th id="firstNameCol" style="text-align:center;font-size:large;display:none">שם פרטי</th>
+                        <th id="lastNameCol" style="text-align:center;font-size:large;display:none">שם משפחה</th>
+                        <th id="emailCol" style="text-align:center;font-size:large;display:none">אימייל</th>
+                        <th id="institueCol" style="text-align:center;font-size:large;display:none">המכון המאבחן</th>
                     </tr>
                 </thead>
                 <tbody id="tblBody"></tbody>
@@ -133,6 +135,7 @@
                             <option>י'</option>
                             <option>יא'</option>
                             <option>יב'</option>
+                            <option>בוגר</option>
                         </select>
                     </div>
 
@@ -781,20 +784,40 @@
                         : '<td align="center" style="font-size:large;border:none;color:red"><i class="glyphicon glyphicon-remove"></i></td>';
                     var iconWithId = icons.replace(/data-id=/g, 'data-Id="' + value.Id + '"');
                     var row = $('<tr>' + iconWithId
-                        + noErrorSign
-                        + '<td align="center" style="font-size:large">' + value.FirstName + '</td > '
-                        + '<td align="center" style="font-size:large">' + value.LastName + '</td>'
-                        + '<td align="center" style="font-size:large">' + value.ParentEmail + '</td>'
-                        + '<td align="center" style="font-size:large">' + value.Institue + '</td></tr>');
+                    + (data.Columns.indexOf("readyToBeSent") > -1 ? noErrorSign : '')
+                    + (data.Columns.indexOf("firstName") > -1 ? '<td align="center" style="font-size:large">' + value.FirstName + '</td > ' : '')
+                    + (data.Columns.indexOf("lastName") > -1 ? '<td align="center" style="font-size:large">' + value.LastName + '</td>' : '')
+                    + (data.Columns.indexOf("email") > -1 ? '<td align="center" style="font-size:large">' + value.ParentEmail + '</td>' : '')
+                    + (data.Columns.indexOf("institue") > -1 ? '<td align="center" style="font-size:large">' + value.Institue + '</td></tr>' : ''));
+
                     $('#tblBody').append(row);
+
+
                 });
+
+                if (data.Columns.indexOf("readyToBeSent") > -1)
+                    $('#readyToSentCol').show();
+                if (data.Columns.indexOf("institue") > -1)
+                    $('#institueCol').show();
+                if (data.Columns.indexOf("email") > -1)
+                    $('#emailCol').show();
+                if (data.Columns.indexOf("lastName") > -1)
+                    $('#lastNameCol').show();
+                if (data.Columns.indexOf("firstName") > -1)
+                    $('#firstNameCol').show();
+                if (data.Columns.indexOf("actions") > -1)
+                    $('#actionsCol').show();
+
             }
 
             if (localStorage.getItem('accessToken') == null) {
                 window.location.href = "Login.html";
             }
 
-            if (localStorage.getItem('isAdmin') == null || localStorage.getItem('isAdmin') == 'undefined') {
+            if (localStorage.getItem('isAdmin') == null ||
+                localStorage.getItem('isAdmin') == 'undefined' ||
+                localStorage.getItem('isAddIvhunBtnEnabled') == 'undefined' ||
+                localStorage.getItem('isAddIvhunBtnEnabled') == null) {
                 $.ajax({
                     url: '/api/users/isUserAdmin',
                     method: 'Get',
@@ -803,8 +826,9 @@
                             + localStorage.getItem("accessToken")
                     },
                     success: function (res) {
-                        localStorage.setItem("isAdmin", res)
-                        if (localStorage.getItem("isAdmin") == 'true') {
+                        localStorage.setItem("isAdmin", res.IsAdmin);
+                        localStorage.setItem("isAddIvhunBtnEnabled", res.IsAddIvhunBtnEnabled);
+                        if (localStorage.getItem("isAddIvhunBtnEnabled") == 'true') {
 
                             $('#addIvhun').css("padding-right", "50px");
                             $('#addIvhun').append("<a href=\"\" class=\"btn btn-default btn-rounded mb-4 waves-effect waves-light pull-right\" id=\"addIvhunBtn\" style=\"border:solid;border-color:antiquewhite;margin:15px;font-size:large;color:black\" data-toggle=\"modal\" data-target=\"#modalContactForm\">הוסף אבחון <i class=\"glyphicon glyphicon-plus\"></i></a>");
@@ -813,7 +837,7 @@
                     }
                 });
             }
-            if (localStorage.getItem("isAdmin") == 'true') {
+            if (localStorage.getItem("isAddIvhunBtnEnabled") == 'true') {
 
                 $('#addIvhun').css("padding-right", "50px");
                 $('#addIvhun').append("<a href=\"\" class=\"btn btn-default btn-rounded mb-4 waves-effect waves-light pull-right\" id=\"addIvhunBtn\" style=\"border:solid;border-color:antiquewhite;margin:15px;font-size:large;color:black\" data-toggle=\"modal\" data-target=\"#modalContactForm\">הוסף אבחון <i class=\"glyphicon glyphicon-plus\"></i></a>");
@@ -1535,7 +1559,7 @@
                     error: function (jQXHR) {
                         $('img').hide();
                         $("#failure-alert").show();
-                        setTimeout(function () { $("#failure-alert").hide(); }, 5000);
+                        setTimeout(function () { $("#failure-alert").hide(); }, 5000); 
                     }
                 });
             });
@@ -1570,94 +1594,101 @@
 
             $('#confirmSendEmail').find('.modal-footer #confirmEmail').on('click', function () {
                 var ivhunId = $(this).data('id');
-                var error = false;
                 $("#confirmSendEmail .close").click();
-                $('img').show();
-                $.ajax({
-                    url: '/api/users/isUserExists/' + ivhunId,
-                    method: 'GET',
-                    contentType: 'application/json',
-                    headers: {
-                        'Authorization': 'Bearer '
-                            + localStorage.getItem("accessToken")
-                    },
-                    success: function (data) {
-                        var pass = '';
-                        if (data == false) {
-                            pass = createPassword();
-                            $.ajax({
-                                url: '/api/account/register',
-                                method: 'POST',
-                                data: {
-                                    email: ivhunim[ivhunId].ParentEmail,
-                                    password: pass,
-                                    confirmPassword: pass
-                                },
-                                success: function () {
-                                    $.ajax({
-                                        url: '/api/ivhunim/email/' + ivhunId,
-                                        method: 'Put',
-                                        data: {
-                                            email: ivhunim[ivhunId].ParentEmail,
-                                            password: pass,
-                                            confirmPassword: pass
-                                        },
-                                        headers: {
-                                            'Authorization': 'Bearer '
-                                                + localStorage.getItem("accessToken")
-                                        },
-                                        success: function () {
-                                            $('img').hide();
-                                            $("#success-alert").show();
-                                            setTimeout(function () { $("#success-alert").hide(); }, 5000);
-                                        },
-                                        error: function () {
-                                            $('img').hide();
-                                            $("#failure-alert").show();
-                                            setTimeout(function () { $("#failure-alert").hide(); }, 5000);
-                                        }
-                                    });
-                                },
-                                error: function (jqXHR) {
-                                    $('img').hide();
-                                    error = true;
-                                    $("#failure-alert").show();
-                                    setTimeout(function () { $("#failure-alert").hide(); }, 5000);
-                                }
-                            })
+                if (ivhunim[ivhunId].ReadyToBeSent == null || ivhunim[ivhunId].ReadyToBeSent == false) {
+                    $('img').hide();
+                    $("#ivhun_not_ready-alert").show();
+                    setTimeout(function () { $("#ivhun_not_ready-alert").hide(); }, 5000);
+                }
+                else{
+                    var error = false;
+                    $('img').show();
+                    $.ajax({
+                        url: '/api/users/isUserExists/' + ivhunId,
+                        method: 'GET',
+                        contentType: 'application/json',
+                        headers: {
+                            'Authorization': 'Bearer '
+                                + localStorage.getItem("accessToken")
+                        },
+                        success: function (data) {
+                            var pass = '';
+                            if (data == false) {
+                                pass = createPassword();
+                                $.ajax({
+                                    url: '/api/account/register',
+                                    method: 'POST',
+                                    data: {
+                                        email: ivhunim[ivhunId].ParentEmail,
+                                        password: pass,
+                                        confirmPassword: pass
+                                    },
+                                    success: function () {
+                                        $.ajax({
+                                            url: '/api/ivhunim/email/' + ivhunId,
+                                            method: 'Put',
+                                            data: {
+                                                email: ivhunim[ivhunId].ParentEmail,
+                                                password: pass,
+                                                confirmPassword: pass
+                                            },
+                                            headers: {
+                                                'Authorization': 'Bearer '
+                                                    + localStorage.getItem("accessToken")
+                                            },
+                                            success: function () {
+                                                $('img').hide();
+                                                $("#success-alert").show();
+                                                setTimeout(function () { $("#success-alert").hide(); }, 5000);
+                                            },
+                                            error: function () {
+                                                $('img').hide();
+                                                $("#failure-alert").show();
+                                                setTimeout(function () { $("#failure-alert").hide(); }, 5000);
+                                            }
+                                        });
+                                    },
+                                    error: function (jqXHR) {
+                                        $('img').hide();
+                                        error = true;
+                                        $("#failure-alert").show();
+                                        setTimeout(function () { $("#failure-alert").hide(); }, 5000);
+                                    }
+                                })
+                            }
+                            else {
+                                $.ajax({
+                                    url: '/api/ivhunim/email/' + ivhunId,
+                                    method: 'Put',
+                                    data: {
+                                        email: ivhunim[ivhunId].ParentEmail,
+                                        password: pass,
+                                        confirmPassword: pass
+                                    },
+                                    headers: {
+                                        'Authorization': 'Bearer '
+                                            + localStorage.getItem("accessToken")
+                                    },
+                                    success: function () {
+                                        $('img').hide();
+                                        $("#success-alert").show();
+                                        setTimeout(function () { $("#success-alert").hide(); }, 5000);
+                                    },
+                                    error: function () {
+                                        $('img').hide();
+                                        $("#failure-alert").show();
+                                        setTimeout(function () { $("#failure-alert").hide(); }, 5000);
+                                    }
+                                });
+                            }
+                        },
+                        error: function (jQXHR) {
+                            $('img').hide();
+                            $("#failure-alert").show();
+                            setTimeout(function () { $("#failure-alert").hide(); }, 5000);
                         }
-                        else {
-                            $.ajax({
-                                url: '/api/ivhunim/email/' + ivhunId,
-                                method: 'Put',
-                                data: {
-                                    email: ivhunim[ivhunId].ParentEmail,
-                                    password: pass,
-                                    confirmPassword: pass
-                                },
-                                headers: {
-                                    'Authorization': 'Bearer '
-                                        + localStorage.getItem("accessToken")
-                                },
-                                success: function () {
-                                    $('img').hide();
-                                    $("#success-alert").show();
-                                    setTimeout(function () { $("#success-alert").hide(); }, 5000);
-                                },
-                                error: function () {
-                                    $('img').hide();
-                                    $("#failure-alert").show();
-                                    setTimeout(function () { $("#failure-alert").hide(); }, 5000);
-                                }
-                            });
-                        }
-                    },
-                    error: function (jQXHR) {
-                        $('img').hide();
-                        $("#failure-alert").show();
-                        setTimeout(function () { $("#failure-alert").hide(); }, 5000);
-                    }
-                });
+                    });
+                }
             });
 
             $('#confirmDelete').on('show.bs.modal', function (e) {

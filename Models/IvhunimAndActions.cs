@@ -9,5 +9,6 @@ namespace Models
     {
         public List<Ivhunim> Ivhunim { get; set; }
         public List<RolesActions> Actions { get; set; }
+        public List<string> Columns { get; set; }
     }
 }

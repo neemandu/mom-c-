@@ -57,6 +57,7 @@
     <Compile Include="IvhunimAndActions.cs" />
     <Compile Include="IvhunimEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RolesMainTableColumns.cs" />
     <Compile Include="RolesInstitues.cs" />
     <Compile Include="RolesActions.cs" />
   </ItemGroup>

@@ -82,6 +82,7 @@
                     window.location.href = "/";
                     localStorage.removeItem('accessToken');
                     localStorage.removeItem('isAdmin');
+                    localStorage.removeItem('isAddIvhunBtnEnabled');
                     $('#login').show();
                     $('#disconnect').hide();
                 },
@@ -115,7 +116,7 @@
                                 + localStorage.getItem("accessToken")
                         },
                         success: function (res) {
-                            localStorage.setItem("isAdmin", res);
+                            localStorage.setItem("isAdmin", res.IsAdmin);
                         }
                     });
                     window.location.href = "/";
@@ -151,7 +152,7 @@
                                 + localStorage.getItem("accessToken")
                         },
                         success: function (res) {
-                            localStorage.setItem("isAdmin", res);
+                            localStorage.setItem("isAdmin", res.IsAdmin);
                             if (localStorage.getItem("isAdmin") == 'true') {
                                 $('#users').show();
                             }

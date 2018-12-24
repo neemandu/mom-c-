@@ -18,7 +18,7 @@ namespace a1.Controllers
     {
         private IIvhunimRepository _ivhunRpo;
         private IIvhunimService _ivhunimSrv;
-        
+
         public IvhunimController(IIvhunimRepository ivhunRpo,
                                  IIvhunimService ivhunimSrv)
         {
@@ -36,7 +36,7 @@ namespace a1.Controllers
                 var result = _ivhunRpo.GetAll(User.IsInRole("Admin"), User.IsInRole("NextStepAdmin"), User.IsInRole("Typist"), email);
                 return Ok(result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
@@ -82,10 +82,15 @@ namespace a1.Controllers
                 using (IvhunimEntities entities = new IvhunimEntities())
                 {
 
-                    var ivhunim = entities.Ivhunims.Where(o => o.Id == id).FirstOrDefault();
+                    var ivhun = entities.Ivhunims.Where(o => o.Id == id).FirstOrDefault();
+                    if (ivhun == null)
+                        return NotFound();
+
+                    if (ivhun.ReadyToBeSent == false)
+                        return BadRequest("Cannot send ivhun not ready");
 
                     string body = "";
-                   if (string.IsNullOrWhiteSpace(registrationModel.Password))
+                    if (string.IsNullOrWhiteSpace(registrationModel.Password))
                     {
                         body = $@"שלום,
 האבחון של ילד/תך מוכן.
@@ -95,7 +100,7 @@ ayaneeman.azurewebsites.net
 לשאלות נוספות, ניתן להשיב לאימייל הזה או להתקשר אלי לטלפון: 0522204509
 
 תודה,
-איה.";  
+איה.";
                     }
                     else
                     {
@@ -103,23 +108,23 @@ ayaneeman.azurewebsites.net
 האבחון של ילד/תך מוכן.
 בכדי להוריד את האבחון, כנס/י ל: 
 ayaneeman.azurewebsites.net
-שם המשתמש: {ivhunim.ParentEmail}
+שם המשתמש: {ivhun.ParentEmail}
 סיסמא: {registrationModel.Password}
 לשאלות נוספות, ניתן להשיב לאימייל הזה או להתקשר אלי לטלפון: 0522204509
 
 תודה,
 איה.";
                     }
-                    
 
-                    if (string.IsNullOrWhiteSpace(ivhunim.ParentEmail))
+
+                    if (string.IsNullOrWhiteSpace(ivhun.ParentEmail))
                     {
                         return NotFound();
                     }
                     else
                     {
                         var fromAddress = new MailAddress("neemanaya@gmail.com", "איה נאמן");
-                        var toAddress = new MailAddress(ivhunim.ParentEmail, ivhunim.FirstName + " " + ivhunim.LastName);
+                        var toAddress = new MailAddress(ivhun.ParentEmail, ivhun.FirstName + " " + ivhun.LastName);
                         const string fromPassword = "52345865";
                         const string subject = "איה נאמן - אבחון";
                         var smtp = new SmtpClient
@@ -135,7 +140,7 @@ ayaneeman.azurewebsites.net
                         {
                             Subject = subject,
                             Body = body,
-                            IsBodyHtml = false                            
+                            IsBodyHtml = false
                         })
                         {
                             smtp.Send(message);
@@ -144,7 +149,7 @@ ayaneeman.azurewebsites.net
                 }
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
@@ -186,7 +191,7 @@ ayaneeman.azurewebsites.net
             {
                 await _ivhunRpo.Delete(id);
                 string email = User.Identity.Name;
-                return Ok(_ivhunRpo.GetAll(User.IsInRole("Admin"), User.IsInRole("NextStepAdmin"), User.IsInRole("Typist"), email));                
+                return Ok(_ivhunRpo.GetAll(User.IsInRole("Admin"), User.IsInRole("NextStepAdmin"), User.IsInRole("Typist"), email));
             }
             catch (Exception ex)
             {

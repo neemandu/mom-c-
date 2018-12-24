@@ -26,7 +26,12 @@ namespace a1.Controllers
         public IHttpActionResult IsUserAdmin()
         {
             bool isAdmin = User.IsInRole("Admin");
-            return Ok(isAdmin);
+            bool isAddIvhunBtnEnabled = User.IsInRole("Admin") || User.IsInRole("Typist");
+            return Ok(new
+            {
+                IsAdmin = isAdmin,
+                IsAddIvhunBtnEnabled = isAddIvhunBtnEnabled
+            });
         }
 
         [HttpGet]
