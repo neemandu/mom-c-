@@ -8,6 +8,7 @@ using a1.TestsTypes;
 using Contracts;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+using Services;
 using Unity;
 
 namespace a1
@@ -21,6 +22,7 @@ namespace a1
             container.RegisterType<IIvhunimRepository, IvhunimRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<IIvhunimService, IvhunimService>();
+            container.RegisterType<IPdfService, PdfService>();
             config.DependencyResolver = new UnityResolver(container);
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.

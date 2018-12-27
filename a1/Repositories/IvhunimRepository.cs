@@ -1,15 +1,20 @@
 ﻿using a1.Models;
+using Contracts;
 using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace a1.Repositories
 {
     public class IvhunimRepository : IIvhunimRepository
     {
+        private readonly IPdfService _pdfService;
+        public IvhunimRepository(IPdfService pdfService)
+        {
+            _pdfService = pdfService;
+        }
         public async Task Delete(int id)
         {
             using (IvhunimEntities entities = new IvhunimEntities())
@@ -136,6 +141,11 @@ namespace a1.Repositories
             {
                 throw ex;
             }
+        }
+
+        public byte[] Download(int id)
+        {
+            return _pdfService.GenerateIvhunPdf(new FinalIvhunSolution());
         }
     }
 }

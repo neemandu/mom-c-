@@ -9,6 +9,8 @@ using System.Web.Http;
 using System.Net.Mail;
 using a1.Repositories;
 using Models;
+using System.IO;
+using System.Net.Http.Headers;
 
 namespace a1.Controllers
 {
@@ -49,9 +51,21 @@ namespace a1.Controllers
 
         [HttpGet]
         [Route("download/{id}")]
-        public IHttpActionResult Download(int id)
+        public System.Web.Http.Results.ResponseMessageResult Download(int id)
         {
-            return Ok();
+            var byteArr = _ivhunRpo.Download(id);
+            HttpResponseMessage httpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ByteArrayContent(byteArr),
+            };
+            httpResponseMessage.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = "Ivhun.pdf"
+            };
+            httpResponseMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
+
+            System.Web.Http.Results.ResponseMessageResult responseMessageResult = ResponseMessage(httpResponseMessage);
+            return responseMessageResult;
         }
 
         [HttpPut]

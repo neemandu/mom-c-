@@ -9,6 +9,7 @@ namespace a1.Repositories
         Task Duplicate(int id);
         Task Post(Ivhunim ivhun);
         Task Upsert(Ivhunim ivhun);
+        byte[] Download(int id);
         IvhunimAndActions GetAll(bool isUserAdmin, bool isUserNextStepAdmin, bool isUserTypist, string email);
     }
 }

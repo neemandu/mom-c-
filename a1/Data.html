@@ -1,5 +1,5 @@
 ﻿
-<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -522,6 +522,24 @@
 
 
     <!-- Modal Dialog -->
+    <div class="modal fade" id="confirmDownload" role="dialog" aria-labelledby="confirmDownloadLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h2 class="modal-title" style="text-align:right">אישור הורדה</h2>
+                </div>
+                <div class="modal-body">
+                    <h3 style="text-align:right">?האם להוריד את האבחון</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="width:200px;font-size:large;color:black">לא</button>
+                    <button type="button" class="btn btn-green" id="confirmDown" style="width:200px;font-size:large">כן</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -585,7 +603,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" style="width:200px;font-size:large;color:black">לא</button>
-                    <button type="button" class="btn btn-danger" id="confirmDup" style="width:200px;font-size:large">כן</button>
+                    <button type="button" class="btn btn-blue-grey" id="confirmDup" style="width:200px;font-size:large">כן</button>
                 </div>
             </div>
         </div>
@@ -608,10 +626,46 @@
         var globalId = -1;
         $(document).ready(function () {
             $('#addIvhun').on('click', function () {
-                globalId = -1;
+                globalId = -1; 
                 cleanAddIvhun();
-                $("#modalContactForm").scrollTop(0);
+                window.scrollTo(0, 0);
             });
+
+            $('#download').on('click', function () {
+                alert('asdkfljasdf');
+            });
+
+            //$('#confirmDownload').on('show.bs.modal', function (e) {
+                
+            //    var id = $(e.relatedTarget).attr('data-id');
+            //    $.ajax({
+            //        url: '/api/ivhunim/download/' + id,
+            //        method: 'Get',
+            //        headers: {
+            //            'Authorization': 'Bearer '
+            //                + localStorage.getItem("accessToken")
+            //        },
+            //        success: function (res) {
+            //            $("#confirmDownload .close").click();
+            //        }
+            //    });
+            //});
+
+            //$('#download').on('click', function () {
+            //    var id = $(this).data('id');
+            //    $.ajax({
+            //        url: '/api/ivhunim/download/' + id,
+            //        method: 'Get',
+            //        headers: {
+            //            'Authorization': 'Bearer '
+            //                + localStorage.getItem("accessToken")
+            //        },
+            //        success: function (res) {
+
+            //        }
+            //    });
+            //});
+
 
             $('#myInput').on('keyup', function () {
                 // Declare variables
@@ -752,7 +806,9 @@
                 var icons = '<td>'
                 $.each(data.Actions, function (index, value) {
                     if (value.Action == 'Download') {
-                        icons = icons + '<a href="#" class="btn btn-default" title="הורד אבחון" style="border:none;font-size:large;color:black"><span class="glyphicon glyphicon-download-alt"></span></a>';
+                        icons = icons + '<a href="#" class="btn btn-default" title="הורד" style="border:none;color:black;font-size:large"'
+                            + 'data-id= type="button" data-toggle="modal" data-target="#confirmDownload" data-title="הורדת אבחון" '
+                            + 'data-message="Are you sure you want to download this file?"> <span class="glyphicon glyphicon-download-alt"></span></a>';
                     }
                     if (value.Action == 'Delete') {
                         icons = icons + '<a href="#" class="btn btn-default" title="מחק" style="border:none;color:red;font-size:large"'
@@ -784,11 +840,11 @@
                         : '<td align="center" style="font-size:large;border:none;color:red"><i class="glyphicon glyphicon-remove"></i></td>';
                     var iconWithId = icons.replace(/data-id=/g, 'data-Id="' + value.Id + '"');
                     var row = $('<tr>' + iconWithId
-                    + (data.Columns.indexOf("readyToBeSent") > -1 ? noErrorSign : '')
-                    + (data.Columns.indexOf("firstName") > -1 ? '<td align="center" style="font-size:large">' + value.FirstName + '</td > ' : '')
-                    + (data.Columns.indexOf("lastName") > -1 ? '<td align="center" style="font-size:large">' + value.LastName + '</td>' : '')
-                    + (data.Columns.indexOf("email") > -1 ? '<td align="center" style="font-size:large">' + value.ParentEmail + '</td>' : '')
-                    + (data.Columns.indexOf("institue") > -1 ? '<td align="center" style="font-size:large">' + value.Institue + '</td></tr>' : ''));
+                        + (data.Columns.indexOf("readyToBeSent") > -1 ? noErrorSign : '')
+                        + (data.Columns.indexOf("firstName") > -1 ? '<td align="center" style="font-size:large">' + value.FirstName + '</td > ' : '')
+                        + (data.Columns.indexOf("lastName") > -1 ? '<td align="center" style="font-size:large">' + value.LastName + '</td>' : '')
+                        + (data.Columns.indexOf("email") > -1 ? '<td align="center" style="font-size:large">' + value.ParentEmail + '</td>' : '')
+                        + (data.Columns.indexOf("institue") > -1 ? '<td align="center" style="font-size:large">' + value.Institue + '</td></tr>' : ''));
 
                     $('#tblBody').append(row);
 
@@ -1107,6 +1163,20 @@
                 // Pass form reference to modal for submission on yes/ok
                 $(this).find('.modal-footer #confirm').data('id', $id);
             });
+
+
+            $('#confirmDownload').on('show.bs.modal', function (e) {
+                $message = $(e.relatedTarget).attr('data-message');
+                $(this).find('.modal-body p').text($message);
+                $title = $(e.relatedTarget).attr('data-title');
+                $(this).find('.modal-title').text($title);
+                $id = $(e.relatedTarget).attr('data-id');
+
+                // Pass form reference to modal for submission on yes/ok
+                $(this).find('.modal-footer #confirmDown').data('id', $id);
+            });
+
+
             $('#confirmSendEmail').on('show.bs.modal', function (e) {
                 $message = $(e.relatedTarget).attr('data-message');
                 $(this).find('.modal-body p').text($message);
@@ -1559,9 +1629,41 @@
                     error: function (jQXHR) {
                         $('img').hide();
                         $("#failure-alert").show();
-                        setTimeout(function () { $("#failure-alert").hide(); }, 5000); 
+                        setTimeout(function () { $("#failure-alert").hide(); }, 5000);
                     }
                 });
+            });
+
+            $('#confirmDownload').find('.modal-footer #confirmDown').on('click', function () {
+                var ivhunId = $(this).data('id');
+                var tz = ivhunim[ivhunId].Tz;
+                $("#confirmDownload .close").click();
+                $('img').show();
+
+                var req = new XMLHttpRequest();
+                req.open("GET", '/api/ivhunim/download/' + ivhunId, true);
+                req.responseType = "blob";
+                req.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem("accessToken"));
+                req.onreadystatechange = function () {
+                    if (req.readyState === 4 && req.status === 200) {
+
+                        // test for IE
+                        $('img').hide();
+                        if (typeof window.navigator.msSaveBlob === 'function') {
+                            window.navigator.msSaveBlob(req.response, tz + ".pdf");
+                        } else {
+                            var blob = req.response;
+                            var link = document.createElement('a');
+                            link.href = window.URL.createObjectURL(blob);
+                            link.download = tz + ".pdf";
+                            
+                            document.body.appendChild(link);
+
+                            link.click();
+                        }
+                    }
+                };
+                req.send();
             });
 
             $('#confirmDelete').find('.modal-footer #confirm').on('click', function () {
@@ -1600,7 +1702,7 @@
                     $("#ivhun_not_ready-alert").show();
                     setTimeout(function () { $("#ivhun_not_ready-alert").hide(); }, 5000);
                 }
-                else{
+                else {
                     var error = false;
                     $('img').show();
                     $.ajax({
@@ -1737,7 +1839,6 @@
 
         });
     </script>
-    <script src="src/alert.js"></script>
 </body>
 </html>
 
